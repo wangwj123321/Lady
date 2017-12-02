@@ -22,10 +22,10 @@ public class Product {
     private Integer status;
     private String picpath;
     private String createdBy;
-    private Date createdate;
-    private String modifyby;
-    private Date modifydate;
-    public Integer getId() {
+    private Date createDate;
+    private String modifyBy;
+    private Date modifyDate;
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
@@ -121,23 +121,23 @@ public class Product {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Date getCreatedate() {
-		return createdate;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public String getModifyby() {
-		return modifyby;
+	public String getModifyBy() {
+		return modifyBy;
 	}
-	public void setModifyby(String modifyby) {
-		this.modifyby = modifyby;
+	public void setModifyBy(String modifyBy) {
+		this.modifyBy = modifyBy;
 	}
-	public Date getModifydate() {
-		return modifydate;
+	public Date getModifyDate() {
+		return modifyDate;
 	}
-	public void setModifydate(Date modifydate) {
-		this.modifydate = modifydate;
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 	@Override
     public String toString() {
@@ -158,9 +158,9 @@ public class Product {
                 ", status='" + status + '\'' +
                 ", picpath='" + picpath + '\'' +
                 ", createdBy='" + createdBy + '\'' +
-                ", createdate='" + createdate + '\'' +
-                ", modifyby='" + modifyby + '\'' +
-                ", modifydate='" + modifydate + '\'' +
+               ", createDate=" + createDate.toString() +
+                ", modifyBy='" + modifyBy + '\'' +
+                ", modifyDate=" + modifyDate.toString() +
                 '}';
     }
 }

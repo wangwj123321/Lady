@@ -70,9 +70,9 @@ public class Theme {
                 ", themeName='" + themeName + '\'' +
                 ", status=" + status +
                 ", createdBy='" + createdBy + '\'' +
-                ", createDate=" + createDate +
+                ", createDate=" + createDate.toString() +
                 ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate +
+                ", modifyDate=" + modifyDate.toString() +
                 '}';
     }
 }

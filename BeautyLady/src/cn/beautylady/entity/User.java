@@ -98,9 +98,9 @@ public class User {
                 ", password='" + password + '\'' +
                 ", status='" + status + '\'' +
                 ", createdBy='" + createdBy + '\'' +
-                ", createDate=" + createDate +
+                ", createDate=" + createDate.toString() +
                 ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate +
+                ", modifyDate=" + modifyDate.toString() +
                 '}';
     }
 }

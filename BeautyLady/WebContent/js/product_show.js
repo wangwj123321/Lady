@@ -16,25 +16,25 @@ $(function() {
 								"<a href='"+ctx+"/stop.jsp?id="+arr[i].id+"&type="+data.type+"'>停用</a></td></tr>"
 				if(data.type == "Category"){
 					if(flag){$("#goodList").append("<tr><td>大类编号</td><td>大类名称</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].categoryId+"</td><td>"+arr[i].categoryName+"</td>"
+					diffData = "<tr><td>"+arr[i].categoryNo+"</td><td>"+arr[i].categoryName+"</td>"
 				}else if(data.type == "SubClasses"){
 					if(flag){$("#goodList").append("<tr><td>小类编号</td><td>小类名称</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].subClassesId+"</td><td>"+arr[i].subClassesName+"</td>"
+					diffData = "<tr><td>"+arr[i].subClassesNo+"</td><td>"+arr[i].subClassesName+"</td>"
 				}else if(data.type == "Color"){
 					if(flag){$("#goodList").append("<tr><td>颜色编号</td><td>颜色类型</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].colorId+"</td><td>"+arr[i].colorName+"</td>"
+					diffData = "<tr><td>"+arr[i].colorNo+"</td><td>"+arr[i].colorName+"</td>"
 				}else if(data.type == "Size"){
 					if(flag){$("#goodList").append("<tr><td>尺寸编号</td><td>尺寸大小</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].sizeId+"</td><td>"+arr[i].sizeName+"</td>"
+					diffData = "<tr><td>"+arr[i].sizeNo+"</td><td>"+arr[i].sizeName+"</td>"
 				}else if(data.type == "Band"){
 					if(flag){$("#goodList").append("<tr><td>波段编号</td><td>波段</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].bandId+"</td><td>"+arr[i].bandName+"</td>"
+					diffData = "<tr><td>"+arr[i].bandNo+"</td><td>"+arr[i].bandName+"</td>"
 				}else if(data.type == "Theme"){
 					if(flag){$("#goodList").append("<tr><td>主题编号</td><td>主题</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].themeId+"</td><td>"+arr[i].themeName+"</td>"
+					diffData = "<tr><td>"+arr[i].themeNo+"</td><td>"+arr[i].themeName+"</td>"
 				}else if(data.type == "Series"){
 					if(flag){$("#goodList").append("<tr><td>款式编号</td><td>款式</td>"+Commontitle);}
-					diffData = "<tr><td>"+arr[i].seriesId+"</td><td>"+arr[i].seriesName+"</td>"
+					diffData = "<tr><td>"+arr[i].seriesNo+"</td><td>"+arr[i].seriesName+"</td>"
 				}
 				flag = false;
 				$("#goodList").append(diffData+commonData);

@@ -256,4 +256,26 @@ public class BaseDao {
 		return clazz.getName().substring(clazz.getName().lastIndexOf(".")+1);
 		
 	}
+
+	public int getCount(String sql,Object...objs) {
+		Connection conn = C3p0Utils.getInstance().getConnection();
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		int result = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (objs!=null && objs.length!=0) {
+				for (int i = 0; i < objs.length; i++) {
+					pstmt.setObject((i+1), objs[i]);
+				}
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

@@ -1,6 +1,9 @@
 package cn.beautylady.service;
 
+import java.util.Map;
+
 import cn.beautylady.entity.Page;
+import cn.beautylady.entity.Product;
 /**
  * 商品信息服务接口
  * @author acsars
@@ -15,4 +18,6 @@ public interface ProductService {
 	 * @return 页面对象
 	 */
     public <T>Page<T> getPageObj(Integer pageNo,Integer pageSize, Class<T> clazz);
+    
+    public void getListProduct(Page<Product> page,Map<String, Object> map,String order);
 }

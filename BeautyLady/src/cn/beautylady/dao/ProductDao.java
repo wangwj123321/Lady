@@ -1,6 +1,10 @@
 package cn.beautylady.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import cn.beautylady.entity.Page;
+import cn.beautylady.entity.Product;
 /**
  * 商品信息操作接口
  * @author acsars
@@ -21,4 +25,15 @@ public interface ProductDao {
      * @return 页面对象
      */
     public <T>Page<T> getPageObj(Integer pageNo,Integer pageSize,Class<T> clazz);
-    }
+    /**
+     * 获取首页的商品列表
+     * @param page 页面对象
+     * @return 商品列表
+     */
+    public List<Product> getListProduct(Page<Product> page,Map<String, Object> map,String order);
+    /**
+     * 获取首页显示商品总数
+     * @return 商品总数
+     */
+    public int getProductTotal(Map<String, Object> map);
+}

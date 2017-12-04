@@ -6,24 +6,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class C3p0Utils {
 	private static C3p0Utils c3p0Utils;//连接池对象
-	private ComboPooledDataSource dataSource;//通过标识创建相应连接池new ComboPooledDataSource("mysql");
+	private ComboPooledDataSource dataSource;//通过标识创建相应连接池;
 	static {
 		c3p0Utils = new C3p0Utils();
 	}
 	public C3p0Utils() {
 		dataSource = new ComboPooledDataSource("mysql");
 	}
+	
 	/**
 	 * 新生成C3p0Utils对象
 	 * @return C3p0Utils对象
 	 */
 	public static C3p0Utils getInstance() {
 		return c3p0Utils;
-		
+	}
+	
+	/**
+	 * 获取数据库连接
+	 * @return
+	 */
+	public DataSource getDataSource(){
+		return dataSource;
 	}
 	/**
 	 * 从连接池中取出连接

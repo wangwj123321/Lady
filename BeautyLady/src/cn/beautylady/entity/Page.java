@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class Page<T>{
 	private int pageNo;//当前页码
-	private int dataCount;//数据总数
-	private int pageSize;//当前页数据数
-	private int pageCount;//页码数
+	private int dataCount;//总行数
+	private int pageSize;//每页行数
+	private int pageCount;//总页码数
 	private String type;//当前页存储数据类型
 	private List<T> list;//当前页的数据列表
 	public int getPageNo() {

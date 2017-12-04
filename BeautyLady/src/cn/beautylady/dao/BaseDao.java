@@ -42,6 +42,7 @@ public class BaseDao {
 		}
 		return num;
 	}
+	
 	/**
 	 * 查询数据列表
 	 * @param sql sql语句
@@ -235,7 +236,7 @@ public class BaseDao {
 	 * @return 当前页信息
 	 */
 	public <T>Page<T> getPage(Integer pageNo, Integer pageSize,Class<T> clazz){
-		String sql ="SELECT * FROM`"+getClassName(clazz)+"` LIMIT "+ (pageNo-1)*20+","+20;
+		String sql ="SELECT * FROM`"+getClassName(clazz)+"` LIMIT "+ (pageNo-1)*pageSize+","+pageSize;
 		Page<T> page = new Page<>();
 		int dataCount = getCountByClass(clazz);
 		page.setDataCount(dataCount);

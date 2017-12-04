@@ -1,6 +1,7 @@
 package cn.beautylady.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户表
@@ -16,8 +17,19 @@ public class User {
     private Date createDate;
     private String modifyBy;
     private Date modifyDate;
+    /**
+     * 一个用户有多个角色
+     * 角色的集合
+     */
+    private List<Role> RoleList;
+    public List<Role> getRoleList() {
+		return RoleList;
+	}
+	public void setRoleList(List<Role> roleList) {
+		RoleList = roleList;
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

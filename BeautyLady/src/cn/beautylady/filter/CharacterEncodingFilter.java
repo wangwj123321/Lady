@@ -7,6 +7,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet Filter implementation class CharacterEncodingFilter
@@ -28,12 +30,23 @@ public class CharacterEncodingFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		if(charset != null) {
-			request.setCharacterEncoding(charset);
-			response.setCharacterEncoding(charset);
-		}
-		chain.doFilter(request, response);
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest request;
+        HttpServletResponse response;
+        try{
+            request=(HttpServletRequest)req;
+            response=(HttpServletResponse)resp;
+        }catch (ClassCastException e){
+            throw new ServletException("non-HTTP request or response");
+        }
+
+        if ("get".equalsIgnoreCase(request.getMethod())) {
+            request = new MyHttpRequest(request);
+        }else {
+            request.setCharacterEncoding("UTF-8");
+        }
+        response.setContentType("text/html;charset=UTF-8");
+        chain.doFilter(request, response);
 	}
 
 	/**

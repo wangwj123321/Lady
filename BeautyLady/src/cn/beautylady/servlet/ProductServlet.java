@@ -26,7 +26,7 @@ import cn.beautylady.util.ClassNameUtil;
 /**
  * Servlet implementation class ProductServlet
  */
-@WebServlet("/ProductServlet")
+@WebServlet("/servlet/ProductServlet")
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService=new ProductServiceImpl();
@@ -79,7 +79,7 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("order", order);
 			application.setAttribute("key", key);
 			application.setAttribute("value", value);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("../index.jsp");
 		}
 	}
 

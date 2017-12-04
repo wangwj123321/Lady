@@ -14,15 +14,15 @@
         <div><img src="images/logo.png" alt=""></div>
         <div id="side_bar">
             <ul>
-                <li><a href="ProductServlet?opr=getListProduct&order=ASC">首页</a></li>
+                <li><a href="servlet/ProductServlet?opr=getListProduct&order=ASC">首页</a></li>
                 <li><a href="">服装</a></li>
                 <li id="quarter">
                 	<a href="">季度</a>
                 	<ul id="quar">
-                		<li><a href="ProductServlet?opr=getListProduct&key=QUARTER&value=1&order=ASC">春季</a></li>
-                		<li><a href="ProductServlet?opr=getListProduct&key=QUARTER&value=2&order=ASC">夏季</a></li>
-                		<li><a href="ProductServlet?opr=getListProduct&key=QUARTER&value=3&order=ASC">秋季</a></li>
-                		<li><a href="ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li>
+                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=1&order=ASC">春季</a></li>
+                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=2&order=ASC">夏季</a></li>
+                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=3&order=ASC">秋季</a></li>
+                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li>
                 	</ul>
                 </li>
                 <li><a href="">潮流新宠</a></li>
@@ -32,12 +32,12 @@
     </div>
     <div id="right">
         <div id="right_top">
-        	<c:if test="${order=='ASC' }"><a href="ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=DESC">价格排序</a></c:if>
-            <c:if test="${order=='DESC' }"><a href="ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=ASC">价格排序</a></c:if>
+        	<c:if test="${order=='ASC' }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=DESC">价格排序</a></c:if>
+            <c:if test="${order=='DESC' }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=ASC">价格排序</a></c:if>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <form action="ProductServlet?opr=getListProduct&key=productName&order=ASC" id="search" method="post"><input type="text" placeholder="搜索您感兴趣的内容" name="value"><input type="submit" value="查找" style="display:inline-block;width:40px;text-align:center;height:24px"></form>
+            <form action="servlet/ProductServlet?opr=getListProduct&key=productName&order=ASC" id="search" method="post"><input type="text" placeholder="搜索您感兴趣的内容" name="value"><input type="submit" value="查找" style="display:inline-block;width:40px;text-align:center;height:24px"></form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="ProductServlet?opr=getListProduct&order=ASC">全部 </a>|&nbsp;&nbsp;&nbsp;<a href="ProductServlet?opr=getListProduct&key=categoryid&value=E&order=ASC">长外套 &nbsp;&nbsp;&nbsp;</a>| &nbsp;&nbsp;&nbsp;<a href="ProductServlet?opr=getListProduct&key=categoryid&value=A&order=ASC">马夹</a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;<a href="ProductServlet?opr=getListProduct&key=categoryid&value=D&order=ASC">大衣</a>
+            <a href="servlet/ProductServlet?opr=getListProduct&order=ASC">全部 </a>|&nbsp;&nbsp;&nbsp;<a href="servlet/ProductServlet?opr=getListProduct&key=categoryNo&value=E&order=ASC">长外套 &nbsp;&nbsp;&nbsp;</a>| &nbsp;&nbsp;&nbsp;<a href="servlet/ProductServlet?opr=getListProduct&key=categoryNo&value=A&order=ASC">马夹</a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;<a href="servlet/ProductServlet?opr=getListProduct&key=categoryNo&value=D&order=ASC">大衣</a>
         </div>
         <div id="list">
             <ul>
@@ -51,8 +51,8 @@
             </ul>
             <div id="right_bottom">
             	<span>当前页：${ProductPage.pageNo }/${ProductPage.pageCount }</span>
-            	<c:if test="${ProductPage.pageNo>1 }"><a href="ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">首页</a><a href="ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">上一页</a></c:if>
-            	<c:if test="${ProductPage.pageNo<ProductPage.pageCount }"><a href="ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">下一页</a><a href="ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount}">尾页</a></c:if>
+            	<c:if test="${ProductPage.pageNo>1 }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">首页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">上一页</a></c:if>
+            	<c:if test="${ProductPage.pageNo<ProductPage.pageCount }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">下一页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount}">尾页</a></c:if>
             </div>
         </div>
     </div>

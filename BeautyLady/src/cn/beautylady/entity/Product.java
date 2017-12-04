@@ -10,13 +10,13 @@ public class Product {
     private String productNo;
     private String productName;
     private String unit;
-    private Double tagprice;
-    private Double costprice;
-    private String categoryid;
-    private String subclassesid;
-    private String bandid;
-    private String themeid;
-    private String seriesid;
+    private Double tagPrice;
+    private Double costPrice;
+    private String categoryNo;
+    private String subclassesNo;
+    private String bandNo;
+    private String themeNo;
+    private String seriesNo;
     private Integer year;
     private Integer quarter;
     private Integer status;
@@ -49,47 +49,47 @@ public class Product {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public Double getTagprice() {
-		return tagprice;
+	public Double getTagPrice() {
+		return tagPrice;
 	}
-	public void setTagprice(Double tagprice) {
-		this.tagprice = tagprice;
+	public void setTagPrice(Double tagPrice) {
+		this.tagPrice = tagPrice;
 	}
-	public Double getCostprice() {
-		return costprice;
+	public Double getCostPrice() {
+		return costPrice;
 	}
-	public void setCostprice(Double costprice) {
-		this.costprice = costprice;
+	public void setCostPrice(Double costPrice) {
+		this.costPrice = costPrice;
 	}
-	public String getCategoryid() {
-		return categoryid;
+	public String getCategoryNo() {
+		return categoryNo;
 	}
-	public void setCategoryid(String categoryid) {
-		this.categoryid = categoryid;
+	public void setCategoryNo(String categoryNo) {
+		this.categoryNo = categoryNo;
 	}
-	public String getSubclassesid() {
-		return subclassesid;
+	public String getSubclassesNo() {
+		return subclassesNo;
 	}
-	public void setSubclassesid(String subclassesid) {
-		this.subclassesid = subclassesid;
+	public void setSubclassesNo(String subclassesNo) {
+		this.subclassesNo = subclassesNo;
 	}
-	public String getBandid() {
-		return bandid;
+	public String getBandNo() {
+		return bandNo;
 	}
-	public void setBandid(String bandid) {
-		this.bandid = bandid;
+	public void setBandNo(String bandNo) {
+		this.bandNo = bandNo;
 	}
-	public String getThemeid() {
-		return themeid;
+	public String getThemeNo() {
+		return themeNo;
 	}
-	public void setThemeid(String themeid) {
-		this.themeid = themeid;
+	public void setThemeNo(String themeNo) {
+		this.themeNo = themeNo;
 	}
-	public String getSeriesid() {
-		return seriesid;
+	public String getSeriesNo() {
+		return seriesNo;
 	}
-	public void setSeriesid(String seriesid) {
-		this.seriesid = seriesid;
+	public void setSeriesNo(String seriesNo) {
+		this.seriesNo = seriesNo;
 	}
 	public Integer getYear() {
 		return year;
@@ -140,27 +140,15 @@ public class Product {
 		this.modifyDate = modifyDate;
 	}
 	@Override
-    public String toString() {
-        return "Product{" +
-        		"id'" + id + '\'' +
-                "productNo='" + productNo + '\'' +
-                ", productName='" + productName + '\'' +
-                ", unit=" + unit +
-                ", tagprice='" + tagprice + '\'' +
-                ", costprice=" + costprice +
-                ", categoryid='" + categoryid + '\'' +
-                ", subclassesid='" + subclassesid + '\'' +
-                ", bandid='" + bandid + '\'' +
-                ", themeid='" + themeid + '\'' +
-                ", seriesid='" + seriesid + '\'' +
-                ", year='" + year + '\'' +
-                ", quarter='" + quarter + '\'' +
-                ", status='" + status + '\'' +
-                ", picpath='" + picpath + '\'' +
-                ", createdBy='" + createdBy + '\'' +
-               ", createDate=" + createDate.toString() +
-                ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate.toString() +
-                '}';
-    }
+	public String toString() {
+		return "Product [id=" + id + ", productNo=" + productNo + ", productName=" + productName + ", unit=" + unit
+				+ ", tagPrice=" + tagPrice + ", costPrice=" + costPrice + ", categoryNo=" + categoryNo
+				+ ", subclassesNo=" + subclassesNo + ", bandNo=" + bandNo + ", themeNo=" + themeNo + ", seriesNo="
+				+ seriesNo + ", year=" + year + ", quarter=" + quarter + ", status=" + status + ", picpath=" + picpath
+				+ ", createdBy=" + createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate="
+				+ modifyDate + "]";
+	}
+	
+    
+	
 }

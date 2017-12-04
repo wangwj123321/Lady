@@ -45,7 +45,7 @@
 	                <li>
 	                    <a href=""><img src="images/${product.picpath }" alt=""></a>
 	                    <p><a href="">${product.productName }</a></p>
-	                    <p>￥${product.tagprice}</p>
+	                    <p>￥${product.tagPrice}</p>
 	                </li>
                 </c:forEach>
             </ul>

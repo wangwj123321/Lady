@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<url-Pattern>
+	<file-pattern>
+		<fileName>Category</fileName>
+		<className>cn.beautylady.entity.Category</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>SubClasses</fileName>
+		<className>cn.beautylady.entity.SubClasses</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>Color</fileName>
+		<className>cn.beautylady.entity.Color</className>
+	</file-pattern>
+		<file-pattern>
+		<fileName>Size</fileName>
+		<className>cn.beautylady.entity.Size</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>Band</fileName>
+		<className>cn.beautylady.entity.Band</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>Theme</fileName>
+		<className>cn.beautylady.entity.Theme</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>Series</fileName>
+		<className>cn.beautylady.entity.Series</className>
+	</file-pattern>
+</url-Pattern>

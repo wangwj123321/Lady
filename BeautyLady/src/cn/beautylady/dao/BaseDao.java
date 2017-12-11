@@ -1,9 +1,11 @@
 package cn.beautylady.dao;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import cn.beautylady.entity.Page;
 import cn.beautylady.util.C3p0Utils;
+import cn.beautylady.util.JdbcUtil;
 
 
 /**
@@ -248,15 +251,7 @@ public class BaseDao {
 		return page;
 		
 	}
-	/**
-	 * 获取对象的类名
-	 * @param T 
-	 * @return 类名
-	 */
-	public <T>String getClassName(Class<T> clazz) {
-		return clazz.getName().substring(clazz.getName().lastIndexOf(".")+1);
-		
-	}
+	
 
 	public int getCount(String sql,Object...objs) {
 		Connection conn = C3p0Utils.getInstance().getConnection();
@@ -279,4 +274,385 @@ public class BaseDao {
 		}
 		return result;
 	}
+	
+	 /**
+     * 将字符串的一个字母转换成大写
+     * @param str
+     * @return
+     */
+    public String initcap(String str) {
+        char[] ch=str.toCharArray();
+        if(ch[0]>='a' && ch[0]<='z'){
+            ch[0]= (char) (ch[0]-32);
+        }
+        return new String(ch);
+    }
+
+    
+
+
+    
+
+
+    /**
+     * 根据主键进行删除（可传入多个主键）
+     * @param clazz 数据类型
+     * @param keys 主键 字符串数组
+     * @return 执行结果
+     * @throws SQLException
+     */
+    public <T>int delete(Class<T> clazz,Object...keys) throws SQLException{
+        StringBuffer sql = new StringBuffer().append("DELETE FROM `"+getClassName(clazz)+"` WHERE " +getPrimaryKey(clazz)+ " IN (");
+        boolean flag = true;//判断是否拼接的是第一个属性
+        for (int i = 0; i < keys.length; i++) {
+            if(flag){
+                sql.append("?");
+                flag = false;
+            }else{
+                sql.append(",?");
+            }
+        }
+        sql.append(")");
+        return executeUpdate(sql.toString(), keys);
+    }
+    /**
+     * 根据用户提供的对象信息删除
+     * @param t
+     * @return 执行结果
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    public <T>int delete(T t) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException {
+        Class clazz = t.getClass();
+        StringBuffer sql = new StringBuffer().append("DELETE FROM `"+getClassName(clazz)+"` WHERE ");
+        StringBuffer condition = new StringBuffer().append(" WHERE ");
+        Field[] fields = clazz.getDeclaredFields();//获取对象所有属性
+        List<Object> paramList = new ArrayList<>();
+        Object param = null;//属性值
+        boolean flag = true;//是否添加的是第一个属性
+        for (int i = 0; i < fields.length; i++) {
+            String fieldName = fields[i].getName();//当前对象属性
+            Method method = clazz.getMethod(getGetter(fieldName));//当前属性的Getter方法
+            param = method.invoke(t);//获取属性值
+            if(param != null && !"".equals(param)){
+                paramList.add(param);//添加有效属性值到属性列表
+                if(flag){
+                    sql.append("`"+fieldName+"` =?");
+                    flag = false;
+                }else{
+                    sql.append(" AND `"+fieldName+"` =?");
+                }
+            }
+        }
+        return executeUpdate(sql.toString(), paramList.toArray());
+    }
+
+
+
+    /**
+     * 根据对象向数据库插入数据
+     * @param t
+     * @return
+     */
+    public <T>int insert(T t) throws SQLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<?> clazz = t.getClass();  //根据对象获取class类
+        String sql = "INSERT INTO `" + clazz.getName().substring(clazz.getName().lastIndexOf(".") + 1) + "`";//根据class类获取类名称
+        String values = "VALUES(";
+        Field[] fields = clazz.getDeclaredFields();   //获取所有的属性类
+        List<Object> list = new ArrayList<>();
+        boolean flag=true;
+            for (int i = 0 ; i<fields.length ; i++) {
+                String methodName = getGetter(fields[i].getName()); //根据数据类获取属性名称，获取get方法名称
+                Method method = clazz.getDeclaredMethod(methodName);    //根据get方法名称获取方法对象
+                Object obj = method.invoke(t);
+                if (obj != null) {
+                    if(flag){
+                        values+="?";
+                        sql+="(";
+                        sql += "`" + fields[i].getName() + "`";
+                        list.add(obj);
+                        flag=false;
+                    }else {
+                        values+=",?";
+                        sql+=",`"+fields[i].getName() +"`";
+                        list.add(obj);
+                    }
+                }
+            }
+            if (list.size()> 0) {
+                sql+=")";
+                values += ")";
+                sql=sql+values;
+            }else {
+                throw new RuntimeException("传入的对象属性值都为空");
+            }
+            return executeUpdate(sql, list.toArray());
+    }
+
+
+
+    /**
+     *根据对象的主键进行修改
+     * @param t 传入的对象
+     * @param <T>
+     * @return  受影响的行数
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws SQLException
+     * @throws NoSuchFieldException
+     */
+    public <T> int update(T t) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException, NoSuchFieldException {
+        Class clazz = t.getClass();
+        String tableName =getClassName(clazz);
+        List<Object> list = new ArrayList<>();
+        boolean flag = true;
+        StringBuffer sql = new StringBuffer("update " + tableName +" set ");
+        String primaryKey = getPrimaryKey(clazz);
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            String fieldName = field.getName();
+            String methodName = getGetter(fieldName);
+            Method method = clazz.getDeclaredMethod(methodName);
+            Object obj = method.invoke(t);
+            if (obj != null) {
+                if (flag) {
+                    sql.append(fieldName+"=? ");
+                    flag=false;
+                }else{
+                    sql.append(","+fieldName+"=? ");
+                }
+                list.add(obj);
+            }
+        }
+        Field primary = clazz.getDeclaredField(primaryKey);
+        Method primaryKeyMethod = clazz.getDeclaredMethod(getGetter(primaryKey));
+        Object primaryKeyValue = primaryKeyMethod.invoke(t);
+        list.add(primaryKeyValue);
+        sql.append(" where "+primaryKey+"=?");
+        return executeUpdate(sql.toString(),list.toArray());
+    }
+
+
+
+
+
+
+    /**
+     * 通过class对象获取类名
+     * @param clazz class对象
+     * @param <T>
+     * @return  类名
+     */
+    public <T>String getClassName(Class<T> clazz){
+        return clazz.getName().substring(clazz.getName().lastIndexOf(".")+1);
+    }
+
+    /**
+     * 获取表的主键字段名称
+     * @param table
+     * @return
+     * @throws SQLException
+     */
+    public static String getPrimaryKey(String table) throws SQLException {
+        DatabaseMetaData databaseMetaData = JdbcUtil.getConnection().getMetaData();
+        ResultSet rs = databaseMetaData.getPrimaryKeys(null,null,table);
+        rs.next();
+        return rs.getString("COLUMN_NAME");
+    }
+
+    /**
+     * 获取到实体类的主键属性
+     * @param clazz 查找的实体类
+     * @return
+     */
+    public String getPrimaryKey(Class clazz){
+        String primaryKey =null ;
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            Annotation[] as = field.getAnnotations();
+            for (Annotation a : as) {
+                String aName = a.annotationType().getSimpleName();
+                if("PrimaryKey".equals(aName)){
+                    primaryKey = field.getName();
+                    break;
+                }
+            }
+        }
+        return  primaryKey;
+    }
+
+    /**
+     * 传入对象查找该实体对象的主键
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public <T>String getPrimaryKey(T t){
+        Class<T> clazz= (Class<T>) t.getClass();
+        return getPrimaryKey(clazz);
+    }
+
+
+    public PreparedStatement getStatement(String sql ,Object ... params) throws SQLException {
+        Connection conn = JdbcUtil.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        if (params != null && params.length > 0) {
+            for (int i =0 ;i <params.length ;i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+        }
+        return pstmt;
+    }
+
+
+
+
+    /**
+     * 通过对象查询对象集合
+     * @param t 查找的对象
+     * @param <T>
+     * @return
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    public <T>List<T> select(T t) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException, InstantiationException {
+        Class<T> clazz = (Class<T>) t.getClass();
+        String tableName = getClassName(clazz);
+        StringBuffer sql = new StringBuffer("SELECT * FROM "+tableName);
+        StringBuffer condition = new StringBuffer(" where ");
+        boolean flag = true; //判断是否是第一个参数
+        List<Object> list = new ArrayList<Object>();
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            String methodName = getGetter(field.getName());
+            Method method = clazz.getDeclaredMethod(methodName);
+            Object object = method.invoke(t);
+            if (object != null && "".equals(object)) {
+                if (flag) {
+                    condition.append(field.getName()+"=?");
+                    flag=false;
+                }else {
+                    condition.append(" and "+field.getName()+"=?");
+                }
+                list.add(object);
+            }
+        }
+        if (list != null && list.size() > 0) {
+            sql.append(condition);
+        }
+
+        return select(clazz,sql.toString(),list.toArray());
+    }
+
+
+    /**
+     * 根据class对象和sql语句查找数据集合
+     * @param clazz 查找class对象
+     * @param sql   执行的sql语句
+     * @param params    sql语句的参数
+     * @param <T>
+     * @return
+     * @throws SQLException
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws InvocationTargetException
+     */
+    public <T>List<T> select(Class<T> clazz,String sql ,Object ... params) throws SQLException, NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+        List<T> list = new ArrayList<T>();
+        PreparedStatement pstmt = getStatement(sql, params);
+        ResultSet rs = pstmt.executeQuery();
+        ResultSetMetaData resultSetMetaData = rs.getMetaData();
+        int columnCount = resultSetMetaData.getColumnCount();
+        while (rs.next()) {
+            T t = clazz.newInstance();
+            for (int i =0 ; i <columnCount ; i++) {
+                String fieldName = resultSetMetaData.getColumnName(i + 1);  //获取到字段名称
+                //通过字段名称获取到类的属性名称，属性名称获取到类的Setxxx方法对象
+                Method method = clazz.getDeclaredMethod(getSetter(fieldName), clazz.getDeclaredField(fieldName).getType());
+                method.invoke(t, rs.getObject(i + 1));
+            }
+            list.add(t);
+        }
+        return list;
+    }
+
+    /**
+     * 查找一个对象
+     * @param clazz 查找的对象类型
+     * @param sql   执行的sql语句
+     * @param obj   sql参数
+     * @param <T>
+     * @return
+     * @throws SQLException
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws InvocationTargetException
+     */
+    public <T> T selectOne(Class<T> clazz , String sql,Object obj) throws SQLException, NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+        T t = clazz.newInstance();
+        PreparedStatement pstmt = getStatement(sql,obj);
+        ResultSet rs = pstmt.executeQuery();
+        ResultSetMetaData resultSetMetaData = rs.getMetaData();
+        rs.next();
+        int columnCount = resultSetMetaData.getColumnCount();
+        for (int i =0 ;i <columnCount ;i ++) {
+            String fieldName = resultSetMetaData.getColumnName(i + 1);
+            String methodName = getSetter(fieldName);
+            Method method = clazz.getDeclaredMethod(methodName, clazz.getDeclaredField(fieldName).getType());
+            method.invoke(t, rs.getObject(i + 1));
+        }
+        return t;
+    }
+
+    /**
+     * 根据用户对象的主键查找对象
+     * @param t 用户对象
+     * @param <T>
+     * @return
+     * @throws SQLException
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    public <T> T selectOne(T t) throws SQLException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+        Class<T> clazz = (Class<T>) t.getClass();
+        String tableName = getClassName(clazz);
+        String primaryKey = getPrimaryKey(clazz);
+        String methodName = getGetter(primaryKey);
+        Method method = clazz.getDeclaredMethod(methodName);
+        Object obj = method.invoke(t);
+        StringBuffer sql = new StringBuffer("SELECT * FROM " + tableName +" where "+primaryKey+"= ?");
+        return selectOne(clazz, sql.toString(),obj);
+    }
+
+    /**
+     * 查找单个对象
+     * @param clazz 查找的对象的类
+     * @param key   查找对象的主键值
+     * @param <T>
+     * @return
+     * @throws SQLException
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws NoSuchFieldException
+     */
+    public <T> T selectOne(Class<T> clazz, Object key) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
+        String tableName = getClassName(clazz);
+        String primaryKey = getPrimaryKey(clazz);
+        StringBuffer sql = new StringBuffer("SELECT * FROM " + tableName +" where "+primaryKey+"= ?");
+        return selectOne(clazz, sql.toString(),key);
+    }
 }

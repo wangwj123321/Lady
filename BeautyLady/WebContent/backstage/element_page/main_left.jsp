@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
     <div id="main_leftNav" class="col-5 col-sm-4 col-md-3 col-lg-2 col-xl-2">
         <div>
-            <button type="button" data-toggle="collapse" href="#product_info" data-parent="#main_leftNav"  class="btn btn-block btn-danger border-dark">商品分类</button>
+            <button type="button" data-toggle="collapse" href="#product_info" data-parent="#main_leftNav"  class="btn btn-block btn-danger border-dark">基础档案</button>
             <div id="product_info" class="collapse">
                 <ul class="navbar-nav text-center">
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Category')">大类</a></li>
@@ -16,10 +16,10 @@
             </div>
         </div>
         <div>
-            <button type="button" data-toggle="collapse" href="#sell_info" data-parent="#main_leftNav" class="btn btn-block btn-danger  border-dark">销售信息</button>
+            <button type="button" data-toggle="collapse" href="#sell_info" data-parent="#main_leftNav" class="btn btn-block btn-danger  border-dark">商品管理</button>
             <div id="sell_info" class="collapse">
                 <ul class="navbar-nav text-center">
-                    <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Category')">大类</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'StorageOrder')">商品入库单</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'SubClasses')">小类</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Color')">颜色</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Size')">尺码</a></li>
@@ -33,7 +33,7 @@
             <button type="button" data-toggle="collapse" href="#product_origin" data-parent="#main_leftNav" class="btn btn-block btn-danger  border-dark">商品来源</button>
             <div id="product_origin" class="collapse">
                 <ul class="navbar-nav text-center">
-                    <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Category')">大类</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'StorageOrder')">大类</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'SubClasses')">小类</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Color')">颜色</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Size')">尺码</a></li>

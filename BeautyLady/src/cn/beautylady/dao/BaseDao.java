@@ -239,8 +239,8 @@ public class BaseDao {
 		String sql ="SELECT * FROM`"+getClassName(clazz)+"` LIMIT "+ (pageNo-1)*pageSize+","+pageSize;
 		Page<T> page = new Page<>();
 		int dataCount = getCountByClass(clazz);
-		page.setDataCount(dataCount);
 		page.setPageSize(pageSize);
+		page.setDataCount(dataCount);
 		page.setPageNo(pageNo);
 		page.setType(getClassName(clazz));
 		List<T> list = getArrayList(sql, clazz, null);

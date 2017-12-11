@@ -91,16 +91,3 @@ li{
 	color:grey;
 	width:60px;
 }
-#right_bar{
-    position: fixed;
-    right: 0;
-    top:0;
-    width: 5%;
-    padding-top: 50px;
-    text-align: center;
-}
-#right_bar li{
-    position: relative;
-    height: 40px;
-    line-height: 40px;
-}

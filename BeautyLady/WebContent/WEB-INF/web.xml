@@ -10,22 +10,30 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <listener>
-    <listener-class>cn.beautylady.listener.InitListener</listener-class>
+  	<listener-class>cn.beautylady.listener.InitListener</listener-class>
   </listener>
+  
   <filter>
-    <filter-name>visit</filter-name>
-    <filter-class>cn.beautylady.filter.VisitFileter</filter-class>
+  	<filter-name>visit</filter-name>
+  	<filter-class>cn.beautylady.filter.VisitFileter</filter-class>
   </filter>
   <filter>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>cn.beautylady.filter.CharacterEncodingFilter</filter-class>
+  	<filter-name>CharacterEncodingFilter</filter-name>
+  	<filter-class>cn.beautylady.filter.CharacterEncodingFilter</filter-class>
   </filter>
+  
+  
+  
+  
   <filter-mapping>
-    <filter-name>visit</filter-name>
-    <url-pattern>/servlet/*</url-pattern>
+  	<filter-name>visit</filter-name>
+  	<url-pattern>/servlet/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+  	<filter-name>CharacterEncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  
+  
 </web-app>

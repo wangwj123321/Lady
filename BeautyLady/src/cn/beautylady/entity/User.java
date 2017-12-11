@@ -12,7 +12,7 @@ public class User {
     private String userAccount;
     private String userName;
     private String password;
-    private Integer status;
+    private String status;
     private String createdBy;
     private Date createDate;
     private String modifyBy;
@@ -61,11 +61,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

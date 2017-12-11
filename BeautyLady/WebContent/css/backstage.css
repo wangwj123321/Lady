@@ -18,3 +18,8 @@
 .nav-item{
     position: relative;
 }
+#pageSize{
+	position:absolute;
+	right:20px;
+	top:55px;
+}

@@ -7,9 +7,11 @@ package cn.beautylady.entity;
 public class Storage {
 	private Integer id;//库存编号
 	private Integer productNo;//商品编号
-	private String sizeName;//尺码名称
-	private String colorName;//颜色名称
-	private Integer storageNum;//库存数量
+	private String colorNo;//颜色编号
+	private String sizeNo;//尺码编号
+	private Integer number;//库存数量
+	private Double tagPrice;
+	private Double totalMoney;
 	public Integer getId() {
 		return id;
 	}
@@ -22,32 +24,42 @@ public class Storage {
 	public void setProductNo(Integer productNo) {
 		this.productNo = productNo;
 	}
-	public String getSizeName() {
-		return sizeName;
+	public String getColorNo() {
+		return colorNo;
 	}
-	public void setSizeName(String sizeName) {
-		this.sizeName = sizeName;
+	public void setColorNo(String colorNo) {
+		this.colorNo = colorNo;
 	}
-	public String getColorName() {
-		return colorName;
+	public String getSizeNo() {
+		return sizeNo;
 	}
-	public void setColorName(String colorName) {
-		this.colorName = colorName;
+	public void setSizeNo(String sizeNo) {
+		this.sizeNo = sizeNo;
 	}
-	public Integer getStorageNum() {
-		return storageNum;
+	public Integer getNumber() {
+		return number;
 	}
-	public void setStorageNum(Integer storageNum) {
-		this.storageNum = storageNum;
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	public Double getTagPrice() {
+		return tagPrice;
+	}
+	public void setTagPrice(Double tagPrice) {
+		this.tagPrice = tagPrice;
+	}
+	public Double getTotalMoney() {
+		return totalMoney;
+	}
+	public void setTotalMoney(Double totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 	@Override
-    public String toString() {
-        return "Storage{" +
-        		"id'" + id + '\'' +
-                "productNo='" + productNo + '\'' +
-                ", sizeName='" + sizeName + '\'' +
-                ", colorName=" + colorName +
-                ", storageNum='" + storageNum + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Storage [id=" + id + ", productNo=" + productNo + ", colorNo=" + colorNo + ", sizeNo=" + sizeNo
+				+ ", number=" + number + ", tagPrice=" + tagPrice + ", totalMoney=" + totalMoney + "]";
+	}
+	
+	
+	
 }

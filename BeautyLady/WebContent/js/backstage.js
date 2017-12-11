@@ -89,4 +89,11 @@ $(function () {
 			}
 		},"JSON");
 	}
+	
+	uploadTable = function(){
+		$("#tablist").append("<a class='nav-link' data-toggle='tab' href='#upload'>Category<button type='button' class='close_btn' value='x'></button></a>");
+		$("#tabcontent").append("<form action='${pageContext.request.contextPath }/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
+				"资料导入<input type='file' name='file'>"+
+		"</form>");
+	}
 });

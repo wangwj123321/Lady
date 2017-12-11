@@ -43,7 +43,7 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		/*String pageNo = request.getParameter("pageNo");
+		String pageNo = request.getParameter("pageNo");
 		String type = request.getParameter("type");
 		ProductService ps = new ProductServiceImpl();
 		PrintWriter out = response.getWriter();
@@ -55,7 +55,7 @@ public class ProductServlet extends HttpServlet {
 			out.print(json);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}*/
+		}
 		String opr=request.getParameter("opr");
 		if ("getListProduct".equals(opr)) {
 			String key=request.getParameter("key");

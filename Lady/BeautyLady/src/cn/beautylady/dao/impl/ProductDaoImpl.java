@@ -26,7 +26,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 
 	@Override
 	public List<Product> getListProduct(Page<Product> page,Map<String, Object> map,String order) {
-		// TODO Auto-generated method stub
 		String sql="SELECT * FROM `product` ";
 		if (map!=null && map.size()!=0) {
 			Set<String> key=map.keySet();

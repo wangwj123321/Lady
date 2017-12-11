@@ -1,0 +1,20 @@
+#header,#logo,#pending{
+    height: 50px;
+    background-color: black;
+    font: normal 15px "方正舒体";
+    color: white;
+}
+#header,#logo,#pending li{
+    line-height: 50px;
+}
+#main_leftNav li{
+    border: black solid 1px;
+}
+.close_btn{
+    position: absolute;
+    top: 10%;
+    right: 10%;
+}
+.nav-item{
+    position: relative;
+}

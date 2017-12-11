@@ -26,8 +26,7 @@ public class Page<T>{
 		return dataCount;
 	}
 	public void setDataCount(int dataCount) {
-		this.dataCount = dataCount;
-		pageCount = dataCount%pageSize == 0 ? dataCount/pageSize : dataCount/pageSize + 1;
+			pageCount = dataCount%pageSize == 0 ? dataCount/pageSize : dataCount/pageSize + 1;
 	}
 	public int getPageSize() {
 		return pageSize;

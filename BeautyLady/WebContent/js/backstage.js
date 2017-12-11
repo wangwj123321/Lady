@@ -78,10 +78,10 @@ $(function () {
 	}
 	
 	uploadTable = function(){
-		$("#tablist").append("<a class='nav-link' data-toggle='tab' href='#upload'>Category<button type='button' class='close_btn' value='x'></button></a>");
-		$("#tabcontent").append("<form action='${pageContext.request.contextPath }/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
+		$("#tablist").append("<li class='nav-item'><a class='nav-link' data-toggle='tab' href='#upload'>资料导入<button type='button' class='close_btn' value='x'></button></a></li>");
+		$("#tabcontent").append("<div id='upload' class='tab_item show_info tab-pane'><form action='${pageContext.request.contextPath }/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
 				"资料导入<input type='file' name='file'>"+
-		"</form>");
+		"</form></div>");
 	}
 	
 	

@@ -13,9 +13,13 @@
 	<table>
 		<tr>
 			<td>开始日期</td>
-			<td class="inline laydate-icon" id="start" style="width:200px; margin-right:10px;"></td>
+			<td class="inline laydate-icon" id="start" style="width:150px; margin-right:10px;"></td>
 			<td>结束日期</td>
-			<td class="inline laydate-icon" id="end" style="width:200px;"></td>
+			<td class="inline laydate-icon" id="end" style="width:150px;"></td>
+		</tr>
+		<tr>
+			<td>商品名称</td><td><input type="text" name="productName"></td>
+			<td>订单编号</td><td><input type="text" name="productNo"></td>
 		</tr>
 	</table>
 	<table>

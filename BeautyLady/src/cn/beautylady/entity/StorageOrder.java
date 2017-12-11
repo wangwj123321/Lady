@@ -17,6 +17,7 @@ public class StorageOrder {
 	private Double totalMoney;
 	private Date storageDate;
 	private String userName;
+	private String desc;
 	private Integer status;
 	private String createdBy;
 	private Date createDate;
@@ -60,6 +61,12 @@ public class StorageOrder {
 	}
 	
 	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public Double getTotalMoney() {
 		return totalMoney;
 	}
@@ -112,9 +119,11 @@ public class StorageOrder {
 	public String toString() {
 		return "StorageOrder [id=" + id + ", orderNo=" + orderNo + ", productNo=" + productNo + ", colorNo=" + colorNo
 				+ ", sizeNo=" + sizeNo + ", number=" + number + ", totalMoney=" + totalMoney + ", storageDate="
-				+ storageDate + ", userName=" + userName + ", status=" + status + ", createdBy=" + createdBy
-				+ ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate=" + modifyDate + "]";
+				+ storageDate + ", userName=" + userName + ", desc=" + desc + ", status=" + status + ", createdBy="
+				+ createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate=" + modifyDate
+				+ "]";
 	}
+	
 	
 	
 	

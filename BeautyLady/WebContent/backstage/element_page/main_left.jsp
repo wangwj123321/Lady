@@ -12,6 +12,7 @@
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Band')">波段</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Theme')">主题</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Series')">系列</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="uploadTable()">资料导入</a></li>
                 </ul>
             </div>
         </div>
@@ -26,6 +27,7 @@
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Band')">波段</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Theme')">主题</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascirpt:void(0)" onclick="return initProduct(1,'Series')">系列</a></li>
+                    
                 </ul>
             </div>
         </div>

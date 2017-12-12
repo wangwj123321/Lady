@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>商品入库单明细</title>
+<title>显示入库单</title>
 </head>
 <body>
 	
@@ -24,6 +24,5 @@
 			<td>修改时间</td>
 		</tr>
 	</table>
-	
 </body>
 </html>

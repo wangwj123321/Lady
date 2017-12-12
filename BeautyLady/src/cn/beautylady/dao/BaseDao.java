@@ -277,6 +277,7 @@ public class BaseDao {
 		}
 		return result;
 	}
+
 	
 	 /**
      * 将字符串的一个字母转换成大写
@@ -714,4 +715,5 @@ public class BaseDao {
         StringBuffer sql = new StringBuffer("SELECT * FROM " + tableName +" where "+primaryKey+"= ?");
         return selectOne(clazz, sql.toString(),key);
     }
+
 }

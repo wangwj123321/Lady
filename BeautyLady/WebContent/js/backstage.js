@@ -1,4 +1,5 @@
 $(function () {
+	var pageSize = "";
     //显示窗体
     showmainmenu = function () {
         $("#main_win").addClass("active").parent().siblings().children().removeClass("active");
@@ -20,7 +21,8 @@ $(function () {
 		$("#"+type+"classList").empty();
 		$("#"+type+"pageChange").empty();
 		var arr = new Array();
-		$.get(ctx+"/servlet/ProductServlet","pageNo="+pageNo+"&type="+type,function(data){
+		var page = "page";
+		$.get(ctx+"/servlet/ProductServlet","opr="+page+"&pageNo="+pageNo+"&type="+type+"&pageSize="+pageSize,function(data){
 			arr = data.list;//接受数据列表
 			var flag = true;//判断是否输入的为表单
 			for(i in arr){
@@ -76,14 +78,29 @@ $(function () {
 		    });
 		    return false;
 	}
+<<<<<<< HEAD
 	
 	uploadTable = function(){
 		$("#tablist").append("<li class='nav-item'><a class='nav-link' data-toggle='tab' href='#upload'>资料导入<button type='button' class='close_btn' value='x'></button></a></li>");
 		$("#tabcontent").append("<div id='upload' class='tab_item show_info tab-pane'><form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
 				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/>"+
 		"</form></div>");
+=======
+	//select改变页面显示数量
+	btnchange = function(values){
+		var pageChange = "pageChange";
+		$.get(ctx+"/servlet/ProductServlet","opr="+pageChange+"&pageSize="+values,function(data){
+			if(data){
+				alert("修改成功");
+				pageSize = $("[name='pageSize']").val();
+				//查找当前显示的窗体
+				$("#main_menu").siblings().each(function(){
+					if($(this).hasClass("active")){
+						initProduct(1,$(this).attr("id"));
+					}
+				})
+			}
+		},"JSON");
+>>>>>>> 1a949e929abe792d0023146452900440280d5ad4
 	}
-	
-	
-	
 });

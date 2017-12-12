@@ -43,21 +43,28 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String opr=request.getParameter("opr");
 		String pageNo = request.getParameter("pageNo");
 		String type = request.getParameter("type");
+		String pageSize = request.getParameter("pageSize");
+		if(pageSize == null || "".equals(pageSize)){
+			pageSize = "20";
+		}
 		ProductService ps = new ProductServiceImpl();
 		PrintWriter out = response.getWriter();
-		Class clazz;
-		try {
-			clazz = Class.forName(ClassNameUtil.getClassName(type));
-			Page page = ps.getPageObj(Integer.parseInt(pageNo), 20, clazz);
-			String json = JSON.toJSONStringWithDateFormat(page, "yyyy-MM-dd", SerializerFeature.WriteNullListAsEmpty);
-			out.print(json);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		String opr=request.getParameter("opr");
-		if ("getListProduct".equals(opr)) {
+		if("page".equals(opr)){
+			Class clazz;
+			try {
+				clazz = Class.forName(ClassNameUtil.getClassName(type));
+				Page page = ps.getPageObj(Integer.parseInt(pageNo), Integer.parseInt(pageSize), clazz);
+				String json = JSON.toJSONStringWithDateFormat(page, "yyyy-MM-dd", SerializerFeature.WriteNullListAsEmpty);
+				out.print(json);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}else if("pageChange".equals(opr)){
+			out.print(true);
+		}else if("getListProduct".equals(opr)) {
 			String key=request.getParameter("key");
 			String value=request.getParameter("value");
 			String order=request.getParameter("order");

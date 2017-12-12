@@ -35,9 +35,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-   
-=======
     <div id="pageSize">
     	<small>请选择页面显示数</small><select name="pageSize" class="custom-select-sm" onchange="btnchange(this[selectedIndex].value);">
     		<option value="20">默认20</option>
@@ -45,7 +42,6 @@
     		<option value="40">40</option>
     	</select>
     </div>
->>>>>>> 1a949e929abe792d0023146452900440280d5ad4
 </div>
 </body>
 </html>

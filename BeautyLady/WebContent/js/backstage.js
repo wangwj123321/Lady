@@ -56,15 +56,36 @@ $(function () {
 				flag = false;
 				$("#"+type+"classList").append(diffData + commonData);
 			}
-			$("#"+type+"pageChange").append("当前页码["+data.pageNo+"/"+data.pageCount+"]")
-			if(data.pageNo > 1){
-				$("#"+type+"pageChange").append("<a href='javascript:void(0)' onclick = initProduct(1,'"+data.type+"')>首页</a>" +
-						"<a href='javascript:void(0)' onclick = initProduct("+(data.pageNo-1)+",'"+data.type+"')>上一页</a>")
+			//窗体分页浏览
+			var str = "当前页码["+data.pageNo+"/"+data.pageCount+"]<div class='btn-toolbar float-left' role='toolbar'>";
+			if(data.pageCount <=7){
+				str += "<div class='btn-group' role='group'>";
+				$("#"+type+"pageChange").append("<div class='btn-group' role='group'>");
+				for (var i = 1; i <= data.pageCount; i++) {
+					str += "<button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+i+",&quot;"+data.type+"&quot;)'>"+i+"</button>";
+				}
+				str += "</div>";
+			}else if(data.pageCount >7 && data.pageNo<5 ){
+				str += "<div class='btn-group' role='group'>";
+				for (var i = 1; i <= data.pageNo +3; i++) {
+					str += "<button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+i+",&quot;"+data.type+"&quot;)'>"+i+"</button>";
+				}
+				str += "</div><div class='btn-group' role='group'><button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+data.pageCount+",&quot;"+data.type+"&quot;)'>"+data.pageCount+"</button></div>";
+			}else if(data.pageCount>7 && data.pageNo>=5 && data.pageNo+3<data.pageCount){
+				str += "<div class='btn-group' role='group'><button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct(1,&quot;"+data.type+"&quot;)'>1</button></div><div class='btn-group' role='group'>";
+				for (var j = data.pageNo-3; j <= data.pageNo+3; j++) {
+					str += "<button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+j+",&quot;"+data.type+"&quot;)'>"+j+"</button>";
+				}
+				str += "</div><div class='btn-group' role='group'><button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+data.pageCount+",&quot;"+data.type+"&quot;)'>"+data.pageCount+"</button></div>";
+			}else if(data.pageCount>7 && data.pageNo >=5 && pageNo+3>=data.pageCount){
+				str += "<div class='btn-group' role='group'><button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct(1,&quot;"+data.type+"&quot;)'>1</button></div><div class='btn-group' role='group'>";
+				for (var j = data.pageNo-3; j <= data.pageCount; j++) {
+					str += "<button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+j+",&quot;"+data.type+"&quot;)'>"+j+"</button>";
+				}
+				str+= "</div>";
 			}
-			if(data.pageNo < data.pageCount){
-				$("#"+type+"pageChange").append("<a href='javascript:void(0)' onclick = initProduct("+(data.pageNo+1)+",'"+data.type+"')>下一页</a>" +
-						"<a href='javascript:void(0)' onclick = initProduct("+(data.pageCount)+",'"+data.type+"')>尾页</a>")
-			}
+			str +="</div>";
+			$("#"+type+"pageChange").append(str);
 		},"JSON");
 		 var $closes = $(".close_btn");
 		    //点击删除窗体

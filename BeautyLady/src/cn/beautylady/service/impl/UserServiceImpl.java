@@ -16,5 +16,4 @@ public class UserServiceImpl implements UserService{
 	public User login(User user) {
 		return dao.findUser(user);
 	}
-
 }

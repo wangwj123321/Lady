@@ -87,24 +87,26 @@
 			str +="</div>";
 			$("#"+type+"pageChange").append(str);
 		},"JSON");
-		 var $closes = $(".close_btn");
-		    //点击删除窗体
-		    $closes.each(function (i,$close) {
-		       $($close).click(function () {
-		           var idName = $(this).parent().attr("href");
-		           $(this).parent().parent().remove();
-		           $(idName).remove();
-		           showmainmenu();
-		       });
-		    });
+		
+		var $closes = $(".close_btn");
+	    //点击删除窗体
+	    $closes.each(function (i,$close) {
+	       $($close).click(function () {
+	           var idName = $(this).parent().attr("href");
+	           $(this).parent().parent().remove();
+	           $(idName).remove();
+	           showmainmenu();
+	       });
+	    });
 		    return false;
 	}
-	
+	 
 	uploadTable = function(){
 		$("#tablist").append("<li class='nav-item'><a class='nav-link' data-toggle='tab' href='#upload'>资料导入<button type='button' class='close_btn' value='x'></button></a></li>");
 		$("#tabcontent").append("<div id='upload' class='tab_item show_info tab-pane'><form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
 				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/>"+
 		"</form></div>");
+		
 	}
 	//select改变页面显示数量
 	btnchange = function(values){
@@ -122,4 +124,7 @@
 			}
 		},"JSON");
 	}
+	
+	
+	
 });

@@ -78,7 +78,6 @@ $(function () {
 		    });
 		    return false;
 	}
-<<<<<<< HEAD
 	//select改变页面显示数量
 	btnchange = function(values){
 		var pageChange = "pageChange";
@@ -86,10 +85,13 @@ $(function () {
 			if(data){
 				alert("修改成功");
 				pageSize = $("[name='pageSize']").val();
-				$ids = $()
+				//查找当前显示的窗体
+				$("#main_menu").siblings().each(function(){
+					if($(this).hasClass("active")){
+						initProduct(1,$(this).attr("id"));
+					}
+				})
 			}
 		},"JSON");
 	}
-=======
->>>>>>> parent of 328ac1a... 添加了入库单实体类
 });

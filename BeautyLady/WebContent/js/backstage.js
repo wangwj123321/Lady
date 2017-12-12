@@ -78,7 +78,6 @@ $(function () {
 		    });
 		    return false;
 	}
-<<<<<<< HEAD
 	//select改变页面显示数量
 	btnchange = function(values){
 		var pageChange = "pageChange";
@@ -90,6 +89,4 @@ $(function () {
 			}
 		},"JSON");
 	}
-=======
->>>>>>> parent of 328ac1a... 添加了入库单实体类
 });

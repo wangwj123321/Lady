@@ -31,4 +31,9 @@ public class ProductServiceImpl implements ProductService{
 		page.setList(list);
 	}
 
+	@Override
+	public Product getProductById(int id) {
+		return dao.getProductById(id);
+	}
+
 }

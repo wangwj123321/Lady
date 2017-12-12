@@ -18,6 +18,17 @@ public interface ProductService {
 	 * @return 页面对象
 	 */
     public <T>Page<T> getPageObj(Integer pageNo,Integer pageSize, Class<T> clazz);
-    
+    /**
+     * 获取指定条件的商品列表
+     * @param page 分页对象
+     * @param map 条件
+     * @param order 价钱排序
+     */
     public void getListProduct(Page<Product> page,Map<String, Object> map,String order);
+        /**
+     * 根据id获取商品
+     * @param id 商品id
+     * @return 商品对象
+     */
+    public Product getProductById(int id);
 }

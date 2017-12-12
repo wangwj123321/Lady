@@ -69,4 +69,11 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 		System.out.println(sql);
 		return getCount(sql);
 	}
+
+	@Override
+	public Product getProductById(int id) {
+		// TODO Auto-generated method stub
+		String sql="SELECT * FROM `product` WHERE id=?";
+		return getOne(sql, Product.class, id);
+	}
 }

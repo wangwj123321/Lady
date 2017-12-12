@@ -5,5 +5,5 @@ package cn.beautylady.entity;
  *
  */
 public class DynamicProduct {
-
+	
 }

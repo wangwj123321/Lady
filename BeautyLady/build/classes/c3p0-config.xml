@@ -11,7 +11,7 @@
    <!-- 配置连接池mysql -->
 	<named-config name="mysql">
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
-		<property name="jdbcUrl">jdbc:mysql://localhost:3306/beautylay</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3206/beautylay</property>
 		<property name="user">root</property>
 		<property name="password">root</property>
 		<property name="initialPoolSize">10</property>  

@@ -71,7 +71,7 @@ public class ProductServlet extends HttpServlet {
 			String pageNO=request.getParameter("pageNO");
 			int pn=1;
 			Map<String, Object> map=new HashMap<String, Object>();
-			if (key!=null && key!="") {
+			if (key!=null && !key.equals("")) {
 				map.put(key, value);
 			}
 			Page<Product> page=new Page<>();

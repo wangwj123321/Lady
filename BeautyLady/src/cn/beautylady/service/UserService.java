@@ -13,4 +13,6 @@ public interface UserService {
 	 * @return
 	 */
     public User login(User user);
+
+	public boolean getUserByUserAccount(String userAccount);
 }

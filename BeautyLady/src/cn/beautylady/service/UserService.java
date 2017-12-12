@@ -13,6 +13,11 @@ public interface UserService {
 	 * @return
 	 */
     public User login(User user);
-
-	public boolean getUserByUserAccount(String userAccount);
+    
+    /**
+     * 通过用户名查找用户（判断用户输入的用户名是否存在）
+     * @param userAccount 用户名
+     * @return 用户对象
+     */
+    public boolean  getUserByUserAccount(String userAccount);
 }

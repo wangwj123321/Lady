@@ -38,5 +38,10 @@ public interface ProductDao {
      * @return 商品总数
      */
     public int getProductTotal(Map<String, Object> map);
-    
+    /**
+     * 根据id获取商品
+     * @param id 商品id
+     * @return 商品对象
+     */
+    public Product getProductById(int id);
 }

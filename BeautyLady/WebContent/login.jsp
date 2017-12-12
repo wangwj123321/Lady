@@ -13,7 +13,7 @@
 		$("[name='userAccount']").blur(function(){
 			var userAccount=$(this).val();
 			if(userAccount!=""){
-				$.get("servlet/LoginUserServlet","opr=getUserByUserAccount&userAccount="+userAccount,success,"html");
+				$.get("servlet/UserServlet","opr=getUserByUserAccount&userAccount="+userAccount,success,"html");
 			}
 			function success(data){
 				if(data=="false"){
@@ -47,7 +47,7 @@
     <div id="login">
         <img src="images/login.png" alt="">
         <div id="center">
-            <form action="servlet/LoginUserServlet?opr=login" id="ff" method="post">
+            <form action="servlet/UserServlet?opr=login" id="ff" method="post">
                 <input type="text" placeholder="邮箱地址/手机号码" name="userAccount" value="${userAccount }">
                 <input type="password" placeholder="密码" name="pwd"> 
                 <div id="cc">

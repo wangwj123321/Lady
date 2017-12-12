@@ -1,5 +1,6 @@
 package cn.beautylady.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +16,7 @@ import cn.beautylady.entity.Product;
  */
 public class ProductDaoImpl extends BaseDao implements ProductDao{
 	@Override
-	public <T> int addProduct(T t) {
+	public <T> int addProduct(T t) throws SQLException {
 		return insertData(t.getClass());
 	}
 

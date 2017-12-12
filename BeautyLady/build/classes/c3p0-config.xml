@@ -14,12 +14,12 @@
 		<property name="jdbcUrl">jdbc:mysql://localhost:3206/beautylay</property>
 		<property name="user">root</property>
 		<property name="password">root</property>
-		<property name="initialPoolSize">10</property>  
+		<property name="initialPoolSize">50</property>  
         <property name="maxIdleTime">30</property>  
-        <property name="maxPoolSize">100</property>  
+        <property name="maxPoolSize">1000</property>  
         <property name="minPoolSize">10</property>  
-        <property name="maxStatements">200</property> 
-        <property name="checkoutTimeout">1000</property>
-        <property name="acquireIncrement">5</property>
+        <property name="maxStatements">500</property> 
+        <property name="checkoutTimeout">2000</property>
+        <property name="acquireIncrement">500</property>
 	</named-config>
 </c3p0-config>

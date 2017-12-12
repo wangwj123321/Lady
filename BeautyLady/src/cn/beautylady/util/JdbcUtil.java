@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * Created by 王 on 2017/11/27.
  */
 public class JdbcUtil {
-    private static ComboPooledDataSource dataSource = new ComboPooledDataSource();
+    private static ComboPooledDataSource dataSource = new ComboPooledDataSource("mysql");
 
     public static Connection getConnection() {
         Connection conn = null;

@@ -1,5 +1,6 @@
 package cn.beautylady.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,9 @@ public interface ProductDao {
 	 * 添加商品信息
 	 * @param t 商品对象
 	 * @return 执行结果
+	 * @throws SQLException 
 	 */
-    public <T>int addProduct(T t);
+    public <T>int addProduct(T t) throws SQLException;
     /**
      * 查找页面对象
      * @param pageNo 页码

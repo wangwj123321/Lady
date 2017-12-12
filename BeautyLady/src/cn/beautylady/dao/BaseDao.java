@@ -31,7 +31,7 @@ public class BaseDao {
 	 * @param params 参数字符串数组
 	 * @return 执行结果
 	 */
-	public int executeUpdate(String sql,Object...params) {
+	/*public int executeUpdate(String sql,Object...params) {
 		PreparedStatement pstmt = null;
 		int num = -1;
 		try {
@@ -44,7 +44,7 @@ public class BaseDao {
 			C3p0Utils.releaseSources(conn, pstmt, null);
 		}
 		return num;
-	}
+	}*/
 	
 	/**
 	 * 查询数据列表
@@ -140,8 +140,9 @@ public class BaseDao {
 	 * 向数据库增加数据
 	 * @param T 
 	 * @return 执行结果
+	 * @throws SQLException 
 	 */
-	public <T>int insertData(Class<T> clazz){
+	public <T>int insertData(Class<T> clazz) throws SQLException{
 		String sql = "INSERT INTO '"+getClassName(clazz)+"'";
 		String values = "VALUES(";
 		Field[] fields = clazz.getDeclaredFields();//获取类的所有属性
@@ -151,7 +152,8 @@ public class BaseDao {
 			for (int i = 0; i < fields.length; i++) {
 				String methodName = getGetter(fields[i].getName());//根据属性名获取get方法字符串
 				Method method = clazz.getMethod(methodName);
-				Object obj = method.invoke(clazz.newInstance());
+				T t = clazz.newInstance();
+				Object obj = method.invoke(t);
 				if(obj != null) {
 					if(flag) {
 						values += "?";
@@ -192,8 +194,9 @@ public class BaseDao {
 	 * 在数据库中删除数据
 	 * @param T 
 	 * @return 执行结果
+	 * @throws SQLException 
 	 */
-	public <T>int delData(Class<T> clazz) {
+	public <T>int delData(Class<T> clazz) throws SQLException {
 		String sql = "DELECT FROM `"+getClassName(clazz)+"`";
 		Field[] fields = clazz.getDeclaredFields();//获取对象中所有的属性
 		List<Object> list = new ArrayList<>();
@@ -349,6 +352,51 @@ public class BaseDao {
         }
         return executeUpdate(sql.toString(), paramList.toArray());
     }
+    
+    
+    public <T>int insert(List<T> objs) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException{
+    	int result=-1;
+    	String sql1=null;
+    	if(objs.size()>0 && objs!=null){
+    		T t = objs.get(0);
+    		Class<?> clazz = t.getClass();  //根据对象获取class类
+            StringBuffer sql =new StringBuffer("INSERT INTO `" + getClassName(clazz) + "`");//根据class类获取类名称
+            StringBuffer values =new StringBuffer("VALUES(");
+            Field[] fields = clazz.getDeclaredFields();   //获取所有的属性类
+            List<Object> list = new ArrayList<>();
+            boolean flag=true;
+                for (int i = 0 ; i<fields.length ; i++) {
+                    String methodName = getGetter(fields[i].getName()); //根据数据类获取属性名称，获取get方法名称
+                    Method method = clazz.getDeclaredMethod(methodName);    //根据get方法名称获取方法对象
+                    Object obj = method.invoke(t);
+                    if (obj != null) {
+                        if(flag){
+                            values.append("?");
+                            sql.append("(");
+                            sql.append("`" + fields[i].getName() + "`");
+                            list.add(obj);
+                            flag=false;
+                        }else {
+                            values.append(",?");
+                            sql.append(",`"+fields[i].getName() +"`");
+                            list.add(obj);
+                        }
+                    }
+                }
+                if (list.size()> 0) {
+                    sql.append(")");
+                    sql.append(")");
+                    sql1=sql.toString()+values.toString();
+                }else {
+                    throw new RuntimeException("传入的对象属性值都为空");
+                }
+    	}
+    	for(T t : objs){
+    		
+    	}
+    	
+    	return result;
+    }
 
 
 
@@ -359,8 +407,9 @@ public class BaseDao {
      */
     public <T>int insert(T t) throws SQLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<?> clazz = t.getClass();  //根据对象获取class类
-        String sql = "INSERT INTO `" + clazz.getName().substring(clazz.getName().lastIndexOf(".") + 1) + "`";//根据class类获取类名称
-        String values = "VALUES(";
+        String sql1=null;
+        StringBuffer sql =new StringBuffer("INSERT INTO `" + getClassName(clazz) + "`");//根据class类获取类名称
+        StringBuffer values =new StringBuffer("VALUES(");
         Field[] fields = clazz.getDeclaredFields();   //获取所有的属性类
         List<Object> list = new ArrayList<>();
         boolean flag=true;
@@ -370,26 +419,26 @@ public class BaseDao {
                 Object obj = method.invoke(t);
                 if (obj != null) {
                     if(flag){
-                        values+="?";
-                        sql+="(";
-                        sql += "`" + fields[i].getName() + "`";
+                        values.append("?");
+                        sql.append("(");
+                        sql.append("`" + fields[i].getName() + "`");
                         list.add(obj);
                         flag=false;
                     }else {
-                        values+=",?";
-                        sql+=",`"+fields[i].getName() +"`";
+                        values.append(",?");
+                        sql.append(",`"+fields[i].getName() +"`");
                         list.add(obj);
                     }
                 }
             }
             if (list.size()> 0) {
-                sql+=")";
-                values += ")";
-                sql=sql+values;
+                sql.append(")");
+                values.append(")");
+                sql1=sql.toString()+values.toString();
             }else {
                 throw new RuntimeException("传入的对象属性值都为空");
             }
-            return executeUpdate(sql, list.toArray());
+            return executeUpdate(sql1, list.toArray());
     }
 
 
@@ -507,7 +556,17 @@ public class BaseDao {
         }
         return pstmt;
     }
-
+    
+    /**
+     * 增删改操作
+     * @param sql SQL语句字符串
+     * @param params 参数字符串数组
+     * @return 执行结果
+     */
+    public int executeUpdate(String sql,Object...params) throws SQLException {
+        PreparedStatement pstmt = getStatement(sql, params);
+        return pstmt.executeUpdate();
+    }
 
 
 

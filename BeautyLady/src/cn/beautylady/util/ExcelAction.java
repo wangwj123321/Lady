@@ -17,6 +17,9 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 王 on 2017/11/14.
@@ -107,6 +110,7 @@ public class ExcelAction {
                             Field[] declaredFields = beanClass.getDeclaredFields();  //获取所有bean的属性
                             Method[] methods = beanClass.getMethods();  //获取所有的方法
                             //hssfSheet.getLastRowNum()获取当前的页的行数，然后遍历
+                            List<T> list = new ArrayList<T>();	//用户保存遍历出来的对象
                             for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) { //行的遍历，每遍历一行生成一个对象
                                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
                                 if (hssfRow != null) {
@@ -175,10 +179,16 @@ public class ExcelAction {
                                             }
                                         }
                                     }
-                                    BaseDao dao = new BaseDao();
-                                    dao.insertData(beanClass);
+                                  BaseDao dao = new BaseDao();
+                                  try {
+									dao.insert(newInstance);
+								} catch (NoSuchMethodException | SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
                                 }
                             }
+                            
 
                         }
                     }
@@ -277,7 +287,12 @@ public class ExcelAction {
                                         //这里判断实例化class是哪个实体类，这里可以设置一些特定不变，创建时间，之类的字段
                                         //这步主要是确定调用什么service来操作保存数据
                                         BaseDao dao = new BaseDao();
-                                        dao.insertData(beanClass);
+                                        try {
+											dao.insert(newInstance);
+										} catch (NoSuchMethodException | SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
                                     }
                                 }
                             }

@@ -28,4 +28,12 @@
 		<fileName>Series</fileName>
 		<className>cn.beautylady.entity.Series</className>
 	</file-pattern>
+	<file-pattern>
+		<fileName>Product_Color</fileName>
+		<className>cn.beautylady.entity.Product_Color</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>Product_Size</fileName>
+		<className>cn.beautylady.entity.Product_Size</className>
+	</file-pattern>
 </url-Pattern>

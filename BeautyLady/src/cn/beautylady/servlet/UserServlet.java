@@ -73,6 +73,7 @@ public class UserServlet extends HttpServlet {
 			User loginUser=userService.login(user);
 			if (loginUser!=null) {
 				session.setAttribute("loginUser", loginUser.getUserName());
+				session.setAttribute("userAccount", loginUser.getUserAccount());
 				session.setAttribute("hint", null);
 				if ("true".equals(pass)) {
 					Cookie cookie=new Cookie("loginUser", loginUser.getUserName());

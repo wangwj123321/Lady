@@ -44,4 +44,5 @@ public interface ProductDao {
      * @return 商品对象
      */
     public Product getProductById(int id);
+   
 }

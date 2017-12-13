@@ -9,6 +9,14 @@
 </head>
     <link rel="stylesheet" href="css/index.css">
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <%
+    	Cookie[] cookies=request.getCookies();
+    	for(Cookie cookie:cookies){
+    		if(cookie.getName().equals("loginUser")){
+    			session.setAttribute("loginUser", cookie.getValue());
+    		}
+    	}
+    %>
 <body>
     <div id="left">
         <div><img src="images/logo.png" alt=""></div>
@@ -58,7 +66,8 @@
     </div>
     <div id="right_bar">
         <ul>
-            <li><a href="servlet/UserServlet?opr=isLogin"><img src="images/cart.png" alt=""></a></li>
+            <li><a href="servlet/UserServlet?opr=isLogin"><img src="images/user.png" alt=""></a></li>
+            <li><a href=""><img src="images/cart.png" alt=""></a></li>
             <li><a href=""><img src="images/sign.png" alt=""></a></li>
             <li><a href=""><img src="images/favorite.png" alt=""></a></li>
             <li><a href=""><img src="images/search.png" alt=""></a></li>

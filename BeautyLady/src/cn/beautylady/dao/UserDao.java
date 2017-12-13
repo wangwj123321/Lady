@@ -21,4 +21,11 @@ public interface UserDao {
      * @return 用户对象
      */
     public User getUserByUserAccount(String userAccount);
+    
+    /**
+     * 通过邮箱查找用户（判断是否存在邮箱）
+     * @param email
+     * @return
+     */
+    public User getUserByEmail(String email);
 }

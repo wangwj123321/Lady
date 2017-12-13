@@ -17,8 +17,13 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public User getUserByUserAccount(String userAccount) {
-		// TODO Auto-generated method stub
 		String sql="SELECT * FROM `user` WHERE userAccount=?";
 		return getOne(sql, User.class, userAccount);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		String sql="SELECT * FROM `user` WHERE email=?";
+		return getOne(sql, User.class, email);
 	}
 }

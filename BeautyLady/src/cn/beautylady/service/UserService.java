@@ -20,4 +20,11 @@ public interface UserService {
      * @return 用户对象
      */
     public boolean  getUserByUserAccount(String userAccount);
+    
+    /**
+     * 通过邮箱查找用户（判断是否存在邮箱）
+     * @param email
+     * @return
+     */
+    public boolean getUserByEmail(String email);
 }

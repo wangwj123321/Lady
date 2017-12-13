@@ -18,6 +18,7 @@ public class User {
     private String modifyBy;
     private Date modifyDate;
     private String acode;
+    private String email;
     /**
      * 涓�涓敤鎴锋湁澶氫釜瑙掕壊
      * 瑙掕壊鐨勯泦鍚�
@@ -108,6 +109,13 @@ public class User {
     
 	public void setAcode(String acode) {
 		this.acode = acode;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	@Override
     public String toString() {

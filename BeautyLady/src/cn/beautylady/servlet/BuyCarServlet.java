@@ -2,6 +2,7 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,6 +71,30 @@ public class BuyCarServlet extends HttpServlet {
 				}else {
 					out.print("false");
 				}
+			}
+		}else if("getUserCar".equals(opr)) {
+			String userAccount=(String) request.getSession().getAttribute("userAccount");
+			if(userAccount==null) {
+				response.sendRedirect("../login.jsp");
+				return;
+			}
+			List<BuyCar> list=buyCarService.getBuyCarByUserAccount(userAccount);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("../car1.jsp").forward(request, response);
+		}else if("delBuyCar".equals(opr)) {
+			int id=Integer.parseInt(request.getParameter("id"));
+			if (buyCarService.delBuyCar(id)) {
+				out.print("true");
+			}else {
+				out.print("false");
+			}
+		}else if("updateCount".equals(opr)) {
+			int id=Integer.parseInt(request.getParameter("id"));
+			int count=Integer.parseInt(request.getParameter("count"));
+			if (buyCarService.updateCount(id, count)) {
+				out.print("true");
+			}else {
+				out.print("false");
 			}
 		}
 		out.flush();

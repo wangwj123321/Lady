@@ -1,6 +1,7 @@
 package cn.beautylady.dao.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.dao.BaseDao;
 import cn.beautylady.dao.BuyCarDao;
@@ -39,6 +40,43 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public List<BuyCar> getBuyCarByUserAccount(String userAccount) {
+		String sql="SELECT `buycar`.*,`product`.`productName`,`color`.`colorName`,`size`.`sizeName`,`product`.`picpath`\r\n" + 
+				"FROM `buycar`,`product`,`color`,`size` \r\n" + 
+				"WHERE `buycar`.`productNo`=`product`.`productNo` \r\n" + 
+				"AND `buycar`.`colorNo`=`color`.`colorNo`\r\n" + 
+				"AND `buycar`.`sizeNo`=`size`.`sizeNo`\r\n" + 
+				"AND userAccount=?";
+		return getArrayList(sql, BuyCar.class, userAccount);
+	}
+
+	@Override
+	public int delBuyCar(int id) {
+		String sql="DELETE FROM `buycar` WHERE id=?";
+		int count=0;
+		try {
+			count=executeUpdate(sql, id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public int updateCount(int id, int count) {
+		String sql="UPDATE `buycar` SET `count`=?,amount=tagPrice*`count` WHERE id=?";
+		int num=0;
+		try {
+			count=executeUpdate(sql, count,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return num;
 	}
 	
 }

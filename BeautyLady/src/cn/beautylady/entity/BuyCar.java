@@ -15,6 +15,10 @@ public class BuyCar {
 	private Double amount;
 	private String userName;
 	private Integer count;
+	private String productName;
+	private String colorName;
+	private String sizeName;
+	private String picpath;
 	public Integer getId() {
 		return id;
 	}
@@ -86,6 +90,33 @@ public class BuyCar {
 	}
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+	
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	
+	public String getColorName() {
+		return colorName;
+	}
+	public void setColorName(String colorName) {
+		this.colorName = colorName;
+	}
+	public String getSizeName() {
+		return sizeName;
+	}
+	public void setSizeName(String sizeName) {
+		this.sizeName = sizeName;
+	}
+	
+	public String getPicpath() {
+		return picpath;
+	}
+	public void setPicpath(String picpath) {
+		this.picpath = picpath;
 	}
 	public BuyCar(Integer id, String colorNo, String sizeNo, String productNo, String userAccount, String status,
 			Date createDate, Double tagPrice, Double zk, Double amount, String userName, Integer count) {

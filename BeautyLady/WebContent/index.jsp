@@ -67,7 +67,7 @@
     <div id="right_bar">
         <ul>
             <li><a href="servlet/UserServlet?opr=isLogin"><img src="images/user.png" alt=""></a></li>
-            <li><a href=""><img src="images/cart.png" alt=""></a></li>
+            <li><a href="servlet/BuyCarServlet?opr=getUserCar&userAccount=${userAccount }"><img src="images/cart.png" alt=""></a></li>
             <li><a href=""><img src="images/sign.png" alt=""></a></li>
             <li><a href=""><img src="images/favorite.png" alt=""></a></li>
             <li><a href=""><img src="images/search.png" alt=""></a></li>

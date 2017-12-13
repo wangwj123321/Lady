@@ -1,5 +1,7 @@
 package cn.beautylady.dao;
 
+import java.util.List;
+
 import cn.beautylady.entity.BuyCar;
 
 public interface BuyCarDao {
@@ -17,9 +19,28 @@ public interface BuyCarDao {
 	 */
 	public BuyCar getBuyCar(String productNo,String userAccount,String colorNo,String sizeNo);
 	/**
-	 * 修改购物车商品的数量
+	 * 修改购物车商品的数量+1
 	 * @param id 购物车记录id
 	 * @return 影响行数
 	 */
 	public int updateBuyCarCount(int id);
+	/**
+	 * 获取用户的购物车的商品列表
+	 * @param userAccount 用户名
+	 * @return 商品列表
+	 */
+	public List<BuyCar> getBuyCarByUserAccount(String userAccount);
+	/**
+	 * 删除购物车商品
+	 * @param id 购物车记录id 
+	 * @return 影响行数 
+	 */
+	public int delBuyCar(int id);
+	/**
+	 * 修改购物车商品数量
+	 * @param id 购物车记录id 
+	 * @param count 修改的数量
+	 * @return 影响行数
+	 */
+	public int updateCount(int id,int count);
 }

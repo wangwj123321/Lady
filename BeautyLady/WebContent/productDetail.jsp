@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>加入购物车成功</h3>
 		<p>
 			<a id="jxBuy"></a>
-			<a href="" id="clearing"></a>
+			<a href="servlet/BuyCarServlet?opr=getUserCar&userAccount=${userAccount }" id="clearing"></a>
 		</p>
 	</div>
 </body>

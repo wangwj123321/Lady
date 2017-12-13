@@ -48,6 +48,19 @@ public class UserServlet extends HttpServlet {
 		}
 		if ("getUserByUserAccount".equals(opr)) {
 			String userAccount=request.getParameter("userAccount");
+			if (userService.getUserByUserAccount(userAccount)) {
+				out.print("true"); 
+			}else {
+				out.print("false"); 
+			}
+		}
+		if ("getUserByEmailt".equals(opr)) {
+			String email=request.getParameter("email");
+			if (userService.getUserByEmail(email)) {
+				out.print("true"); 
+			}else {
+				out.print("false"); 
+			}
 		}
 		if ("login".equals(opr)) {
 			String userAccount=request.getParameter("userAccount");

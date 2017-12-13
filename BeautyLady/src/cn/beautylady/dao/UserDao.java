@@ -15,4 +15,17 @@ public interface UserDao {
      */
     public User findUser(User user);
 
+    /**
+     * 通过用户名查找用户（判断用户输入的用户名是否存在）
+     * @param userAccount 用户名
+     * @return 用户对象
+     */
+    public User getUserByUserAccount(String userAccount);
+    
+    /**
+     * 通过邮箱查找用户（判断是否存在邮箱）
+     * @param email
+     * @return
+     */
+    public User getUserByEmail(String email);
 }

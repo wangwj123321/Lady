@@ -16,4 +16,23 @@ public class UserServiceImpl implements UserService{
 	public User login(User user) {
 		return dao.findUser(user);
 	}
+	
+	@Override
+	public boolean getUserByUserAccount(String userAccount) {
+		User user=dao.getUserByUserAccount(userAccount);
+		if (user!=null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean getUserByEmail(String email) {
+		User user=dao.getUserByEmail(email);
+		if (user!=null) {
+			return true;
+		}
+		return false;
+	}
+
 }

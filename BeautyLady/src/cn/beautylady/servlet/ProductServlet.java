@@ -19,8 +19,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.beautylady.entity.Page;
+import cn.beautylady.service.ColorService;
 import cn.beautylady.service.ProductService;
+import cn.beautylady.service.SizeService;
+import cn.beautylady.service.impl.ColorServiceImpl;
 import cn.beautylady.service.impl.ProductServiceImpl;
+import cn.beautylady.service.impl.SizeServiceImpl;
 import cn.beautylady.util.ClassNameUtil;
 
 /**
@@ -30,6 +34,8 @@ import cn.beautylady.util.ClassNameUtil;
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService=new ProductServiceImpl();
+	private ColorService colorService=new ColorServiceImpl();
+	private SizeService sizeService=new SizeServiceImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -71,7 +77,7 @@ public class ProductServlet extends HttpServlet {
 			String pageNO=request.getParameter("pageNO");
 			int pn=1;
 			Map<String, Object> map=new HashMap<String, Object>();
-			if (key!=null && key!="") {
+			if (key!=null && !"".equals(key)) {
 				map.put(key, value);
 			}
 			Page<Product> page=new Page<>();
@@ -87,6 +93,15 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("key", key);
 			application.setAttribute("value", value);
 			response.sendRedirect("../index.jsp");
+		}else if("productDetail".equals(opr)) {
+			Integer proId=Integer.parseInt(request.getParameter("proId"));
+			Product product=productService.getProductById(proId);
+			List<Color> product_Colors=colorService.getListColorByProNo(product.getProductNo());
+			List<Size> product_Sizes=sizeService.getListSizeByProNo(product.getProductNo());
+			request.setAttribute("product", product);
+			request.setAttribute("colors", product_Colors);
+			request.setAttribute("sizes", product_Sizes);
+			request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
 		}
 	}
 

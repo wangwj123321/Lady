@@ -4,22 +4,24 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 用户表
- * Created by 王 on 2017/11/26.
+ * 鐢ㄦ埛琛�
+ * Created by 鐜� on 2017/11/26.
  */
 public class User {
     private Integer id;
     private String userAccount;
     private String userName;
     private String password;
-    private String status;
+    private Integer status;
     private String createdBy;
     private Date createDate;
     private String modifyBy;
     private Date modifyDate;
+    private String acode;
+    private String email;
     /**
-     * 一个用户有多个角色
-     * 角色的集合
+     * 涓�涓敤鎴锋湁澶氫釜瑙掕壊
+     * 瑙掕壊鐨勯泦鍚�
      */
     private List<Role> RoleList;
     public List<Role> getRoleList() {
@@ -61,11 +63,11 @@ public class User {
         this.password = password;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -100,8 +102,22 @@ public class User {
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
-
-    @Override
+    
+    public String getAcode() {
+		return acode;
+	}
+    
+	public void setAcode(String acode) {
+		this.acode = acode;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	@Override
     public String toString() {
         return "User{" +
                 "id=" + id +

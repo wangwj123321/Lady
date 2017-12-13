@@ -51,3 +51,36 @@ li{
 	color:grey;
 	width:60px;
 }
+#pro_img{
+    text-align:center;
+    padding-top:50px ;
+}
+#right_content{
+	background:#fafafa;
+	position:fixed;
+	right:0;
+	top:0;
+	width:25%;
+	height:100%;
+	padding:30px 0 0 30px;
+}
+#right_content h4{
+	font-weight:bold;
+	font-size:20px;
+	margin-bottom:20px;
+}
+#right_content h5{
+	font-weight:500;
+	font-size:14px;
+	margin-bottom:10px;
+}
+#add_car{
+	margin-top:50px;
+	text-align:center;
+}
+#add_car a{
+	display:inline-block;
+	width:173px;
+	height:40px;
+	background:url("../images/add_car.png")no-repeat;
+}

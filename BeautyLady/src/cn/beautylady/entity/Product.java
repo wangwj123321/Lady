@@ -25,6 +25,8 @@ public class Product {
     private Date createDate;
     private String modifyBy;
     private Date modifyDate;
+    private String subClassesName; //小类名称
+    
 	public Integer getId() {
 		return id;
 	}
@@ -138,6 +140,13 @@ public class Product {
 	}
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+	
+	public String getSubClassesName() {
+		return subClassesName;
+	}
+	public void setSubClassesName(String subClassesName) {
+		this.subClassesName = subClassesName;
 	}
 	@Override
 	public String toString() {

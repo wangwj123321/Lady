@@ -127,13 +127,16 @@
     	$("#"+type+"pageChange").children().append(btnstr);
     }
 	uploadTable = function(){
-		$("#tablist").append("<li class='nav-item'><a class='nav-link' data-toggle='tab' href='#upload'>资料导入<button type='button' class='close_btn' value='x'></button></a></li>");
-		$("#tabcontent").append("<div id='upload' class='tab_item show_info tab-pane'><form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
+		createWindow("upload","上传文件");
+		$("#upload").empty();
+		$("#upload").append("<form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
 				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/>"+
+
 		"</form></div>");
 		$closes = $(".close_btn");
 		$("[href='#upload']").addClass("active").parent().siblings().children().removeClass("active");
 		$("#upload").addClass("active").siblings().removeClass("active");
+
 	}
 	//select改变页面显示数量
 	btnchange = function(values){

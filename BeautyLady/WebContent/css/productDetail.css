@@ -83,4 +83,37 @@ li{
 	width:173px;
 	height:40px;
 	background:url("../images/add_car.png")no-repeat;
+<<<<<<< HEAD
+=======
+}
+#add_car_hint{
+	width:300px;
+	height:250px;
+	text-align:center;
+	position:fixed;
+	z-index:2;
+	background:white;
+	border:1px solid grey;
+	left:38%;
+	top:20%;
+	display:none;
+}
+#add_car_hint h3{
+	font-size:16px;
+	margin:30px 0 150px;
+}
+#jxBuy{
+	display:inline-block;
+	background:url("../images/jxBuy.png")no-repeat;
+	width:80px;
+	height:32px;
+	margin-right:20px;
+	cursor:pointer;
+}
+#clearing{
+	display:inline-block;
+	background:url("../images/clearing.png")no-repeat;
+	width:56px;
+	height:32px;
+>>>>>>> 2d19429f8436d2f2db43d8371f1ab23635cb3fdf
 }

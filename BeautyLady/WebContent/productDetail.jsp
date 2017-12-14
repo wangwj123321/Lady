@@ -43,29 +43,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<img src="images/${product.picpath }"/>
 	</div>
 	<div id="right_content">
-		<h4>${product.productName }</h4>
+		<h4>${product.subClassesName }</h4>
 		<h5>编号 &nbsp;&nbsp;${product.productNo }</h5>
 		<p style="font-weight:bold;font-size:16px">￥${product.tagPrice }</p>
 		<br/>
 		<br/>
 		<form action="" method="post">
-			
+			<input type="hidden" name="tagPrice" value=${product.tagPrice }>
+			<input type="hidden" name="productNo" value=${product.productNo }>
 			颜色：&nbsp;&nbsp;
-			<c:forEach var="color" items="${colors }">
-				${color.colorName }<input type="radio" name="color" value="${color.colorNo }">
+			<c:forEach var="color" items="${colors }" varStatus="status">
+				${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
 			</c:forEach>
 			<br/>
 			<br/>
 			<br/>
 			<br/>
 			尺码：&nbsp;&nbsp;
-			<c:forEach var="size" items="${sizes }">
-				${size.sizeName }<input type="radio" name="size" value="${size.sizeNo }">
+			<c:forEach var="size" items="${sizes }" varStatus="status">
+				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
 			</c:forEach>
 		</form>
 		<div id="add_car">
-			<a href=""></a>
+			<a id="add_car"></a>
 		</div>
 	</div>
+	<div id="add_car_hint">
+		<h3>加入购物车成功</h3>
+		<p>
+			<a id="jxBuy"></a>
+			<a href="servlet/BuyCarServlet?opr=getUserCar&userAccount=${userAccount }" id="clearing"></a>
+		</p>
+	</div>
 </body>
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+	$("#add_car").click(function(){
+		var colorNo=$("[name='colorNo']:checked").val();
+		var sizeNo=$("[name='sizeNo']:checked").val();
+		var tagPrice=$("[name='tagPrice']").val();
+		var productNo=$("[name='productNo']").val();
+/* 		alert(colorNo);
+		alert(sizeNo); */
+		$.get("servlet/BuyCarServlet","opr=addBuyCar&colorNo="+colorNo+"&sizeNo="+sizeNo+"&tagPrice="+tagPrice+"&productNo="+productNo,succ,"text");
+		function succ(data){
+			if(data=="true"){
+				$("#add_car_hint").css("display","block");
+			}else if(data=="noLogin"){
+				location.href='login.jsp';
+			}
+		}
+	});
+	$("#jxBuy").click(function(){
+		$(this).parent().parent().css("display","none");
+	});
+</script>
 </html>

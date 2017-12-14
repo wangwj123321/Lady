@@ -592,7 +592,7 @@ public class BaseDao {
             String methodName = getGetter(field.getName());
             Method method = clazz.getDeclaredMethod(methodName);
             Object object = method.invoke(t);
-            if (object != null && "".equals(object)) {
+            if (object != null && !"".equals(object)) {
                 if (flag) {
                     condition.append(field.getName()+"=?");
                     flag=false;

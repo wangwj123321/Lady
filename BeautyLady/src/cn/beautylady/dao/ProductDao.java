@@ -1,5 +1,6 @@
 package cn.beautylady.dao;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -44,4 +45,17 @@ public interface ProductDao {
      * @return 商品对象
      */
     public Product getProductById(int id);
+    
+    /**
+     * 根据商品编号获取商品对象
+     * @param productNo
+     * @return
+     * @throws SQLException 
+     * @throws InvocationTargetException 
+     * @throws InstantiationException 
+     * @throws IllegalAccessException 
+     * @throws NoSuchMethodException 
+     * @throws NoSuchFieldException 
+     */
+    public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 }

@@ -1,5 +1,7 @@
 package cn.beautylady.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +36,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product getProductById(int id) {
 		return dao.getProductById(id);
+	}
+
+	@Override
+	public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.getProductByNo(productNo);
 	}
 
 }

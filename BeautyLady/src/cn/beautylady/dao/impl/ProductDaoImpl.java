@@ -1,5 +1,6 @@
 package cn.beautylady.dao.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -75,5 +76,11 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 		// TODO Auto-generated method stub
 		String sql="SELECT * FROM `product` WHERE id=?";
 		return getOne(sql, Product.class, id);
+	}
+
+	@Override
+	public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "SELECT * FROM `product` WHERE productNo=?";
+		return selectOne(Product.class, sql, productNo);
 	}
 }

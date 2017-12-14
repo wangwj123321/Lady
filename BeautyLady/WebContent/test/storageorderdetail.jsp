@@ -8,6 +8,16 @@
 <script type="text/javascript" src='${pageContext.request.contextPath }/js/jquery-3.2.1.js'></script>
 <script type="text/javascript" src='${pageContext.request.contextPath }/js/laydate.js'></script>
 <script type="text/javascript" src='${pageContext.request.contextPath }/js/storage.js'></script>
+<style>
+	#choose{
+		position:fixed;
+		top:100px;
+		right:700px;
+		width:200px;
+		height:200px;
+		border:1px solid red;
+	}
+</style>
 <title>显示入库单</title>
 </head>
 <body>
@@ -24,20 +34,23 @@
 			<td>数量</td>
 			<td>金额</td>
 		</tr>
-		<c:forEach begin="1" end="15">
-			<tr>
-				<td><input type='text' name='productNo' id='productNo' onchange='getProductExt()'></td>
-				<td><input type='text' name='colorNo' id='colorNo' ondblclick='getColor()'>
-				</td><td><input type='text' name='sizeNo' id='sizeNo'></td>
-				<td><input type='text' name='number' id='number'></td>
-				<td><input type='text' name='totalMoney' id='totalMoney'></td>
-			</tr>
+		<c:forEach begin="1" end="15" varStatus="in">
+		<tr>
+			<td><input type='text' name='productNo' id="productNo${in.index}" ></td>
+			<td><input type='text' name='colorNo' id='colorNo${in.index }' ondblclick='getColor("${in.index }")'></td>
+			<td><input type='text' name='sizeNo' id='sizeNo${in.index }'></td>
+			<td><input type='text' name='number' id='number${in.index }'></td>
+			<td><input type='text' name='totalMoney' id='totalMoney${in.index }'></td>
+		</tr>
 		</c:forEach>
 		<tr>
 			<td><input type='submit' value='提交'/></td>
 		</tr>
 	</table>
 	</form>
+	<div id="mydiv"></div>
+	<div id='choose'>
+	</div>
 </body>
 
 <script type="text/javascript">

@@ -8,20 +8,21 @@ import java.util.Date;
  *
  */
 public class StorageOrder {
-	private Integer id;
-	private String orderNo;
-	private String productNo;
-	private String colorNo;
-	private String sizeNo;
-	private Integer number;
-	private Double totalMoney;
-	private Date storageDate;
-	private String userName;
-	private Integer status;
-	private String createdBy;
-	private Date createDate;
-	private String modifyBy;
-	private Date modifyDate;
+	private Integer id;			//主键id
+	private String orderNo;		//订单编号
+	private String productNo;	//商品编号
+	private String colorNo;		//颜色编号
+	private String sizeNo;		//尺码编号
+	private Integer number;		//入库数量
+	private Double totalMoney;	//入库金额
+	private Date storageDate;	//入库时间
+	private String userName;	//入库操作用户
+	private String desc;		//订单描述
+	private Integer status;		//状体
+	private String createdBy;	//创建时间
+	private Date createDate;	//创建时间
+	private String modifyBy;	//修改者
+	private Date modifyDate;	//修改时间
 	public Integer getId() {
 		return id;
 	}
@@ -58,8 +59,6 @@ public class StorageOrder {
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
-	
-	
 	public Double getTotalMoney() {
 		return totalMoney;
 	}
@@ -77,6 +76,12 @@ public class StorageOrder {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 	public Integer getStatus() {
 		return status;
@@ -112,7 +117,11 @@ public class StorageOrder {
 	public String toString() {
 		return "StorageOrder [id=" + id + ", orderNo=" + orderNo + ", productNo=" + productNo + ", colorNo=" + colorNo
 				+ ", sizeNo=" + sizeNo + ", number=" + number + ", totalMoney=" + totalMoney + ", storageDate="
-				+ storageDate + ", userName=" + userName + ", status=" + status + ", createdBy=" + createdBy
-				+ ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate=" + modifyDate + "]";
+				+ storageDate + ", userName=" + userName + ", desc=" + desc + ", status=" + status + ", createdBy="
+				+ createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate=" + modifyDate
+				+ "]";
 	}
+	
+	
+	
 }

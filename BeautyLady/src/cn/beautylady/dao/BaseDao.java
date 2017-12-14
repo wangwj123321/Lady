@@ -657,7 +657,7 @@ public class BaseDao {
      * @throws InstantiationException
      * @throws InvocationTargetException
      */
-    public <T> T selectOne(Class<T> clazz , String sql,Object obj) throws SQLException, NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public <T> T selectOne(Class<T> clazz , String sql,Object ... obj) throws SQLException, NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         T t = clazz.newInstance();
         PreparedStatement pstmt = getStatement(sql,obj);
         ResultSet rs = pstmt.executeQuery();

@@ -83,6 +83,8 @@ li{
 	width:173px;
 	height:40px;
 	background:url("../images/add_car.png")no-repeat;
+<<<<<<< HEAD
+=======
 }
 #add_car_hint{
 	width:300px;
@@ -113,4 +115,5 @@ li{
 	background:url("../images/clearing.png")no-repeat;
 	width:56px;
 	height:32px;
+>>>>>>> 2d19429f8436d2f2db43d8371f1ab23635cb3fdf
 }

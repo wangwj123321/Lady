@@ -1,5 +1,7 @@
 package cn.beautylady.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.Map;
 
 import cn.beautylady.entity.Page;
@@ -31,4 +33,17 @@ public interface ProductService {
      * @return 商品对象
      */
     public Product getProductById(int id);
+    
+    /**
+     * 根据商品编号获取商品对象
+     * @param productNo
+     * @return
+     * @throws SQLException 
+     * @throws InvocationTargetException 
+     * @throws InstantiationException 
+     * @throws IllegalAccessException 
+     * @throws NoSuchMethodException 
+     * @throws NoSuchFieldException 
+     */
+    public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 }

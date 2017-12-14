@@ -8,7 +8,7 @@ public class BuyCar {
 	private String sizeNo;
 	private String productNo;
 	private String userAccount;
-	private String status;
+	private Integer status;
 	private Date createDate;
 	private Double tagPrice;
 	private Double zk;
@@ -49,10 +49,10 @@ public class BuyCar {
 	public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;
 	}
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public Date getCreateDate() {
@@ -118,7 +118,7 @@ public class BuyCar {
 	public void setPicpath(String picpath) {
 		this.picpath = picpath;
 	}
-	public BuyCar(Integer id, String colorNo, String sizeNo, String productNo, String userAccount, String status,
+	public BuyCar(Integer id, String colorNo, String sizeNo, String productNo, String userAccount, Integer status,
 			Date createDate, Double tagPrice, Double zk, Double amount, String userName, Integer count) {
 		super();
 		this.id = id;

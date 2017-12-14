@@ -52,7 +52,7 @@
 			</p>
 			<div id="clearing">
 				<span>已选：<span id="count">0</span>件
-				</span><br> <span>总计金额(不含运费)：￥ <b>0</b></span><br> <a href=""
+				</span><br> <span>总计金额(不含运费)：￥ <b>0</b></span><br> <a href="car2.jsp"
 					id="carClear"></a>
 			</div>
 		</div>

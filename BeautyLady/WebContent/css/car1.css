@@ -12,6 +12,7 @@ body{
     margin-bottom:20px;
     height:40px;
     line-height:40px;
+    position:relative;
 }
 #top>a{
 	display:inline-block;
@@ -20,13 +21,13 @@ body{
 	padding:5px 0;
 }
 #top>span{
-	float:right;
 	margin-right:20px;
+	position:absolute;
+	right:0px;
 }
 #gwd{
     background: white;
     border-top: 3px solid black;
-    min-width: 980px;
     width: 80%;
     margin: 0 auto;
     height: 150px;

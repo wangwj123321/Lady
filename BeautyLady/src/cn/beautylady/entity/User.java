@@ -19,6 +19,7 @@ public class User {
     private Date modifyDate;
     private String acode;
     private String email;
+    private Integer stage;
     /**
      * 涓�涓敤鎴锋湁澶氫釜瑙掕壊
      * 瑙掕壊鐨勯泦鍚�
@@ -116,6 +117,13 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Integer getStage() {
+		return stage;
+	}
+	public void setStage(Integer stage) {
+		this.stage = stage;
 	}
 	@Override
     public String toString() {

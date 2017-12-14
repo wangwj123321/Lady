@@ -131,7 +131,6 @@
 		$("#upload").empty();
 		$("#upload").append("<form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
 				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/>"+
-
 		"</form></div>");
 		$closes = $(".close_btn");
 		$("[href='#upload']").addClass("active").parent().siblings().children().removeClass("active");

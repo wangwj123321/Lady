@@ -15,6 +15,9 @@
     		if(cookie.getName().equals("loginUser")){
     			session.setAttribute("loginUser", cookie.getValue());
     		}
+    		if(cookie.getName().equals("userAccount")){
+    			session.setAttribute("userAccount", cookie.getValue());
+    		}
     	}
     %>
 <body>

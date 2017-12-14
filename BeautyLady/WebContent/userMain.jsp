@@ -6,7 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+	String loginUser=(String)session.getAttribute("loginUser");
+	if(loginUser==null){
+		response.sendRedirect("login.jsp");
+	}
+%>
 <body>
 	<h1 align="center">欢迎您，${loginUser }</h1>
+	<p><a href="servlet/UserServlet?opr=exitLogin">退出登陆</a></p>
 </body>
 </html>

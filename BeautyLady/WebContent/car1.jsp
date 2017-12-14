@@ -16,7 +16,7 @@
 <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="js/car1.js"></script>
 	<body>
-	    <div id="top"><a href="index.jsp"><img src="images/ochirly.png" alt=""></a></div>
+	    <div id="top"><a href="index.jsp"><img src="images/ochirly.png" alt=""></a>	<span>${loginUser } ,您好！&nbsp;&nbsp;<a href="servlet/UserServlet?opr=exitLogin">退出</a></span></div>
 	    <div id="gwd"><img src="images/car1.png" alt=""><br>购物车</div>
 	    <p>优惠：单笔消费，满699元免邮</p>
 		<c:if test="${! empty list }">

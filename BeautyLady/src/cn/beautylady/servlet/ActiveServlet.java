@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.beautylady.service.IRegService;
 import cn.beautylady.service.impl.RegServiceImpl;
 
-@WebServlet("/servlet/ActiveServlet")
+@WebServlet("/ActiveServlet")
 public class ActiveServlet extends HttpServlet {
 	
 	//依赖注入
@@ -28,7 +28,7 @@ public class ActiveServlet extends HttpServlet {
 		int count = serivce.active(acode);
 		
 		request.setAttribute("count", count);
-		request.getRequestDispatcher("../result.jsp").forward(request, response);
+		request.getRequestDispatcher("result.jsp").forward(request, response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

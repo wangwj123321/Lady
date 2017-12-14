@@ -66,14 +66,14 @@ public class MySendMailThread extends Thread {
 			MimeMessage msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("619699629@qq.com"));
 			msg.setRecipient(RecipientType.TO, new InternetAddress(user.getEmail()));
-			msg.setSubject(user.getUserAccount() + ",欢迎注册***账号,请点击链接激活账号");
+			msg.setSubject(user.getUserAccount() + ",欢迎注册tyj有限公司账号,请点击链接激活账号");
 			StringBuilder sbd = new StringBuilder();
 			sbd.append(user.getUserAccount() + "<br/>欢迎！请确认此邮件地址以激活您的账号。<br/>");
-			sbd.append("<font color='red'><a href='http://127.0.0.1:8080/BeautyLady/servlet/ActiveServlet?acode="
+			sbd.append("<font color='red'><a href='http://127.0.0.1:8080/BeautyLady/ActiveServlet?acode="
 					+ user.getAcode() + "' target='_blank'");
 			sbd.append(">立即激活</a></font><br/>");
 			sbd.append("或者点击下面链接:<br/>");
-			sbd.append("http://127.0.0.1:8080/BeautyLady/servlet/ActiveServlet?acode="
+			sbd.append("http://127.0.0.1:8080/BeautyLady/ActiveServlet?acode="
 					+ user.getAcode() + "<br/>");
 			sbd.append("这是一封自动发送的邮件；如果您并未要求但收到这封信件，您不需要进行任何操作。");
 

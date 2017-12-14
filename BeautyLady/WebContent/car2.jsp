@@ -16,7 +16,7 @@
     <script type="text/javascript" src="js/car2.js"></script>
 </head>
 <body>
-<div id="top"><a href=""><img src="images/ochirly.png" alt=""></a>	<span>张三 ,您好！&nbsp;&nbsp;<a href="">退出<span>购物车（0）</span></a></span></div>
+<div id="top"><a href=""><img src="images/ochirly.png" alt=""></a>	<span>${sessionScope.loginUser } ,您好！&nbsp;&nbsp;<a href="servlet/UserServlet?opr=exitLogin">退出</a></span></div>
 <div id="gwd"><img src="images/car2.png" alt=""><br></div>
 <p>订单确认</p>
 <div id="order_content">

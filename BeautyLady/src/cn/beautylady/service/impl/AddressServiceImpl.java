@@ -12,5 +12,13 @@ public class AddressServiceImpl implements AddressService{
 		int count=addressDao.addAddress(address);
 		return count==1?true:false;
 	}
+	@Override
+	public Address getDefaultAddress(String userAccount) {
+		return addressDao.getDefaultAddress(userAccount);
+	}
+	@Override
+	public void updateDefaultAddress(String userAccount) {
+		addressDao.updateDefaultAddress(userAccount);
+	}
 
 }

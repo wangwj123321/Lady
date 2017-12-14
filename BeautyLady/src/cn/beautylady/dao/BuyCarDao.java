@@ -43,4 +43,10 @@ public interface BuyCarDao {
 	 * @return 影响行数
 	 */
 	public int updateCount(int id,int count);
+	/**
+	 * 通过id获取购物车记录
+	 * @param id 记录id
+	 * @return 购物车记录对象
+	 */
+	public BuyCar getBuyCarById(int id);
 }

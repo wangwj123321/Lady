@@ -34,6 +34,7 @@ public class AddressServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		PrintWriter out=response.getWriter();
 		String opr=request.getParameter("opr");
 		if ("addAdderss".equals(opr)) {
@@ -41,8 +42,20 @@ public class AddressServlet extends HttpServlet {
 			String name=request.getParameter("name");
 			String address=request.getParameter("address");
 			String phone=request.getParameter("phone");
-			Address ads=new Address(null, userAccount, address, name, phone);
+			String isDefault=request.getParameter("isDefault");
+			int isd=0;
+			if (isDefault!=null && !isDefault.equals("")) {
+				isd=Integer.parseInt(isDefault);
+			}
+			Address ads=new Address(null, userAccount, address, name, phone,isd);
+			if (isd!=0) {
+				addressService.updateDefaultAddress(userAccount);
+			}
 			if (addressService.addAddress(ads)) {
+				if (isd!=0) {
+					out.print("updateDefaultTrue");
+					return;
+				}
 				out.print("true");
 			}else {
 				out.print("false");

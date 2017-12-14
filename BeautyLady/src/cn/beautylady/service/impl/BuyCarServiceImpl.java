@@ -43,4 +43,9 @@ public class BuyCarServiceImpl implements BuyCarService{
 		return num==1?true:false;
 	}
 
+	@Override
+	public BuyCar getBuyCarById(int id) {
+		return buyCarDao.getBuyCarById(id);
+	}
+
 }

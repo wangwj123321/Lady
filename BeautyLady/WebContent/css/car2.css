@@ -60,14 +60,162 @@ body>p{
 }
 #order_left{
     float: left;
-    padding: 15px;
+    width: 50%;
+    margin-right: 80px;
 }
-#order_right{
-    float: left;
+#ab{
+    border-top: 1px solid gainsboro;
+
 }
 #addBtu{
     background: url("../images/addAddressButton.png");
     width: 63px;
     height: 27px;
     border: 0;
+}
+#order_left h3{
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    font-weight: inherit;
+}
+
+.ch_address{
+    padding: 5px 50px;
+    border:1px solid orangered;
+    margin-bottom: 30px;
+}
+
+.ch_address p{
+    border-bottom: 1px solid gainsboro;
+    height: 25px;
+    line-height: 25px;
+    font-size: 12px;
+    color: grey;
+}
+.ch_address+div{
+    margin-bottom: 20px;
+    margin-left: 100px;
+}
+#ch_dd_btn{
+    display: inline-block;
+    background: url("../images/ch_add_btn.png") no-repeat;
+    width: 117px;
+    height: 28px;
+    text-align: center;
+}
+#tab{
+    font-size: 14px;
+}
+#tab td:nth-of-type(1){
+    width: 100px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+#tab td:nth-of-type(2){
+    width: 350px;
+}
+[type="text"]{
+    width: 350px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 5px;
+}
+#car_details{
+    margin: 40px 0;
+    border-top: 1px solid gainsboro;
+    font-size: 12px;
+}
+#car_details img{
+    width: 110px;
+    height: 150px;
+}
+#car_details td{
+    width: 150px;
+    text-align: center;
+    border-bottom: 1px solid gainsboro;
+    height: 190px;
+    vertical-align: middle;
+    line-height: 25px;
+}
+#car_details td:nth-of-type(2) p:nth-of-type(1){
+    color: #518700;
+    font-size: 14px;
+}
+#car_details td:nth-of-type(2) p:nth-of-type(2),#car_details td:nth-of-type(2) p:nth-of-type(3){
+    color: grey;
+}
+#car_details td:nth-of-type(2) p:nth-of-type(4){
+    color: black;
+    font-size: 14px;
+}
+#car_details td:nth-of-type(3) p:nth-of-type(1),#car_details td:nth-of-type(4) p:nth-of-type(1),#car_details td:nth-of-type(5) p:nth-of-type(1){
+    color: grey;
+}
+
+#fotter{
+    text-align: center;
+    padding: 30px;
+}
+#fotter h3,#fotter p{
+    color: darkgray;
+    font-weight: 500;
+    margin-top: 10px;
+}
+#fotter p{
+    color: grey;
+    font-size: 12px;
+}
+#order_right{
+    float: left;
+    width: 40%;
+    height: 550px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: white;
+}
+#order_summary{
+    background: #f1f1f1;
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+}
+#order_summary h4{
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 1px solid gainsboro;
+}
+#order_summary p{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid gainsboro;
+}
+#order_summary b{
+    color: #ca291e;
+}
+#order_summary p span{
+    float: right;
+}
+#order_summary p:nth-last-of-type(1){
+    margin-top: 100px;
+    border: 0;
+}
+#order_right a{
+    display: inline-block;
+    color: white;
+    font-size: 13px;
+    background: #a70432;
+    height: 45px;
+    line-height: 45px;
+    min-width: 350px;
+    text-align: center;
+    margin-top: 30px;
+}
+#add_order_btn{
+    width: 100%;
+    text-align: center;
 }

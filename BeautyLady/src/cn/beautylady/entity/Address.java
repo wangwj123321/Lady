@@ -10,6 +10,7 @@ public class Address {
 	private String address;
 	private String name;
 	private String phone;
+	private Integer isDefault;
 	public Integer getId() {
 		return id;
 	}
@@ -40,13 +41,21 @@ public class Address {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Address(Integer id, String userAccount, String address, String name, String phone) {
+	
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+	public Address(Integer id, String userAccount, String address, String name, String phone, Integer isDefault) {
 		super();
 		this.id = id;
 		this.userAccount = userAccount;
 		this.address = address;
 		this.name = name;
 		this.phone = phone;
+		this.isDefault = isDefault;
 	}
 	public Address() {
 		super();

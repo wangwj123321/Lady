@@ -43,6 +43,23 @@ $(document).ready(function(){
         count();
         getTotal();
     });
+    /*结算按妞点解事件*/
+    $("#carClear").click(function(){
+    	var ch=$("[name='ch']");
+    	var ids="";
+    	var flag=false;
+    	$(ch).each(function(i,t){
+            var isChecked=$(t).is(":checked");
+            if(isChecked){
+            	var id=$(t).attr("class");
+            	flag=true;
+            	ids=ids+id;
+            }
+        });
+    	if(flag){
+    		location.href="servlet/BuyCarServlet?opr=clearCar&ids="+ids;
+    	}
+    });
 });
 /*计算商品总共多少件*/
 function count(){

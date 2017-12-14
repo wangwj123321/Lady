@@ -10,11 +10,30 @@ public class AddressDaoImpl extends BaseDao implements AddressDao{
 
 	@Override
 	public int addAddress(Address address) {
-		String sql="INSERT INTO `address` VALUES(NULL,?,?,?,?)";
-		Object[] objs= {address.getUserAccount(),address.getAddress(),address.getName(),address.getPhone()};
+		String sql="INSERT INTO `address` VALUES(NULL,?,?,?,?,?)";
+		Object[] objs= {address.getUserAccount(),address.getAddress(),address.getName(),address.getPhone(),address.getIsDefault()};
 		int count=0;
 		try {
 			count=executeUpdate(sql, objs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public Address getDefaultAddress(String userAccount) {
+		String sql="SELECT * FROM `address` WHERE userAccount=? AND isDefault=1";
+		return getOne(sql, Address.class, userAccount);
+	}
+
+	@Override
+	public int updateDefaultAddress(String userAccount) {
+		String sql="UPDATE `address` SET isDefault=0 WHERE userAccount=?";
+		int count=0;
+		try {
+			count = executeUpdate(sql, userAccount);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

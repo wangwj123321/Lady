@@ -48,4 +48,10 @@ public class BuyCarServiceImpl implements BuyCarService{
 		return buyCarDao.getBuyCarById(id);
 	}
 
+	@Override
+	public boolean updateBuyCarStatus(int id) {
+		int count=buyCarDao.updateBuyCarStatus(id);
+		return count==1?true:false;
+	}
+
 }

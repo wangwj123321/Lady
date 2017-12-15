@@ -49,6 +49,12 @@ $(document).ready(function(){
 		$(this).siblings(".ch_address").remove();
 		$(this).addClass("sure");
 	});
+	/*添加订单按妞点击事件*/
+	$("#add_order_pu").click(function(){
+		var addressID=$("div.sure").attr("name");
+		var costPrice=$("#costTotal").text();
+		location.href="servlet/OrderServlet?opr=addOrder&addressID="+addressID+"&costPrice="+costPrice;
+	});
 	getTotal();
 });
 function getTotal(){

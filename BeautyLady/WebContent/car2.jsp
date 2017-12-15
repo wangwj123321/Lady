@@ -59,7 +59,7 @@
         <div id="car_details">
             <h3>购买商品明细</h3>
             <table id="tab_details">
-            	<c:forEach var="detail" items="${list }">
+            	<c:forEach var="detail" items="${detailList }">
             		<tr>
 	                    <td><img src="images/${detail.picpath }" alt=""></td>
 	                    <td>
@@ -93,7 +93,7 @@
             <p>邮费：<span>￥<b>8.0</b></span></p>
             <p>优惠金额：<span>￥<b id="youhui">0</b></span></p>
             <p>实付金额：<span>￥<b id="costTotal">0</b></span></p>
-            <div id="add_order_btn"><a href="">提交订单</a></div>
+            <div id="add_order_btn"><a id="add_order_pu">提交订单</a></div>
         </div>
     </div>
 </div>

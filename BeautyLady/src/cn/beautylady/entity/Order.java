@@ -8,113 +8,77 @@ import java.util.Date;
  *
  */
 public class Order {
-	private Integer id;//序列号
-	private Integer OrderNo;//订单编号
-	private String colorName;//颜色名称
-	private String  sizeName;//尺码名称
-	private Double payPrice;//付款金额
-	private Double discount;//打折
-	private Double totalPrice;//总价
-	private Integer productNum;//商品数量
-	private Date sendDate;//发货日期
-	private String comment;//评论
-	private boolean isReceived;//确认收货
-	private User user;//用户账号
-	private Date payDate;//付款日期
-	   public Integer getId() {
+	private Integer id;
+	private String orderNo;
+	private String userAccount;
+	private String userName;
+	private Integer addressID;
+	private Date createDate;
+	private Double costPrice;
+	private Integer status;
+	
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getOrderNo() {
-		return OrderNo;
+	public String getOrderNo() {
+		return orderNo;
 	}
-	public void setOrderNo(Integer orderNo) {
-		OrderNo = orderNo;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
-	public String getColorName() {
-		return colorName;
+	public String getUserAccount() {
+		return userAccount;
 	}
-	public void setColorName(String colorName) {
-		this.colorName = colorName;
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
 	}
-	public String getSizeName() {
-		return sizeName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setSizeName(String sizeName) {
-		this.sizeName = sizeName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public Double getPayPrice() {
-		return payPrice;
+	public Integer getAddressID() {
+		return addressID;
 	}
-	public void setPayPrice(Double payPrice) {
-		this.payPrice = payPrice;
+	public void setAddressID(Integer addressID) {
+		this.addressID = addressID;
 	}
-	public Double getDiscount() {
-		return discount;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setDiscount(Double discount) {
-		this.discount = discount;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public Double getTotalPrice() {
-		return totalPrice;
+	public Double getCostPrice() {
+		return costPrice;
 	}
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setCostPrice(Double costPrice) {
+		this.costPrice = costPrice;
 	}
-	public Integer getProductNum() {
-		return productNum;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setProductNum(Integer productNum) {
-		this.productNum = productNum;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
-	public Date getSendDate() {
-		return sendDate;
+	public Order(Integer id, String orderNo, String userAccount, String userName, Integer addressID, Date createDate,
+			Double costPrice, Integer status) {
+		super();
+		this.id = id;
+		this.orderNo = orderNo;
+		this.userAccount = userAccount;
+		this.userName = userName;
+		this.addressID = addressID;
+		this.createDate = createDate;
+		this.costPrice = costPrice;
+		this.status = status;
 	}
-	public void setSendDate(Date sendDate) {
-		this.sendDate = sendDate;
+	public Order() {
+		super();
 	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public boolean isReceived() {
-		return isReceived;
-	}
-	public void setReceived(boolean isReceived) {
-		this.isReceived = isReceived;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Date getPayDate() {
-		return payDate;
-	}
-	public void setPayDate(Date payDate) {
-		this.payDate = payDate;
-	}
-	@Override
-	    public String toString() {
-	        return "Order{" +
-	        		"id'" + id + '\'' +
-	                "OrderNo='" + OrderNo + '\'' +
-	                ", colorName='" + colorName + '\'' +
-	                ", sizeName='" + sizeName + '\'' +
-	                ", payPrice='" + payPrice + '\'' +
-	                ", discount='" + discount + '\'' +
-	                ", totalPrice='" + totalPrice + '\'' +
-	                ", productNum='" + productNum + '\'' +
-	                ", sendDate=" + sendDate.toString() +
-	                ", comment='" + comment + '\'' +
-	                ", isReceived=" + isReceived +
-	                ", user='" + user.getUserName() + '\'' +
-	                ", payDate=" + payDate.toString() +
-	                '}';
-	    }
+	
 }

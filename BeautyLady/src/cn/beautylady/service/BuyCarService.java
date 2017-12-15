@@ -49,4 +49,10 @@ public interface BuyCarService {
 	 * @return 购物车记录对象
 	 */
 	public BuyCar getBuyCarById(int id);
+	/**
+	 * 修改购物车记录为已结算
+	 * @param id 购物车记录id
+	 * @return 是否成功
+	 */
+	public boolean updateBuyCarStatus(int id);
 }

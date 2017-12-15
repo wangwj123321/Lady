@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background:#f4f3f3 ;
+}
+a{
+    text-decoration: none;
+    color: darkgray;
+}
+#top{
+    background: white;
+    width: 100%;
+    text-align: center;
+    margin-bottom:20px;
+    height:40px;
+    line-height:40px;
+    position:relative;
+}
+#top>a{
+    display:inline-block;
+    vertical-align:middle;
+    height:40px;
+    padding:5px 0;
+}
+#top>span{
+    margin-right:20px;
+    position:absolute;
+    right:0px;
+}
+#top>span span{
+    margin-left: 20px;
+}
+#complete{
+    width: 80%;
+    margin: 0 auto;
+    height: 190px;
+    box-sizing: border-box;
+    border-top: 3px solid black;
+    background: white;
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 2px;
+}
+#complete>div{
+    display: inline-block;
+}
+#comp_img{
+    height: 100%;
+    margin-right: 40px;
+}
+#comp_img img,#order_no{
+    vertical-align: middle;
+}
+#order_no{
+    line-height: 50px;
+}
+#order_no p span:nth-of-type(1){
+    margin-right: 20px;
+}
+#order_no b{
+    color: #ff4e00;
+}
+#ch_pay{
+    width: 80%;
+    margin: 0 auto;
+    background: white;
+    padding: 0 50px 50px;
+    box-sizing: border-box;
+}
+#ch_pay p:nth-of-type(1){
+    height: 100px;
+    line-height: 100px;
+    font-size: 12px;
+}
+#ch_pay p b{
+    color: #ff4e00;
+}
+#pay{
+    border: 1px solid gainsboro;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+}
+#pay img{
+    display: inline-block;
+    margin-right: 30px;
+}
+#ch_pay p:nth-of-type(2){
+    height: 100px;
+    line-height: 100px;
+    text-align: right;
+}
+#ch_pay p:nth-of-type(3){
+    height: 100px;
+    line-height: 100px;
+    text-align: right;
+}
+#ch_pay p:nth-of-type(3) a{
+    display: inline-block;
+    text-align: center;
+    height: 40px;
+    min-width: 150px;
+    line-height: 40px;
+    background: #990000;
+    color: white;
+}
+#fotter{
+    text-align: center;
+    padding: 30px;
+}
+#fotter h3,#fotter p{
+    color: darkgray;
+    font-weight: 500;
+    margin-top: 10px;
+}
+#fotter p{
+    color: grey;
+    font-size: 12px;
+}

@@ -102,19 +102,19 @@ public class BuyCarServlet extends HttpServlet {
 				out.print("false");
 			}
 		}else if("clearCar".equals(opr)){
-			String ids=request.getParameter("ids");
-			String[] strs=ids.split("");
+			String[] ids=request.getParameterValues("ids");
+			String[] strs=ids[0].split(",");
 			List<BuyCar> list=new ArrayList<>();
 			String userAccount=(String) request.getSession().getAttribute("userAccount");
 			Address defaultAddress=addressService.getDefaultAddress(userAccount);
-			for (String str : strs) {
-				if (!str.equals("")) {
-					int id=Integer.parseInt(str);
+			for (String ss : strs) {
+				if (!ss.equals("")) {
+					int id=Integer.parseInt(ss);
 					BuyCar buyCar=buyCarService.getBuyCarById(id);
 					list.add(buyCar);
 				}
 			}
-			request.setAttribute("list", list);
+			request.getSession().setAttribute("detailList", list);
 			request.setAttribute("defaultAddress", defaultAddress);
 			request.getRequestDispatcher("../car2.jsp").forward(request, response);
 		}

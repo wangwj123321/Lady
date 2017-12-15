@@ -89,5 +89,18 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 				"AND `buycar`.id=?";
 		return getOne(sql, BuyCar.class, id);
 	}
+
+	@Override
+	public int updateBuyCarStatus(int id) {
+		String sql="UPDATE `buycar` SET `status`=2 WHERE id=?";
+		int count=0;
+		try {
+			count=executeUpdate(sql, id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 }

@@ -46,14 +46,16 @@ $(document).ready(function(){
     /*结算按妞点解事件*/
     $("#carClear").click(function(){
     	var ch=$("[name='ch']");
-    	var ids="";
+    	var ids=new Array();
     	var flag=false;
+    	var index=0;
     	$(ch).each(function(i,t){
             var isChecked=$(t).is(":checked");
             if(isChecked){
             	var id=$(t).attr("class");
             	flag=true;
-            	ids=ids+id;
+            	ids[index]=id;
+            	index=index+1;
             }
         });
     	if(flag){

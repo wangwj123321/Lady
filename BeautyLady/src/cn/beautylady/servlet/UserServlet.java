@@ -87,6 +87,7 @@ public class UserServlet extends HttpServlet {
 			if (loginUser!=null) {
 				if(loginUser.getStatus() == 1) {
 					session.setAttribute("loginUser", loginUser.getUserName());
+					session.setAttribute("userAccount", loginUser.getUserAccount());
 					session.setAttribute("hint", null);
 					if ("true".equals(pass)) {
 						Cookie cookie=new Cookie("loginUser", loginUser.getUserName());

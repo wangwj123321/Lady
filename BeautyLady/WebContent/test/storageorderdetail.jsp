@@ -48,7 +48,6 @@
 		</tr>
 	</table>
 	</form>
-	<div id="mydiv"></div>
 	<div id='choose'>
 	</div>
 </body>

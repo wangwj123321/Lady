@@ -11,6 +11,7 @@ import cn.beautylady.service.StorageOrderService;
 
 public class StorageOrderServiceImpl implements StorageOrderService {
 	StorageOrderDao dao = new StorageOrderDaoImpl();
+	
 	@Override
 	public String getOrderNo() {
 		Date date = new Date();

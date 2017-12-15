@@ -1,6 +1,7 @@
 package cn.beautylady.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import cn.beautylady.service.StorageOrderService;
 import cn.beautylady.service.impl.StorageOrderServiceImpl;
 
+
+
 /**
  * Servlet implementation class AddStorageOrderDetail
+ * 
  */
 @WebServlet("/servlet/addStorageOrder")
 public class AddStorageOrderDetail extends HttpServlet {
@@ -20,6 +24,7 @@ public class AddStorageOrderDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StorageOrderService service = new StorageOrderServiceImpl();
 		String orderNo;
+
 		try {
 			orderNo = service.getOrderNo();
 			request.setAttribute("orderNo", orderNo);

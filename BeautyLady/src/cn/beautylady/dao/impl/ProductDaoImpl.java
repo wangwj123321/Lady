@@ -9,6 +9,7 @@ import java.util.Set;
 import cn.beautylady.dao.BaseDao;
 import cn.beautylady.dao.ProductDao;
 import cn.beautylady.entity.Page;
+import cn.beautylady.entity.Pic;
 import cn.beautylady.entity.Product;
 /**
  * 商品信息操作实现类
@@ -43,7 +44,7 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 				sql+="where "+s+"='"+map.get(s)+"'";
 			}
 		}
-		sql+=" ORDER BY  tagPrice "+order+" LIMIT ?,?";
+		sql+=" ORDER BY  createDate "+order+" LIMIT ?,?";
 		Object[] objs= {(page.getPageNo()-1)*page.getPageSize(),page.getPageSize()};
 		System.out.println(sql);
 		return getArrayList(sql, Product.class, objs);
@@ -82,5 +83,11 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 	public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		String sql = "SELECT * FROM `product` WHERE productNo=?";
 		return selectOne(Product.class, sql, productNo);
+	}
+
+	@Override
+	public List<Pic> getPicListByProductNo(String productNo) {
+		String sql = "select * from `pic` where productNo = ?";
+		return getArrayList(sql, Pic.class, productNo);
 	}
 }

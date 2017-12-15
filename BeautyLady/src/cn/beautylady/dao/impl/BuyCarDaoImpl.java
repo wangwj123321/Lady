@@ -11,7 +11,7 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 
 	@Override
 	public int addBuyCar(BuyCar buyCar) {
-		String sql="INSERT INTO `buycar` VALUES(NULL,?,?,?,?,'0',NULL,?,?,?,?,1)";
+		String sql="INSERT INTO `buycar` VALUES(NULL,?,?,?,?,'1',NULL,?,?,?,?,1)";
 		Object[] objs= {buyCar.getColorNo(),buyCar.getSizeNo(),buyCar.getProductNo(),buyCar.getUserAccount(),buyCar.getTagPrice(),buyCar.getZk(),buyCar.getAmount(),buyCar.getUserName()};
 		int count=0;
 		try {
@@ -25,7 +25,7 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 
 	@Override
 	public BuyCar getBuyCar(String productNo,String userAccount,String colorNo,String sizeNo) {
-		String sql="SELECT * FROM `buycar` WHERE `productNo`=? AND userAccount=? AND colorNo=? AND sizeNo=?;";
+		String sql="SELECT * FROM `buycar` WHERE `productNo`=? AND userAccount=? AND colorNo=? AND sizeNo=? AND `buycar`.`status`='1';";
 		return getOne(sql, BuyCar.class, productNo,userAccount,colorNo,sizeNo);
 	}
 
@@ -49,7 +49,7 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 				"WHERE `buycar`.`productNo`=`product`.`productNo` \r\n" + 
 				"AND `buycar`.`colorNo`=`color`.`colorNo`\r\n" + 
 				"AND `buycar`.`sizeNo`=`size`.`sizeNo`\r\n" + 
-				"AND userAccount=?";
+				"AND userAccount=? AND `buycar`.`status`='1'";
 		return getArrayList(sql, BuyCar.class, userAccount);
 	}
 
@@ -77,6 +77,17 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 			e.printStackTrace();
 		}
 		return num;
+	}
+
+	@Override
+	public BuyCar getBuyCarById(int id) {
+		String sql="SELECT `buycar`.*,`product`.`productName`,`color`.`colorName`,`size`.`sizeName`,`product`.`picpath`\r\n" + 
+				"FROM `buycar`,`product`,`color`,`size` \r\n" + 
+				"WHERE `buycar`.`productNo`=`product`.`productNo` \r\n" + 
+				"AND `buycar`.`colorNo`=`color`.`colorNo`\r\n" + 
+				"AND `buycar`.`sizeNo`=`size`.`sizeNo` \r\n" + 
+				"AND `buycar`.id=?";
+		return getOne(sql, BuyCar.class, id);
 	}
 	
 }

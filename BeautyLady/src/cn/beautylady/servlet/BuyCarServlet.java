@@ -2,6 +2,7 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.beautylady.entity.Address;
 import cn.beautylady.entity.BuyCar;
+import cn.beautylady.service.AddressService;
 import cn.beautylady.service.BuyCarService;
+import cn.beautylady.service.impl.AddressServiceImpl;
 import cn.beautylady.service.impl.BuyCarServiceImpl;
 
 /**
@@ -21,6 +25,7 @@ import cn.beautylady.service.impl.BuyCarServiceImpl;
 public class BuyCarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BuyCarService buyCarService=new BuyCarServiceImpl();
+	private AddressService addressService=new AddressServiceImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -96,6 +101,22 @@ public class BuyCarServlet extends HttpServlet {
 			}else {
 				out.print("false");
 			}
+		}else if("clearCar".equals(opr)){
+			String ids=request.getParameter("ids");
+			String[] strs=ids.split("");
+			List<BuyCar> list=new ArrayList<>();
+			String userAccount=(String) request.getSession().getAttribute("userAccount");
+			Address defaultAddress=addressService.getDefaultAddress(userAccount);
+			for (String str : strs) {
+				if (!str.equals("")) {
+					int id=Integer.parseInt(str);
+					BuyCar buyCar=buyCarService.getBuyCarById(id);
+					list.add(buyCar);
+				}
+			}
+			request.setAttribute("list", list);
+			request.setAttribute("defaultAddress", defaultAddress);
+			request.getRequestDispatcher("../car2.jsp").forward(request, response);
 		}
 		out.flush();
 		out.close();

@@ -3,6 +3,7 @@ package cn.beautylady.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -76,25 +77,61 @@ public class UserServlet extends HttpServlet {
 				return;
 			}
 			User user=new User();
-			user.setUserAccount(userAccount);
+			if(userAccount.indexOf("@") != -1) {
+				user.setEmail(userAccount);
+			}else {
+				user.setUserAccount(userAccount);
+			}
 			user.setPassword(pwd);
 			User loginUser=userService.login(user);
 			if (loginUser!=null) {
-				session.setAttribute("loginUser", loginUser.getUserName());
-				session.setAttribute("userAccount", loginUser.getUserAccount());
-				session.setAttribute("hint", null);
-				if ("true".equals(pass)) {
-					Cookie cookie=new Cookie("loginUser", loginUser.getUserName());
-					cookie.setMaxAge(1296000);
-					cookie.setPath("/BeautyLady");
-					response.addCookie(cookie);
+				if(loginUser.getStatus() == 1) {
+					session.setAttribute("loginUser", loginUser.getUserName());
+					session.setAttribute("hint", null);
+					if ("true".equals(pass)) {
+						Cookie cookie=new Cookie("loginUser", loginUser.getUserName());
+						Cookie cookie2=new Cookie("userAccount", loginUser.getUserAccount());
+						cookie.setMaxAge(1296000);
+						cookie.setPath("/BeautyLady");
+						response.addCookie(cookie);
+						cookie2.setMaxAge(1296000);
+						cookie2.setPath("/BeautyLady");
+						response.addCookie(cookie2);
+					}
+					response.sendRedirect("../index.jsp");
+				}else if(loginUser.getStatus() == 0) {
+					session.setAttribute("hint", "账号未激活，请先激活再尝试登陆！");
+					session.setAttribute("userAccount", userAccount);
+					response.sendRedirect("../login.jsp");
+				}else if(loginUser.getStatus() == 2) {
+					session.setAttribute("hint", "账号以被冻结，请联系管理员解冻再尝试登陆！");
+					session.setAttribute("userAccount", userAccount);
+					response.sendRedirect("../login.jsp");
 				}
-				response.sendRedirect("../index.jsp");
 			}else {
 				session.setAttribute("hint", "密码错误！");
 				session.setAttribute("userAccount", userAccount);
 				response.sendRedirect("../login.jsp");
 			}
+		}
+		if("exitLogin".equals(opr)) {
+			HttpSession session=request.getSession();
+			session.removeAttribute("loginUser");
+			session.removeAttribute("userAccount");
+			Cookie[] cookies=request.getCookies();
+			for (Cookie cookie : cookies) {
+				if ("loginUser".equals(cookie.getName())) {
+					cookie.setMaxAge(0);
+					cookie.setPath("/BeautyLady");
+					response.addCookie(cookie);
+				}
+				if ("userAccount".equals(cookie.getName())) {
+					cookie.setMaxAge(0);
+					cookie.setPath("/BeautyLady");
+					response.addCookie(cookie);
+				}
+			}
+			response.sendRedirect("../login.jsp");
 		}
 	}
 

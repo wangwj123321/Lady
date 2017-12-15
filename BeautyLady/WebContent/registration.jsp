@@ -7,7 +7,11 @@
 <title>用户注册</title>
 <style type="text/css">
 	body{
-		background-image: url(images/login_ochirly.jpg);
+		margin: 0;
+		padding: 0;
+	}
+	#img{
+		cursor: pointer;
 	}
 	#backgrounds{
 		position: absolute;;
@@ -86,10 +90,14 @@
 			}
 			return false;
 		});
+ 		$("#img").click(function(){
+ 			location.href="index.jsp";
+ 		});
 	});
 </script>
 </head>
 <body>
+<img src="images/login_ochirly.jpg" id="img" />
 <div id="backgrounds">
 	<form action="servlet/RegServlet" method="post" id="reg">
 		<div id="hint"></div>

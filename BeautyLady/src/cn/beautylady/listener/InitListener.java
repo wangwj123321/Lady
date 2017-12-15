@@ -22,7 +22,7 @@ public class InitListener implements ServletContextListener{
 		Page<Product> page=new Page<>();
 		page.setPageNo(1);
 		page.setPageSize(24);
-		new ProductServiceImpl().getListProduct(page,null,"ASC");
+		new ProductServiceImpl().getListProduct(page,null,"DESC");
 		ServletContext application=arg0.getServletContext();
 		application.setAttribute("ProductPage", page);
 		application.setAttribute("order", "ASC");

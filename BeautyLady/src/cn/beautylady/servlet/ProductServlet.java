@@ -98,9 +98,11 @@ public class ProductServlet extends HttpServlet {
 			Product product=productService.getProductById(proId);
 			List<Color> product_Colors=colorService.getListColorByProNo(product.getProductNo());
 			List<Size> product_Sizes=sizeService.getListSizeByProNo(product.getProductNo());
+			List<Pic> pics = productService.getPicListByProductNo(product.getProductNo());
 			request.setAttribute("product", product);
 			request.setAttribute("colors", product_Colors);
 			request.setAttribute("sizes", product_Sizes);
+			request.setAttribute("pics", pics);
 			request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
 		}
 	}

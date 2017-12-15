@@ -12,6 +12,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/productDetail.css">
+<link rel="stylesheet" href="css/productDetail/bootstrap.min.css" />
+<link rel="stylesheet" href="css/productDetail/mag.css" />
+<link rel="stylesheet" href="css/productDetail/default.css" />
+<link rel="stylesheet" href="css/productDetail/index.css" />
 </head>
 <body>
 	<div id="left">
@@ -21,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="side_bar">
 			<ul>
 				<li><a
-					href="servlet/ProductServlet?opr=getListProduct&order=ASC">首页</a></li>
+					href="servlet/ProductServlet?opr=getListProduct&order=DESC">首页</a></li>
 				<li><a href="">服装</a></li>
 				<li id="quarter"><a href="">季度</a>
 					<ul id="quar">
@@ -40,7 +44,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 	<div id="pro_img">
-		<img src="images/${product.picpath }"/>
+		
+		<ul class="linetwo">
+			<c:forEach var="pics" items="${pics }">
+				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_1.jpg') || pics.picpath ==  pics.productNo.concat('_m_2.jpg') || pics.picpath ==  pics.productNo.concat('_m_3.jpg') || pics.picpath ==  pics.productNo.concat('_m_4.jpg')}">
+					<img src="images/${pics.productNo }/${pics.picpath }" />
+				</c:if>
+			</c:forEach>
+		</ul>
+		<p class="text">细节展示</p>
+		<ul class="linethree">
+			<c:forEach var="pics" items="${pics }">
+				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_5.jpg') || pics.picpath ==  pics.productNo.concat('_m_6.jpg') || pics.picpath ==  pics.productNo.concat('_m_7.jpg') }">
+					<img src="images/${pics.productNo }/${pics.picpath }" />
+				</c:if>
+			</c:forEach>
+		</ul>
+		<ul class="lineone">
+			<!-- <div class="col col-md-5"> -->
+			<div class="out">
+		        <div class="mag-eg-el-wrap img-thumbnail">
+		            <div class="proportion">
+		                <div mag-thumb="inner" class="mag-eg-el">
+		                    <c:forEach var="pics" items="${pics }">
+						<c:if test="${pics.picpath ==  pics.productNo.concat('_m_8.jpg')   }">
+							<img src="images/${pics.productNo }/${pics.picpath }" />
+						</c:if>
+					</c:forEach>
+		                </div>
+		                <div mag-zoom="inner" class="mag-eg-el">
+		                    <c:forEach var="pics" items="${pics }">
+						<c:if test="${pics.picpath ==  pics.productNo.concat('_b_8.jpg')  }">
+							<img src="images/${pics.productNo }/${pics.picpath }" />
+						</c:if>
+					</c:forEach>
+		                </div>
+		                <div class="filler"></div>
+		            </div>
+		        </div>
+		    </div>
+		</ul>
 	</div>
 	<div id="right_content">
 		<h4>${product.subClassesName }</h4>
@@ -98,4 +141,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(this).parent().parent().css("display","none");
 	});
 </script>
+<script src="js/productDetail/jquery.min.js"></script>
+<script src="js/productDetail/jquery.bridget.js"></script>
+<script src="js/productDetail/jquery.mousewheel.min.js"></script>
+<script src="js/productDetail/PreventGhostClick.js"></script>
+<script src="js/productDetail/mag.js"></script>
+<script src="js/productDetail/mag-jquery.js"></script>
+<script src="js/productDetail/index.js"></script>
 </html>

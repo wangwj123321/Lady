@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.beautylady.entity.Page;
+import cn.beautylady.entity.Pic;
 import cn.beautylady.entity.Product;
 /**
  * 商品信息操作接口
@@ -58,4 +59,11 @@ public interface ProductDao {
      * @throws NoSuchFieldException 
      */
     public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+    
+    /**
+     * 根据商品标号，查找商品赌赢的图片
+     * @param productNo
+     * @return
+     */
+    public List<Pic> getPicListByProductNo(String productNo);
 }

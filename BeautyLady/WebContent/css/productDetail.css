@@ -15,6 +15,30 @@ ul:after{
 li{
     list-style: none;
 }
+.linetwo{
+	width:1200px;
+	margin-left: 250px;
+}
+.text{
+	font-size:24px;
+	margin: 100px 0 50px 0;
+	padding-right: 250px;
+}
+.linethree{
+	width: 980px;
+	margin-left: 350px;
+}
+.linethree>img{
+	width: 280px;
+	padding-right: 30px;
+}
+.lineone{
+	width:500px; 
+	margin: 50px 0 0 600px;
+}
+.out{
+	width:480px;
+}
 #left{
     text-align: center;
     background:#fafafa;
@@ -83,8 +107,6 @@ li{
 	width:173px;
 	height:40px;
 	background:url("../images/add_car.png")no-repeat;
-<<<<<<< HEAD
-=======
 }
 #add_car_hint{
 	width:300px;
@@ -115,5 +137,4 @@ li{
 	background:url("../images/clearing.png")no-repeat;
 	width:56px;
 	height:32px;
->>>>>>> 2d19429f8436d2f2db43d8371f1ab23635cb3fdf
 }

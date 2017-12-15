@@ -8,6 +8,7 @@ import java.util.Map;
 import cn.beautylady.dao.ProductDao;
 import cn.beautylady.dao.impl.ProductDaoImpl;
 import cn.beautylady.entity.Page;
+import cn.beautylady.entity.Pic;
 import cn.beautylady.entity.Product;
 import cn.beautylady.service.ProductService;
 
@@ -41,6 +42,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		return dao.getProductByNo(productNo);
+	}
+
+	@Override
+	public List<Pic> getPicListByProductNo(String productNo) {
+		return dao.getPicListByProductNo(productNo);
 	}
 
 }

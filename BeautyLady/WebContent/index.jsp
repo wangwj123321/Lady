@@ -25,7 +25,7 @@
         <div><img src="images/logo.png" alt=""></div>
         <div id="side_bar">
             <ul>
-                <li><a href="servlet/ProductServlet?opr=getListProduct&order=ASC">首页</a></li>
+                <li><a href="servlet/ProductServlet?opr=getListProduct&order=DESC">首页</a></li>
                 <li><a href="">服装</a></li>
                 <li id="quarter">
                 	<a href="">季度</a>

@@ -25,28 +25,63 @@
 
 <!-- 商品入库单的js文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/storage.js"></script>
-<body class="container-fluid">
+<body>
 <%@include file="element_page/header.jsp" %>
-<div id="main" class="row">
+<div id="main">
 	<%@include file="element_page/main_left.jsp" %>
-	<div class="show_info col-7 col-sm-8 col-md-9 col-lg-10 col-xl-10">
-        <ul class="nav nav-tabs" role="tablist" id="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#main_menu" id="main_win">首页</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="tabcontent">
-            <div id="main_menu" class="show_info tab-pane active">
-               <span class='display-1'>首页</span>
+	    <div id="main_info">
+        <div class="show_info">
+            <ul class="nav nav-tabs small" id="tablist">
+	             <li class="nav-item">
+	                <a class="nav-link active" data-toggle="tab" href="#main_menu" id="main_win">首页</a>
+	            </li>
+            </ul>
+            <div class="tab-content" id="tabcontent">
+	            <div id="main_menu" class="show_info tab-pane active">
+		            <form>
+		                <table class="table">
+		                    <thead><tr><th class="text-center">商品信息修改</th></tr></thead>
+		                    <tbody>
+		                    <tr>
+		                        <td class="text-right"><label for="product_no">商品编号:</label></td>
+		                        <td><select class="custom-select small" id="product_no">
+		                            <option selected>请选择商品编号</option>
+		                            <option value="1">1</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                            <option value="4">4</option>
+		                        </select></td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-right"><label for="email">Email:</label></td>
+		                        <td>
+		                            <input type="email" id="email" placeholder="@">
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-right"><label for="pwd">密码:</label></td>
+		                        <td><input type="password" id="pwd"></td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-right"><input type="submit" name="sbt" value="提交"></td>
+		                        <td><input type="reset" name="rst" value="重置"></td>
+		                    </tr>
+		                    </tbody>
+		                </table>
+		            </form>
+	            </div>
             </div>
         </div>
     </div>
+</div>
+<div id="bottom" class="text-center">
     <div id="pageSize">
     	<small>请选择页面显示数</small><select name="pageSize" class="custom-select-sm" onchange="btnchange(this[selectedIndex].value);">
     		<option value="20">默认20</option>
     		<option value="30">30</option>
     		<option value="40">40</option>
     	</select>
+    	    &copy;tyj有限公司2017-2027年版权所有
     </div>
 </div>
 </body>

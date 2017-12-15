@@ -13,7 +13,7 @@
 	createWindow = function(id,winName){
 		if($("#"+id).length == 0){
 			$("#tablist").append("<li class='nav-item'><a class='nav-link' data-toggle='tab' href='#"+id+"'>"+winName+"" +
-			"<button type='button' class='close_btn' value='x'></button></a></li>");//添加窗体关闭title
+			"&nbsp;&nbsp;&nbsp;<span class='close_btn'>&times;</span></a></li>");//添加窗体关闭title
 			$("#tabcontent").append("<div id="+id+" class='tab_item show_info tab-pane'></div>");//添加窗体内容容器
 			//关闭窗体的方法
 			var $closes = $(".close_btn");;//获取所有窗体
@@ -130,13 +130,7 @@
 		createWindow("upload","上传文件");
 		$("#upload").empty();
 		$("#upload").append("<form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
-				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/>"+
-
-		"</form></div>");
-		$closes = $(".close_btn");
-		$("[href='#upload']").addClass("active").parent().siblings().children().removeClass("active");
-		$("#upload").addClass("active").siblings().removeClass("active");
-
+				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/></form>");
 	}
 	//select改变页面显示数量
 	btnchange = function(values){

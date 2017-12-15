@@ -90,7 +90,7 @@ public class UserServlet extends HttpServlet {
 					session.setAttribute("hint", null);
 					if ("true".equals(pass)) {
 						Cookie cookie=new Cookie("loginUser", loginUser.getUserName());
-						Cookie cookie2=new Cookie("userAccoount", loginUser.getUserAccount());
+						Cookie cookie2=new Cookie("userAccount", loginUser.getUserAccount());
 						cookie.setMaxAge(1296000);
 						cookie.setPath("/BeautyLady");
 						response.addCookie(cookie);

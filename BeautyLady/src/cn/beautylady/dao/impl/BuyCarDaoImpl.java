@@ -78,5 +78,16 @@ public class BuyCarDaoImpl extends BaseDao implements BuyCarDao{
 		}
 		return num;
 	}
+
+	@Override
+	public BuyCar getBuyCarById(int id) {
+		String sql="SELECT `buycar`.*,`product`.`productName`,`color`.`colorName`,`size`.`sizeName`,`product`.`picpath`\r\n" + 
+				"FROM `buycar`,`product`,`color`,`size` \r\n" + 
+				"WHERE `buycar`.`productNo`=`product`.`productNo` \r\n" + 
+				"AND `buycar`.`colorNo`=`color`.`colorNo`\r\n" + 
+				"AND `buycar`.`sizeNo`=`size`.`sizeNo` \r\n" + 
+				"AND `buycar`.id=?";
+		return getOne(sql, BuyCar.class, id);
+	}
 	
 }

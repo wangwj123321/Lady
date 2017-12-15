@@ -1,6 +1,6 @@
 package cn.beautylady.service;
 
-import java.lang.reflect.InvocationTargetException;
+
 import java.sql.SQLException;
 
 public interface StorageOrderService {

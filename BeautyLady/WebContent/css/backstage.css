@@ -1,25 +1,90 @@
-#header,#logo,#pending{
+#header a[class='nav-link']:hover{
+    background-color: #ff2ebe;
+}
+#header_info{
     height: 50px;
-    background-color: black;
-    font: normal 15px "方正舒体";
+}
+#header_info li{
+    border: solid 1px #2A3542;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+#header_info li:hover{
+    background-color: red;
     color: white;
 }
-#header,#logo,#pending li{
-    line-height: 50px;
+#header_info a{
+    font: normal 14px 方正舒体;
+    color: #000;
 }
-#main_leftNav li{
-    border: black solid 1px;
-}
-.close_btn{
+#filling{
+    height: 50px;
     position: absolute;
-    top: 10%;
-    right: 10%;
+    top: 0;
 }
-.nav-item{
+#bottom{
+    width:100%;
+    height:50px;
+    position:absolute;
+    bottom:0;
+    background-color: #2A3542;
+    color: #AEB2B7;
+}
+#main{
+    background-color: #2A3542;
+    position: absolute;
+    top:50px;
+    bottom: 50px;
+    width: 100%;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+}
+#main_left{
+    width:210px;
+    height:100%;
+    float:left;
+    margin-bottom:50px;
+    overflow: auto;
+    padding-left: 30px;
+    color: #AEB2B7;
+}
+#oper_list >div >a{
+    font-size: 16px;
+}
+#main_left a {
+    padding: 0;
+    margin: 0;
+    color: #AEB2B7;
+    font-size: 14px;
+}
+#main_left a:hover{
+    text-decoration: none;
+    background-color: #ff216b;
+    color: white;
+}
+.admin{
+    margin: 20px 0 30px;
+    font: normal 20px 方正舒体;
+}
+#oper_list> div{
+    margin: 20px 0;
+}
+#main_info{
+    height:100%;
+    margin-left:210px;
+    overflow: auto;
+}
+#tablist a{
+ color: #AEB2B7;
+}
+#tablist li{
+    border: solid white 1px;
+}
+#tablist span:hover{
+    color: red;
+}
+#tabcontent>div{
+    background-color: white;
     position: relative;
-}
-#pageSize{
-	position:absolute;
-	right:20px;
-	top:55px;
+    min-height: 459px;
 }

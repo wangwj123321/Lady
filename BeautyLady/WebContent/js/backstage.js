@@ -130,16 +130,7 @@
 		createWindow("upload","上传文件");
 		$("#upload").empty();
 		$("#upload").append("<form action='"+ctx+"/servlet/uploadDate' method='post' enctype='multipart/form-data'>"+
-<<<<<<< HEAD
 				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/></form>");
-=======
-				"资料导入<input type='file' name='file'><br/><input type='submit' value='提交'/>"+
-		"</form></div>");
-		$closes = $(".close_btn");
-		$("[href='#upload']").addClass("active").parent().siblings().children().removeClass("active");
-		$("#upload").addClass("active").siblings().removeClass("active");
->>>>>>> 5fbb57128c9cd70fa291ed027aef3e3915aead70
-
 	}
 	//select改变页面显示数量
 	btnchange = function(values){

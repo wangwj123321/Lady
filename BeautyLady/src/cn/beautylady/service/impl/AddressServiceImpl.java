@@ -1,5 +1,7 @@
 package cn.beautylady.service.impl;
 
+import java.util.List;
+
 import cn.beautylady.dao.AddressDao;
 import cn.beautylady.dao.impl.AddressDaoImpl;
 import cn.beautylady.entity.Address;
@@ -19,6 +21,10 @@ public class AddressServiceImpl implements AddressService{
 	@Override
 	public void updateDefaultAddress(String userAccount) {
 		addressDao.updateDefaultAddress(userAccount);
+	}
+	@Override
+	public List<Address> getNotDefaultAddress(String userAccount) {
+		return addressDao.getNotDefaultAddress(userAccount);
 	}
 
 }

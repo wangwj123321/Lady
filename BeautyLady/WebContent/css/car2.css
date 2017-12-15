@@ -82,8 +82,12 @@ body>p{
 
 .ch_address{
     padding: 5px 50px;
-    border:1px solid orangered;
     margin-bottom: 30px;
+    border:1px dashed darkgray;
+}
+
+.sure{
+    border:2px solid orangered;
 }
 
 .ch_address p{
@@ -92,10 +96,6 @@ body>p{
     line-height: 25px;
     font-size: 12px;
     color: grey;
-}
-.ch_address+div{
-    margin-bottom: 20px;
-    margin-left: 100px;
 }
 #ch_dd_btn{
     display: inline-block;

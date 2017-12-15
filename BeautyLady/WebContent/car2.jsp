@@ -23,12 +23,12 @@
     <div id="order_left">
         <div id="ab">
             <h3>确定收货地址</h3>
-            <div class="ch_address">
+            <div class="ch_address sure" name="${defaultAddress.id }">
                 <p>姓名：${defaultAddress.name }</p>
                 <p>电话：${defaultAddress.phone }</p>
                 <p>地址：${defaultAddress.address }</p>
             </div>
-            <div><a href="" id="ch_dd_btn"></a></div>
+            <div><a id="ch_dd_btn"></a></div>
             <table id="tab">
                 <form action="servlet/AddressServlet?opr=addAdderss" id="aa">
                     <tr>

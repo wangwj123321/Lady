@@ -2,12 +2,15 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
 
 import cn.beautylady.entity.Address;
 import cn.beautylady.service.AddressService;
@@ -37,6 +40,7 @@ public class AddressServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		PrintWriter out=response.getWriter();
 		String opr=request.getParameter("opr");
+		String json="";
 		if ("addAdderss".equals(opr)) {
 			String userAccount=(String)request.getSession().getAttribute("userAccount");
 			String name=request.getParameter("name");
@@ -53,13 +57,20 @@ public class AddressServlet extends HttpServlet {
 			}
 			if (addressService.addAddress(ads)) {
 				if (isd!=0) {
-					out.print("updateDefaultTrue");
+					Address DefaultAddress=addressService.getDefaultAddress(userAccount);
+					String addressJson=JSON.toJSONString(DefaultAddress);
+					out.print("[{\"is\":\"updateDefaultTrue\"},"+addressJson+"]");
 					return;
 				}
-				out.print("true");
+				out.print("[{\"is\":\"true\"}]");
 			}else {
-				out.print("false");
+				out.print("[{\"is\":\"false\"}]");
 			}
+		}else if("getNotDefaultAddress".equals(opr)) {
+			String userAccount=(String) request.getSession().getAttribute("userAccount");
+			List<Address> list=addressService.getNotDefaultAddress(userAccount);
+			json=JSON.toJSONString(list);
+			out.print(json);
 		}
 		out.flush();
 		out.close();

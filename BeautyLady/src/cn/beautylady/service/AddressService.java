@@ -1,5 +1,7 @@
 package cn.beautylady.service;
 
+import java.util.List;
+
 import cn.beautylady.entity.Address;
 
 public interface AddressService {
@@ -21,4 +23,10 @@ public interface AddressService {
 	 * @return 是否成功
 	 */
 	public void updateDefaultAddress(String userAccount);
+	/**
+	 * 获取用户所有非默认地址
+	 * @param userAccount 用户名
+	 * @return 非默认地址对象集合
+	 */
+	public List<Address> getNotDefaultAddress(String userAccount);
 }

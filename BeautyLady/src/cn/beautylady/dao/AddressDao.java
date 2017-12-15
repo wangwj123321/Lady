@@ -1,5 +1,7 @@
 package cn.beautylady.dao;
 
+import java.util.List;
+
 import cn.beautylady.entity.Address;
 
 public interface AddressDao {
@@ -21,4 +23,10 @@ public interface AddressDao {
 	 * @return 影响行数
 	 */
 	public int updateDefaultAddress(String userAccount);
+	/**
+	 * 获取用户所有非默认地址
+	 * @param userAccount 用户名
+	 * @return 非默认地址对象集合
+	 */
+	public List<Address> getNotDefaultAddress(String userAccount);
 }

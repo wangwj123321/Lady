@@ -1,6 +1,7 @@
 package cn.beautylady.dao.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.dao.AddressDao;
 import cn.beautylady.dao.BaseDao;
@@ -39,5 +40,11 @@ public class AddressDaoImpl extends BaseDao implements AddressDao{
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public List<Address> getNotDefaultAddress(String userAccount) {	
+		String sql="SELECT * FROM `address` WHERE userAccount=? AND isDefault=0";
+		return getArrayList(sql, Address.class, userAccount);
 	}
 }

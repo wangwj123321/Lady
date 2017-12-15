@@ -43,8 +43,8 @@ public class AddressDaoImpl extends BaseDao implements AddressDao{
 	}
 
 	@Override
-	public List<Address> getNotDefaultAddress(String userAccount) {	
-		String sql="SELECT * FROM `address` WHERE userAccount=? AND isDefault=0";
-		return getArrayList(sql, Address.class, userAccount);
+	public List<Address> getOtherAddress(String userAccount,int id) {	
+		String sql="SELECT * FROM `address` WHERE userAccount=? AND id!=?";
+		return getArrayList(sql, Address.class, userAccount,id);
 	}
 }

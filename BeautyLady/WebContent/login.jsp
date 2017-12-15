@@ -65,9 +65,9 @@
 			var reg = new RegExp("@");
 			if(userAccount!=""){
 				if(reg.test(userAccount)){
-					$.get("servlet/UserServlet","opr=getUserByEmailt&email="+userAccount,success,"html");
+					$.post("servlet/UserServlet","opr=getUserByEmailt&email="+userAccount,success,"html");
 				}else{
-					$.get("servlet/UserServlet","opr=getUserByUserAccount&userAccount="+userAccount,success,"html");
+					$.post("servlet/UserServlet","opr=getUserByUserAccount&userAccount="+userAccount,success,"html");
 				}
 			}
 			function success(data){

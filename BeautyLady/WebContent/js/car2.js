@@ -18,19 +18,30 @@ $(document).ready(function(){
 			}else if(is=="updateDefaultTrue"){
 				alert("添加默认地址成功！");
 				$(".ch_address").remove();
-				$("#ab").find("h3").after("<div class='ch_address' name='"+object.id+"'><p>姓名："+object.name+"</p><p>电话："+object.phone+"</p><p>地址："+object.address+"</p></div>");
+				$("#ab").find("h3").after("<div class='ch_address sure' name='"+object.id+"'><p>姓名："+object.name+"</p><p>电话："+object.phone+"</p><p>地址："+object.address+"</p></div>");
 			}else{
 				alert("添加地址失败！");
 			}
 		}
+		$(":text").val("");
 	});
 	/*加载所有地址按妞点击事件*/
 	$("#ch_dd_btn").click(function(){
-		$.getJSON("servlet/AddressServlet","opr=getNotDefaultAddress",succ);
-		function succ(data){
-			$(data).each(function(i,t){
-				$("div.sure").after("<div class='ch_address' name='"+t.id+"'><p>姓名："+t.name+"</p><p>电话："+t.phone+"</p><p>地址："+t.address+"</p></div>");
-			});
+		var flag=$(this).attr("name");
+		if(flag == "true"){
+			$(this).attr("name","false");
+			var id=$("div.sure").attr("name");
+			if(id!=""){
+				$.getJSON("servlet/AddressServlet","opr=getNotDefaultAddress&id="+id,succ);
+			}			
+			function succ(data){
+				$(data).each(function(i,t){
+					$("div.sure").after("<div class='ch_address' name='"+t.id+"'><p>姓名："+t.name+"</p><p>电话："+t.phone+"</p><p>地址："+t.address+"</p></div>");
+				});
+			}
+		}else{
+			$(this).attr("name","true");
+			$("div.sure").siblings(".ch_address").remove();
 		}
 	});
 	/*更换收货地址*/

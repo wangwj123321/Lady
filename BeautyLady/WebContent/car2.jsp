@@ -28,7 +28,7 @@
                 <p>电话：${defaultAddress.phone }</p>
                 <p>地址：${defaultAddress.address }</p>
             </div>
-            <div><a id="ch_dd_btn"></a></div>
+            <div><a id="ch_dd_btn" name="ture"></a></div>
             <table id="tab">
                 <form action="servlet/AddressServlet?opr=addAdderss" id="aa">
                     <tr>

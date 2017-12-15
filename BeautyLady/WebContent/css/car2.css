@@ -72,6 +72,7 @@ body>p{
     width: 63px;
     height: 27px;
     border: 0;
+    cursor:pointer;
 }
 #order_left h3{
     height: 60px;
@@ -103,6 +104,7 @@ body>p{
     width: 117px;
     height: 28px;
     text-align: center;
+    cursor:pointer;
 }
 #tab{
     font-size: 14px;
@@ -211,7 +213,7 @@ body>p{
     background: #a70432;
     height: 45px;
     line-height: 45px;
-    min-width: 350px;
+    width:100%;
     text-align: center;
     margin-top: 30px;
 }

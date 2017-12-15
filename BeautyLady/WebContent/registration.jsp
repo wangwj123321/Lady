@@ -102,8 +102,8 @@
 	<form action="servlet/RegServlet" method="post" id="reg">
 		<div id="hint"></div>
 		<h5>新用户注册</h5>
-		<div><input type="text" name="userAccount" placeholder="登录名" required /></div>
-		<div><input type="text" name="userName" placeholder="用户名" required /></div>
+		<div><input type="text" name="userName" placeholder="登录名" required /></div>
+		<div><input type="text" name="userAccount" placeholder="用户名" required /></div>
 		<div><input type="password" name="pwd" placeholder="密码" required /></div>
 		<div><input type="password" name="repwd" placeholder="确认密码" required /></div>
 		<div><input type="text" name="email" placeholder="邮箱" required /></div>

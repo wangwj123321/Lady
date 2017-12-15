@@ -68,7 +68,8 @@ public class AddressServlet extends HttpServlet {
 			}
 		}else if("getNotDefaultAddress".equals(opr)) {
 			String userAccount=(String) request.getSession().getAttribute("userAccount");
-			List<Address> list=addressService.getNotDefaultAddress(userAccount);
+			Integer id=Integer.parseInt(request.getParameter("id"));
+			List<Address> list=addressService.getOtherAddress(userAccount,id);
 			json=JSON.toJSONString(list);
 			out.print(json);
 		}

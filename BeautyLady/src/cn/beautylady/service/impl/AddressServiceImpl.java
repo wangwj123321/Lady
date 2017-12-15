@@ -23,8 +23,8 @@ public class AddressServiceImpl implements AddressService{
 		addressDao.updateDefaultAddress(userAccount);
 	}
 	@Override
-	public List<Address> getNotDefaultAddress(String userAccount) {
-		return addressDao.getNotDefaultAddress(userAccount);
+	public List<Address> getOtherAddress(String userAccount,int id) {
+		return addressDao.getOtherAddress(userAccount,id);
 	}
 
 }

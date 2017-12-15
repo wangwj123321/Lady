@@ -24,9 +24,9 @@ public interface AddressService {
 	 */
 	public void updateDefaultAddress(String userAccount);
 	/**
-	 * 获取用户所有非默认地址
+	 * 获取用户其他地址
 	 * @param userAccount 用户名
-	 * @return 非默认地址对象集合
+	 * @return 其他地址对象集合
 	 */
-	public List<Address> getNotDefaultAddress(String userAccount);
+	public List<Address> getOtherAddress(String userAccount,int id);
 }

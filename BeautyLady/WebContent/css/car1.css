@@ -84,6 +84,7 @@ body{
     height: 29px;
     background: url("../images/carClear.png");
     margin-top: 30px;
+    cursor:pointer;
 }
 #fotter{
     text-align: center;

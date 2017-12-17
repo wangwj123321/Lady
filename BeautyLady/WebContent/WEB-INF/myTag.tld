@@ -42,6 +42,27 @@
             <rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->
         </attribute>
     </tag>
+    
+    <tag>
+    	<name>split</name>
+    	<tag-class>cn.beautylady.tag.SplitTag</tag-class>
+    	<body-content>scriptless</body-content>
+    	<attribute>
+    		<name>str</name>
+    		<required>true</required> <!-- 属性必须有 -->
+            <rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->
+    	</attribute>
+    	<attribute>
+    		<name>symbol</name>
+    		<required>true</required> <!-- 属性必须有 -->
+            <rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->
+    	</attribute>
+    	<attribute>
+		<name>var</name>
+		<required>true</required>	
+		<rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->	 
+		</attribute>
+    </tag>
 
     <function>
         <name>pciPath</name>

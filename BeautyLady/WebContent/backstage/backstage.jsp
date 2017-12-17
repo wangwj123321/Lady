@@ -22,6 +22,7 @@
 <!-- 引入日历的JavaScript代码 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/laydate.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/storageOrder.js"></script>
 
 <!-- 商品入库单的js文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/storage.js"></script>

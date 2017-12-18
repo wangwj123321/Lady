@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@include file="element_page/header.jsp" %>
 <%@include file="element_page/side_left.jsp" %>
 <%@include file="element_page/side_right.jsp" %>
-<div class="product_show row" style="margin-left:20%;width:80%">
+<div class="product_show row" style="margin:0 2rem 0 20%">
 	<div class="col-8">
 		<div class="img_top row">
 			<c:forEach var="pics" items="${pics }">
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:if>
 			</c:forEach>
 		</div>
-		<p class="display-4">细节展示</p>
+		<p style="font-size:1.5rem">细节展示</p>
 		<div class="img_section row">
 					<c:forEach var="pics" items="${pics }">
 				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_5.jpg') || pics.picpath ==  pics.productNo.concat('_m_6.jpg') || pics.picpath ==  pics.productNo.concat('_m_7.jpg') }">
@@ -135,7 +135,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(this).parent().parent().css("display","none");
 	});
 </script>
-<script src="js/productDetail/jquery.min.js"></script>
 <script src="js/productDetail/jquery.bridget.js"></script>
 <script src="js/productDetail/jquery.mousewheel.min.js"></script>
 <script src="js/productDetail/PreventGhostClick.js"></script>

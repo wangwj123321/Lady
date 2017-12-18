@@ -1,4 +1,6 @@
 package cn.beautylady.dao.impl;
+import java.sql.SQLException;
+
 import cn.beautylady.dao.BaseDao;
 import cn.beautylady.dao.UserDao;
 import cn.beautylady.entity.User;
@@ -31,5 +33,17 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	public User getUserByEmail(String email) {
 		String sql="SELECT * FROM `user` WHERE email=?";
 		return getOne(sql, User.class, email);
+	}
+
+	@Override
+	public int modifyUser(User user) throws SQLException {
+		String sql = "update `user` set userName = ?,password = ?,email = ? where userAccount = ?";
+		return executeUpdate(sql, user.getUserName(),user.getPassword(),user.getEmail(),user.getUserAccount());
+	}
+
+	@Override
+	public int modifyUserStatusToZero(User user) throws SQLException {
+		String sql = "update `user` set userName = ?,password = ?,email = ?,status = 0 where userAccount = ?";
+		return executeUpdate(sql, user.getUserName(),user.getPassword(),user.getEmail(),user.getUserAccount());
 	}
 }

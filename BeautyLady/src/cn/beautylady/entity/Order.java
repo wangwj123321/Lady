@@ -1,6 +1,7 @@
 package cn.beautylady.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单类
@@ -16,7 +17,7 @@ public class Order {
 	private Date createDate;
 	private Double costPrice;
 	private Integer status;
-	
+	private List<OrderDetail> orderDetail;
 	public Integer getId() {
 		return id;
 	}
@@ -79,6 +80,12 @@ public class Order {
 	}
 	public Order() {
 		super();
+	}
+	public List<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 	
 }

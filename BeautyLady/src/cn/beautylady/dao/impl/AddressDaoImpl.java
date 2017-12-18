@@ -1,5 +1,6 @@
 package cn.beautylady.dao.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -46,5 +47,29 @@ public class AddressDaoImpl extends BaseDao implements AddressDao{
 	public List<Address> getOtherAddress(String userAccount,int id) {	
 		String sql="SELECT * FROM `address` WHERE userAccount=? AND id!=?";
 		return getArrayList(sql, Address.class, userAccount,id);
+	}
+
+	@Override
+	public List<Address> getAllAddress(String userAccount) {
+		String sql = "select * from `address` where userAccount = ?";
+		return getArrayList(sql, Address.class, userAccount);
+	}
+
+	@Override
+	public int deleteAddress(Integer id) throws SQLException {
+		String sql = "delete from `address` where id = ?";
+		return executeUpdate(sql, id);
+	}
+
+	@Override
+	public int modifyAddress(Address address) throws SQLException {
+		String sql = "update `address` set address = ?,name = ?,phone = ?,isDefault = ? where id = ?";
+		return executeUpdate(sql, address.getAddress(),address.getName(),address.getPhone(),address.getIsDefault(),address.getId());
+	}
+
+	@Override
+	public Address getAddressById(Integer id) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "select * from `address` where id = ?";
+		return selectOne(Address.class, sql, id);
 	}
 }

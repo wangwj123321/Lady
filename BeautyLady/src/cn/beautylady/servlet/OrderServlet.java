@@ -20,7 +20,10 @@ import cn.beautylady.entity.OrderDetail;
 import cn.beautylady.service.BuyCarService;
 import cn.beautylady.service.OrderService;
 import cn.beautylady.service.impl.BuyCarServiceImpl;
+import cn.beautylady.service.impl.ColorServiceImpl;
 import cn.beautylady.service.impl.OrderServiceImpl;
+import cn.beautylady.service.impl.ProductServiceImpl;
+import cn.beautylady.service.impl.SizeServiceImpl;
 
 /**
  * Servlet implementation class OrderServlet
@@ -77,6 +80,36 @@ public class OrderServlet extends HttpServlet {
 				request.getSession().setAttribute("order", lastOrder);
 				response.sendRedirect("../car3.jsp");
 			}
+		}else if("getOrderByUser".equals(opr)){
+			String userAccount=(String) request.getSession().getAttribute("userAccount");
+			List<Order> orderList = orderService.getOrderByUserAccount(userAccount);
+			for (Order order : orderList) {
+				order.setOrderDetail(orderService.getOrderDetailByOrderNo(order.getOrderNo()));
+				for (OrderDetail orderDetail : order.getOrderDetail()) {
+					try{
+						orderDetail.setProduct(new ProductServiceImpl().getProductByNo(orderDetail.getProductNo()));
+						orderDetail.setColor(new ColorServiceImpl().getColorBycolorNo(orderDetail.getColorNo()));
+						orderDetail.setSize(new SizeServiceImpl().getSizeBysizeNo(orderDetail.getSizeNo()));
+					} catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+			}
+			request.setAttribute("orderList", orderList);
+			request.getRequestDispatcher("/userMain.jsp").forward(request, response);
+		}else if("OrderDetail".equals(opr)){
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			OrderDetail orderDetail = null;
+			try {
+				orderDetail = orderService.getOrderDetailById(id);
+				orderDetail.setProduct(new ProductServiceImpl().getProductByNo(orderDetail.getProductNo()));
+				orderDetail.setColor(new ColorServiceImpl().getColorBycolorNo(orderDetail.getColorNo()));
+				orderDetail.setSize(new SizeServiceImpl().getSizeBysizeNo(orderDetail.getSizeNo()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("orderDetail", orderDetail);
+			request.getRequestDispatcher("/userMain.jsp").forward(request, response);
 		}
 		out.flush();
 		out.close();

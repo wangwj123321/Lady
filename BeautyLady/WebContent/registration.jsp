@@ -100,7 +100,6 @@
 <img src="images/login_ochirly.jpg" id="img" />
 <div id="backgrounds">
 	<form action="servlet/RegServlet" method="post" id="reg">
-		<div id="hint"></div>
 		<h5>新用户注册</h5>
 		<div><input type="text" name="userName" placeholder="登录名" required /></div>
 		<div><input type="text" name="userAccount" placeholder="用户名" required /></div>

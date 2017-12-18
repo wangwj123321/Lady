@@ -1,5 +1,9 @@
 package cn.beautylady.dao;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
+
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
 
@@ -28,4 +32,24 @@ public interface OrderDao {
 	 * @return 影响行数
 	 */
 	public int addOrderDetail(OrderDetail orderDetail);
+	
+	/**
+	 * 获取用户订单列表
+	 * @param userAccount 用户登录名
+	 * @return 对应用户的订单列表
+	 */
+	public List<Order> getOrderByUserAccount(String userAccount);
+	
+	/**
+	 * 获取订单详情列表
+	 * @param OrderNo 订单号
+	 * @return 订单详情列表
+	 */
+	public List<OrderDetail> getOrderDetailByOrderNo(String orderNo);
+	
+	/**
+	 * 按照id查找订单
+	 * @return 订单详情
+	 */
+	public OrderDetail getOrderDetailById(Integer id) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 }

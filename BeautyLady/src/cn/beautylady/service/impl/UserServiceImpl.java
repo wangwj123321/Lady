@@ -1,5 +1,7 @@
 package cn.beautylady.service.impl;
 
+import java.sql.SQLException;
+
 import cn.beautylady.dao.UserDao;
 import cn.beautylady.dao.impl.UserDaoImpl;
 import cn.beautylady.entity.User;
@@ -33,6 +35,27 @@ public class UserServiceImpl implements UserService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public User getUserByUserAccounts(String userAccount) {
+		return dao.getUserByUserAccount(userAccount);
+	}
+
+	@Override
+	public User getUserByEmails(String email) {
+		// TODO 自动生成的方法存根
+		return dao.getUserByEmail(email);
+	}
+
+	@Override
+	public int modifyUser(User user) throws SQLException {
+		return dao.modifyUser(user);
+	}
+
+	@Override
+	public int modifyUserStatusToZero(User user) throws SQLException {
+		return dao.modifyUserStatusToZero(user);
 	}
 
 }

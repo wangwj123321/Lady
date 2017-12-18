@@ -55,4 +55,5 @@ public interface BuyCarDao {
 	 * @return 影响行数
 	 */
 	public int updateBuyCarStatus(int id);
+	
 }

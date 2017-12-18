@@ -1,7 +1,6 @@
 package cn.beautylady.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,46 +11,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-
-import cn.beautylady.entity.Product;
+import cn.beautylady.entity.Pic;
 import cn.beautylady.entity.ProductExt;
 import cn.beautylady.service.ProductExtService;
 import cn.beautylady.service.ProductService;
-import cn.beautylady.service.StorageOrderService;
 import cn.beautylady.service.impl.ProductExtServiceImpl;
 import cn.beautylady.service.impl.ProductServiceImpl;
-import cn.beautylady.service.impl.StorageOrderServiceImpl;
 
 /**
- * Servlet implementation class FindProductExt
+ * Servlet implementation class getProductExtByProductNoServlet
  */
-@WebServlet("/servlet/getProductExt")
-public class FindProductExtServlet extends HttpServlet {
+@WebServlet("/servlet/getProductExtByProductNo")
+public class getProductExtByProductNoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String productNos = request.getParameter("productNos");
-		String[] nos = productNos.split(",");
-		StorageOrderService order = new StorageOrderServiceImpl();
+		String productNo = request.getParameter("productNo");
+		System.out.println(productNo);
+		ProductExtService service = new ProductExtServiceImpl();
+		ProductService productService = new ProductServiceImpl();
 		try {
-			List<ProductExt> exts =order.getProductExtByNos(nos);
-			System.out.println(exts);
-			String jsonExts = JSON.toJSONStringWithDateFormat(exts, "yyyy-MM-dd");
-			PrintWriter out = response.getWriter();
-			out.println(jsonExts);
-			out.flush();
-			out.close();
+			ProductExt ext = service.getProductExt(productNo);
+			List<Pic> pics = productService.getPicListByProductNo(productNo);
+			String colorName = request.getParameter("colorName");
+			if(colorName == null) {
+				colorName = "米白";
+				System.out.println(colorName);
+			}
+			request.setAttribute("pics", pics);
+			request.setAttribute("product", ext);
+			request.setAttribute("colorName", colorName);			
+			request.getRequestDispatcher("/test/productdetial.jsp").forward(request, response);
 		} catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InstantiationException
 				| InvocationTargetException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-
-
 	}
 
 	/**

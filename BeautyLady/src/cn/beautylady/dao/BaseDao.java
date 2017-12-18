@@ -15,6 +15,7 @@ import java.util.List;
 
 import cn.beautylady.entity.Page;
 import cn.beautylady.util.C3p0Utils;
+import cn.beautylady.util.JNDIJdbcUtil;
 import cn.beautylady.util.JdbcUtil;
 
 
@@ -24,7 +25,7 @@ import cn.beautylady.util.JdbcUtil;
  *
  */
 public class BaseDao {
-	private Connection conn = null;
+
 	/**
 	 * 数据增删改操作
 	 * @param sql sql语句
@@ -59,7 +60,7 @@ public class BaseDao {
 		ResultSet rs = null;
 		List<T> list = new ArrayList<T>();
 		try {
-			conn = C3p0Utils.getInstance().getConnection();
+			conn = JNDIJdbcUtil.getConnection();
 			pstmt = C3p0Utils.setStatement(conn, sql);
 			pstmt = C3p0Utils.setSQLParameters(pstmt, params);
 			rs = pstmt.executeQuery();
@@ -78,7 +79,7 @@ public class BaseDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			C3p0Utils.releaseSources(conn, pstmt, rs);
+			JNDIJdbcUtil.closeAll(conn, pstmt, rs);
 		}
 		return list;
 	}
@@ -121,7 +122,7 @@ public class BaseDao {
 	 */
 	public <T> int getCountByClass(Class<T> clazz) {
 		String sql = "SELECT COUNT(*) FROM `"+getClassName(clazz)+"`";
-		Connection conn = C3p0Utils.getInstance().getConnection();
+		Connection conn =JNDIJdbcUtil.getConnection();
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		int result = -1;
@@ -133,6 +134,8 @@ public class BaseDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			JNDIJdbcUtil.closeAll(conn, pstmt, rs);
 		}
 		return result;
 	}
@@ -257,7 +260,7 @@ public class BaseDao {
 	
 
 	public int getCount(String sql,Object...objs) {
-		Connection conn = C3p0Utils.getInstance().getConnection();
+		Connection conn = JNDIJdbcUtil.getConnection();
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		int result = -1;
@@ -274,6 +277,8 @@ public class BaseDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			JNDIJdbcUtil.closeAll(conn, pstmt, rs);
 		}
 		return result;
 	}
@@ -508,7 +513,7 @@ public class BaseDao {
      * @throws SQLException
      */
     public static String getPrimaryKey(String table) throws SQLException {
-        DatabaseMetaData databaseMetaData = JdbcUtil.getConnection().getMetaData();
+        DatabaseMetaData databaseMetaData = JNDIJdbcUtil.getConnection().getMetaData();
         ResultSet rs = databaseMetaData.getPrimaryKeys(null,null,table);
         rs.next();
         return rs.getString("COLUMN_NAME");
@@ -548,7 +553,7 @@ public class BaseDao {
 
 
     public PreparedStatement getStatement(String sql ,Object ... params) throws SQLException {
-        Connection conn = JdbcUtil.getConnection();
+        Connection conn = JNDIJdbcUtil.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql);
         if (params != null && params.length > 0) {
             for (int i =0 ;i <params.length ;i++) {
@@ -662,14 +667,18 @@ public class BaseDao {
         PreparedStatement pstmt = getStatement(sql,obj);
         ResultSet rs = pstmt.executeQuery();
         ResultSetMetaData resultSetMetaData = rs.getMetaData();
-        rs.next();
-        int columnCount = resultSetMetaData.getColumnCount();
-        for (int i =0 ;i <columnCount ;i ++) {
-            String fieldName = resultSetMetaData.getColumnName(i + 1);
-            String methodName = getSetter(fieldName);
-            Method method = clazz.getDeclaredMethod(methodName, clazz.getDeclaredField(fieldName).getType());
-            method.invoke(t, rs.getObject(i + 1));
+        if(rs.next()) {
+        	int columnCount = resultSetMetaData.getColumnCount();
+            for (int i =0 ;i <columnCount ;i ++) {
+                String fieldName = resultSetMetaData.getColumnName(i + 1);
+                String methodName = getSetter(fieldName);
+                Method method = clazz.getDeclaredMethod(methodName, clazz.getDeclaredField(fieldName).getType());
+                method.invoke(t, rs.getObject(i + 1));
+            }
+        }else {
+        	return null;
         }
+        JNDIJdbcUtil.closeAll(null, pstmt, rs);
         return t;
     }
 

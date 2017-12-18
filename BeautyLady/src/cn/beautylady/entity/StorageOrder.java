@@ -8,21 +8,28 @@ import java.util.Date;
  *
  */
 public class StorageOrder {
-	private Integer id;			//主键id
-	private String orderNo;		//订单编号
-	private String productNo;	//商品编号
-	private String colorNo;		//颜色编号
-	private String sizeNo;		//尺码编号
-	private Integer number;		//入库数量
-	private Double totalMoney;	//入库金额
-	private Date storageDate;	//入库时间
-	private String userName;	//入库操作用户
-	private String desc;		//订单描述
-	private Integer status;		//状体
-	private String createdBy;	//创建时间
-	private Date createDate;	//创建时间
-	private String modifyBy;	//修改者
-	private Date modifyDate;	//修改时间
+
+	private Integer id;
+	private String orderNo;
+	private Double totalMoney;
+	private Integer number;
+	private Integer status;
+	private Date storageDate;
+	private String userName;
+	private String desc;
+	private Date createDate;
+	private String createdBy;
+	private String modifyBy;
+	private Date modifyDate;
+	
+	public StorageOrder(String order ,String userName, Integer totalNum, Double totalMoney, String desc) {
+		this.orderNo=order;
+		this.createdBy=userName;
+		this.number=totalNum;
+		this.totalMoney=totalMoney;
+		this.desc=desc;
+		
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -35,23 +42,11 @@ public class StorageOrder {
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
-	public String getProductNo() {
-		return productNo;
+	public Double getTotalMoney() {
+		return totalMoney;
 	}
-	public void setProductNo(String productNo) {
-		this.productNo = productNo;
-	}
-	public String getColorNo() {
-		return colorNo;
-	}
-	public void setColorNo(String colorNo) {
-		this.colorNo = colorNo;
-	}
-	public String getSizeNo() {
-		return sizeNo;
-	}
-	public void setSizeNo(String sizeNo) {
-		this.sizeNo = sizeNo;
+	public void setTotalMoney(Double totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 	public Integer getNumber() {
 		return number;
@@ -59,11 +54,11 @@ public class StorageOrder {
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
-	public Double getTotalMoney() {
-		return totalMoney;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setTotalMoney(Double totalMoney) {
-		this.totalMoney = totalMoney;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public Date getStorageDate() {
 		return storageDate;
@@ -83,23 +78,17 @@ public class StorageOrder {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	public Integer getStatus() {
-		return status;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	public String getCreatedBy() {
 		return createdBy;
 	}
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 	public String getModifyBy() {
 		return modifyBy;
@@ -115,11 +104,10 @@ public class StorageOrder {
 	}
 	@Override
 	public String toString() {
-		return "StorageOrder [id=" + id + ", orderNo=" + orderNo + ", productNo=" + productNo + ", colorNo=" + colorNo
-				+ ", sizeNo=" + sizeNo + ", number=" + number + ", totalMoney=" + totalMoney + ", storageDate="
-				+ storageDate + ", userName=" + userName + ", desc=" + desc + ", status=" + status + ", createdBy="
-				+ createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate=" + modifyDate
-				+ "]";
+		return "StorageOrder [id=" + id + ", orderNo=" + orderNo + ", totalMoney=" + totalMoney + ", number=" + number
+				+ ", status=" + status + ", storageDate=" + storageDate + ", userName=" + userName + ", desc=" + desc
+				+ ", createDate=" + createDate + ", createdBy=" + createdBy + ", modifyBy=" + modifyBy + ", modifyDate="
+				+ modifyDate + "]";
 	}
 	
 	

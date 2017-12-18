@@ -19,7 +19,7 @@ public class ProductExt {
 	private Double tagPrice ;          
 	private Double costPrice ;       
 	private String categoryName ;         
-	private String subclassesName ;          
+	private String subClassesName ;          
 	private String bandName ;          
 	private String themeName;           
 	private String seriesName ;          
@@ -91,11 +91,12 @@ public class ProductExt {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public String getSubclassesName() {
-		return subclassesName;
+	
+	public String getSubClassesName() {
+		return subClassesName;
 	}
-	public void setSubclassesName(String subclassesName) {
-		this.subclassesName = subclassesName;
+	public void setSubClassesName(String subClassesName) {
+		this.subClassesName = subClassesName;
 	}
 	public String getBandName() {
 		return bandName;
@@ -168,7 +169,7 @@ public class ProductExt {
 		return "ProductExt [productNo=" + productNo + ", productName=" + productName + ", unit=" + unit + ", colorNo="
 				+ colorNo + ", colorName=" + colorName + ", sizeNo=" + sizeNo + ", sizeName=" + sizeName + ", tagPrice="
 				+ tagPrice + ", costPrice=" + costPrice + ", categoryName=" + categoryName + ", subclassesName="
-				+ subclassesName + ", bandName=" + bandName + ", themeName=" + themeName + ", seriesName=" + seriesName
+				+ subClassesName + ", bandName=" + bandName + ", themeName=" + themeName + ", seriesName=" + seriesName
 				+ ", year=" + year + ", quarter=" + quarter + ", status=" + status + ", picpath=" + picpath
 				+ ", createdBy=" + createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate="
 				+ modifyDate + "]";

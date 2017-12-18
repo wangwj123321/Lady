@@ -46,7 +46,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 		}
 		sql+=" ORDER BY  createDate "+order+" LIMIT ?,?";
 		Object[] objs= {(page.getPageNo()-1)*page.getPageSize(),page.getPageSize()};
-		System.out.println(sql);
 		return getArrayList(sql, Product.class, objs);
 	}
 
@@ -68,7 +67,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 				sql+="where "+s+"='"+map.get(s)+"'";
 			}
 		}
-		System.out.println(sql);
 		return getCount(sql);
 	}
 

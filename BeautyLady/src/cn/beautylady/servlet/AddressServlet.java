@@ -76,7 +76,13 @@ public class AddressServlet extends HttpServlet {
 		}else if("getAllAddress".equals(opr)){
 			String userAccount=(String) request.getSession().getAttribute("userAccount");
 			List<Address> list = addressService.getAllAddress(userAccount);
+			String ch=request.getParameter("ch");
 			request.setAttribute("allAddress", list);
+			if("car2".equals(ch)) {
+				json=JSON.toJSONString(list);
+				out.print(json);
+				return;
+			}
 			request.getRequestDispatcher("/userMain.jsp").forward(request, response);
 		}else if("deleteAddress".equals(opr)){
 			Integer id = Integer.parseInt(request.getParameter("id"));

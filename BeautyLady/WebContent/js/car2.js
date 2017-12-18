@@ -33,6 +33,8 @@ $(document).ready(function(){
 			var id=$("div.sure").attr("name");
 			if(id!=""){
 				$.getJSON("servlet/AddressServlet","opr=getNotDefaultAddress&id="+id,succ);
+			}else{
+				$.getJSON("servlet/AddressServlet","opr=getAllAddress&ch=car2",succ);
 			}			
 			function succ(data){
 				$(data).each(function(i,t){
@@ -48,12 +50,19 @@ $(document).ready(function(){
 	$("#ab").on("click","div.ch_address",function(){
 		$(this).siblings(".ch_address").remove();
 		$(this).addClass("sure");
+		$("#ch_dd_btn").next().text("");
+		$("#ch_dd_btn").attr("name","true");
 	});
 	/*添加订单按妞点击事件*/
 	$("#add_order_pu").click(function(){
 		var addressID=$("div.sure").attr("name");
 		var costPrice=$("#costTotal").text();
-		location.href="servlet/OrderServlet?opr=addOrder&addressID="+addressID+"&costPrice="+costPrice;
+		if(addressID=="" || addressID==null){
+			alert("请选择收货地址！");
+		}else{
+			location.href="servlet/OrderServlet?opr=addOrder&addressID="+addressID+"&costPrice="+costPrice;
+		}
+		
 	});
 	getTotal();
 });

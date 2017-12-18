@@ -11,71 +11,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="js/jquery-3.2.1.js"></script>
+
+<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="js/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!--导入font-awesome 图标字体库-->
+<link rel="stylesheet" href="css/font-awesome.css">
+<!-- 本页面css文件 -->
 <link rel="stylesheet" href="css/productDetail.css">
+<link rel="stylesheet" href="css/common.css">
+<!-- 本页面js文件 -->
+<script type="text/javascript" src="js/common.js"></script>
 <link rel="stylesheet" href="css/productDetail/bootstrap.min.css" />
 <link rel="stylesheet" href="css/productDetail/mag.css" />
 <link rel="stylesheet" href="css/productDetail/default.css" />
 <link rel="stylesheet" href="css/productDetail/index.css" />
 </head>
 <body>
-	<div id="left">
-		<div>
-			<img src="images/logo.png" alt="">
-		</div>
-		<div id="side_bar">
-			<ul>
-				<li><a
-					href="servlet/ProductServlet?opr=getListProduct&order=DESC">首页</a></li>
-				<li><a href="">服装</a></li>
-				<li id="quarter"><a href="">季度</a>
-					<ul id="quar">
-						<li><a
-							href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=1&order=ASC">春季</a></li>
-						<li><a
-							href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=2&order=ASC">夏季</a></li>
-						<li><a
-							href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=3&order=ASC">秋季</a></li>
-						<li><a
-							href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li>
-					</ul></li>
-				<li><a href="">潮流新宠</a></li>
-				<li><a href="">积分商城</a></li>
-			</ul>
-		</div>
-	</div>
-	<div id="pro_img">
-		
-		<ul class="linetwo">
+<%@include file="element_page/header.jsp" %>
+<%@include file="element_page/side_left.jsp" %>
+<%@include file="element_page/side_right.jsp" %>
+<div class="product_show row" style="margin-left:20%;width:80%">
+	<div class="col-8">
+		<div class="img_top row">
 			<c:forEach var="pics" items="${pics }">
 				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_1.jpg') || pics.picpath ==  pics.productNo.concat('_m_2.jpg') || pics.picpath ==  pics.productNo.concat('_m_3.jpg') || pics.picpath ==  pics.productNo.concat('_m_4.jpg')}">
-					<img src="images/${pics.productNo }/${pics.picpath }" />
+					<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.picpath }" /></div>
 				</c:if>
 			</c:forEach>
-		</ul>
-		<p class="text">细节展示</p>
-		<ul class="linethree">
-			<c:forEach var="pics" items="${pics }">
+		</div>
+		<p class="display-4">细节展示</p>
+		<div class="img_section row">
+					<c:forEach var="pics" items="${pics }">
 				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_5.jpg') || pics.picpath ==  pics.productNo.concat('_m_6.jpg') || pics.picpath ==  pics.productNo.concat('_m_7.jpg') }">
-					<img src="images/${pics.productNo }/${pics.picpath }" />
+					<div class="col-4"><img class="img-fluid" src="images/${pics.productNo }/${pics.picpath }" /></div>
 				</c:if>
 			</c:forEach>
-		</ul>
-		<ul class="lineone">
-			<!-- <div class="col col-md-5"> -->
+		</div>
+		<div class="img_bottom">
 			<div class="out">
-		        <div class="mag-eg-el-wrap img-thumbnail">
+		        <div class="mag-eg-el-wrap img-fluid img-thumbnail">
 		            <div class="proportion">
 		                <div mag-thumb="inner" class="mag-eg-el">
 		                    <c:forEach var="pics" items="${pics }">
 						<c:if test="${pics.picpath ==  pics.productNo.concat('_m_8.jpg')   }">
-							<img src="images/${pics.productNo }/${pics.picpath }" />
+							<img class="img-fluid" src="images/${pics.productNo }/${pics.picpath }" />
 						</c:if>
 					</c:forEach>
 		                </div>
 		                <div mag-zoom="inner" class="mag-eg-el">
 		                    <c:forEach var="pics" items="${pics }">
 						<c:if test="${pics.picpath ==  pics.productNo.concat('_b_8.jpg')  }">
-							<img src="images/${pics.productNo }/${pics.picpath }" />
+							<img class="img-fluid" src="images/${pics.productNo }/${pics.picpath }" />
 						</c:if>
 					</c:forEach>
 		                </div>
@@ -83,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            </div>
 		        </div>
 		    </div>
-		</ul>
+		</div>
 	</div>
-	<div id="right_content">
+	<div class="col-4">
 		<h4>${product.subClassesName }</h4>
 		<h5>编号 &nbsp;&nbsp;${product.productNo }</h5>
 		<p style="font-weight:bold;font-size:16px">￥${product.tagPrice }</p>
@@ -111,6 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a id="add_car"></a>
 		</div>
 	</div>
+</div>
 	<div id="add_car_hint">
 		<h3>加入购物车成功</h3>
 		<p>

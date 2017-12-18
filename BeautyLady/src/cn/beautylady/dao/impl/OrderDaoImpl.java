@@ -1,6 +1,8 @@
 package cn.beautylady.dao.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.dao.BaseDao;
 import cn.beautylady.dao.OrderDao;
@@ -47,6 +49,25 @@ public class OrderDaoImpl extends BaseDao implements OrderDao{
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public List<Order> getOrderByUserAccount(String userAccount) {
+		String sql = "select * from `order` where userAccount = ?";
+		return getArrayList(sql, Order.class, userAccount);
+	}
+
+	@Override
+	public List<OrderDetail> getOrderDetailByOrderNo(String orderNo) {
+		String sql = "select * from `orderdetail` where orderNo = ?";
+		return getArrayList(sql, OrderDetail.class, orderNo);
+	}
+
+	@Override
+	public OrderDetail getOrderDetailById(Integer id) throws NoSuchFieldException, NoSuchMethodException,
+			IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "select * from `orderdetail` where id = ?";
+		return selectOne(OrderDetail.class, sql, id);
 	}
 	
 }

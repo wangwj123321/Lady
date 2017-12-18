@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+<base href="<%=basePath%>">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -105,7 +110,7 @@
 <img src="images/login_ochirly.jpg" id="img" />
 <div id="backgrounds">
 	<form action="servlet/UserServlet?opr=login" method="post" id="ff">
-		<div id="hint"></div>
+		<div id="hint">${requestScope.hint }</div>
 		<h5>新用户注册</h5>
 				<div><input type="text" placeholder="邮箱地址/手机号码" name="userAccount" value="${userAccount }"></div>
                 <div><input type="password" placeholder="密码" name="pwd"></div>

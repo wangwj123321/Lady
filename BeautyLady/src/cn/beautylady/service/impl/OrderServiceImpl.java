@@ -1,5 +1,9 @@
 package cn.beautylady.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
+
 import cn.beautylady.dao.OrderDao;
 import cn.beautylady.dao.impl.OrderDaoImpl;
 import cn.beautylady.entity.Order;
@@ -25,6 +29,19 @@ public class OrderServiceImpl implements OrderService{
 	public boolean addOrderDetail(OrderDetail orderDetail) {
 		int count=orderDao.addOrderDetail(orderDetail);
 		return count==1?true:false;
+	}
+	@Override
+	public List<Order> getOrderByUserAccount(String userAccount) {
+		return orderDao.getOrderByUserAccount(userAccount);
+	}
+	@Override
+	public List<OrderDetail> getOrderDetailByOrderNo(String orderNo) {
+		return orderDao.getOrderDetailByOrderNo(orderNo);
+	}
+	@Override
+	public OrderDetail getOrderDetailById(Integer id) throws NoSuchFieldException, NoSuchMethodException,
+			IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return orderDao.getOrderDetailById(id);
 	}
 
 }

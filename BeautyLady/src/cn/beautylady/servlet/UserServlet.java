@@ -2,6 +2,7 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.mail.Session;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import cn.beautylady.entity.User;
 import cn.beautylady.service.UserService;
 import cn.beautylady.service.impl.UserServiceImpl;
+import cn.beautylady.util.MySendMailThread;
 
 /**
  * Servlet implementation class UserServlet
@@ -47,6 +49,18 @@ public class UserServlet extends HttpServlet {
 				response.sendRedirect("../userMain.jsp");
 			}
 		}
+		if ("UserInfo".equals(opr)) {
+			HttpSession session=request.getSession();
+			String loginUser=(String)session.getAttribute("userAccount");
+			User user = null;
+			if(loginUser.indexOf("@") > 0){
+				user = userService.getUserByEmails(loginUser);
+			}else {
+				user = userService.getUserByUserAccounts(loginUser);
+			}
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("/userMain.jsp").forward(request, response);
+		}
 		if ("getUserByUserAccount".equals(opr)) {
 			String userAccount=request.getParameter("userAccount");
 			if (userService.getUserByUserAccount(userAccount)) {
@@ -71,9 +85,9 @@ public class UserServlet extends HttpServlet {
 			HttpSession session=request.getSession();
 			int check=Integer.parseInt((String)session.getAttribute("randCheckCode"));
 			if (checkCode!=check) {
-				session.setAttribute("hint", "验证码有误！");
+				request.setAttribute("hint", "验证码有误！");
 				session.setAttribute("userAccount", userAccount);
-				response.sendRedirect("../login.jsp");
+				request.getRequestDispatcher("../login.jsp").forward(request, response);
 				return;
 			}
 			User user=new User();
@@ -101,18 +115,18 @@ public class UserServlet extends HttpServlet {
 					}
 					response.sendRedirect("../index.jsp");
 				}else if(loginUser.getStatus() == 0) {
-					session.setAttribute("hint", "账号未激活，请先激活再尝试登陆！");
+					request.setAttribute("hint", "账号未激活，请先激活再尝试登陆！");
 					session.setAttribute("userAccount", userAccount);
-					response.sendRedirect("../login.jsp");
+					request.getRequestDispatcher("../login.jsp").forward(request, response);
 				}else if(loginUser.getStatus() == 2) {
-					session.setAttribute("hint", "账号以被冻结，请联系管理员解冻再尝试登陆！");
+					request.setAttribute("hint", "账号以被冻结，请联系管理员解冻再尝试登陆！");
 					session.setAttribute("userAccount", userAccount);
-					response.sendRedirect("../login.jsp");
+					request.getRequestDispatcher("../login.jsp").forward(request, response);
 				}
 			}else {
-				session.setAttribute("hint", "密码错误！");
+				request.setAttribute("hint", "密码错误！");
 				session.setAttribute("userAccount", userAccount);
-				response.sendRedirect("../login.jsp");
+				request.getRequestDispatcher("../login.jsp").forward(request, response);
 			}
 		}
 		if("exitLogin".equals(opr)) {
@@ -133,6 +147,52 @@ public class UserServlet extends HttpServlet {
 				}
 			}
 			response.sendRedirect("../login.jsp");
+		}
+		if("showModifyUser".equals(opr)){
+			String userAccount = (String)request.getSession().getAttribute("userAccount");
+			User user = null;
+			if(userAccount.indexOf("@") > 0){
+				user = userService.getUserByEmails(userAccount);
+			}else{
+				user = userService.getUserByUserAccounts(userAccount);
+			}
+			request.getSession().setAttribute("modifyOneUser", user);
+			response.sendRedirect("../modifyUser.jsp");
+		}
+		if("modifyUser".equals(opr)){
+			String userAccount = request.getParameter("userAccount");
+			String userName = request.getParameter("userName");
+			String pwd = request.getParameter("pwd");
+			String email = request.getParameter("email");
+			String oldpwd = request.getParameter("oldpwd");
+			User user = new User();
+			user.setUserAccount(userAccount);
+			user.setPassword(oldpwd);
+			user = userService.login(user);
+			if(user != null){
+				user.setUserName(userName);
+				user.setPassword(pwd);
+				int count = 0;
+				try {
+					if(!email.equals(user.getEmail())){
+						user.setEmail(email);
+						count = userService.modifyUserStatusToZero(user);
+						new MySendMailThread(user).start();
+						out.println("<script type='text/javascript'>alert('修改成功，邮箱已改，请重新激活！');location.href='../login.jsp'</script>");
+						return;
+					}else{
+						count = userService.modifyUser(user);
+						out.println("<script type='text/javascript'>alert('修改成功');location.href='UserServlet?opr=UserInfo'</script>");
+						return;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				out.println("<script type='text/javascript'>alert('修改失败');location.href='../modifyUser.jsp'</script>");
+			}else{
+				request.setAttribute("hint", "密码错误！");
+				request.getRequestDispatcher("../modifyUser.jsp").forward(request, response);
+			}
 		}
 	}
 

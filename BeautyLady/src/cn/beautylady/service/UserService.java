@@ -1,5 +1,7 @@
 package cn.beautylady.service;
 
+import java.sql.SQLException;
+
 import cn.beautylady.entity.User;
 /**
  * 管理员信息服务接口
@@ -27,4 +29,31 @@ public interface UserService {
      * @return
      */
     public boolean getUserByEmail(String email);
+    
+    /**
+     * 通过用户名查找用户（判断用户输入的用户名是否存在）
+     * @param userAccount 用户名
+     * @return 用户对象
+     */
+    public User  getUserByUserAccounts(String userAccount);
+    
+    /**
+     * 通过邮箱查找用户（判断是否存在邮箱）
+     * @param email
+     * @return
+     */
+    public User getUserByEmails(String email);
+    
+    /**
+     * 修改用户的方法
+     * @param user 要修改的用户
+     * @return 影响行数
+     */
+    public int modifyUser(User user) throws SQLException;
+    /**
+     * 修改用户的方法
+     * @param user 要修改的用户
+     * @return 影响行数
+     */
+    public int modifyUserStatusToZero(User user) throws SQLException;
 }

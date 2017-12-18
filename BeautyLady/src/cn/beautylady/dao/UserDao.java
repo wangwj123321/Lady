@@ -1,5 +1,7 @@
 package cn.beautylady.dao;
 
+import java.sql.SQLException;
+
 import cn.beautylady.entity.User;
 /**
  * 管理员信息操作接口
@@ -28,4 +30,18 @@ public interface UserDao {
      * @return
      */
     public User getUserByEmail(String email);
+    
+    /**
+     * 修改用户的方法
+     * @param user 要修改的用户
+     * @return 影响行数
+     */
+    public int modifyUser(User user) throws SQLException;
+    /**
+     * 修改用户的方法
+     * @param user 要修改的用户
+     * @return 影响行数
+     */
+    public int modifyUserStatusToZero(User user) throws SQLException;
+    
 }

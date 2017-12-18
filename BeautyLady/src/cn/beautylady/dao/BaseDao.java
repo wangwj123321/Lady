@@ -60,7 +60,7 @@ public class BaseDao {
 		ResultSet rs = null;
 		List<T> list = new ArrayList<T>();
 		try {
-			conn = JNDIJdbcUtil.getConnection();
+			conn = JdbcUtil.getConnection();
 			pstmt = C3p0Utils.setStatement(conn, sql);
 			pstmt = C3p0Utils.setSQLParameters(pstmt, params);
 			rs = pstmt.executeQuery();
@@ -122,7 +122,7 @@ public class BaseDao {
 	 */
 	public <T> int getCountByClass(Class<T> clazz) {
 		String sql = "SELECT COUNT(*) FROM `"+getClassName(clazz)+"`";
-		Connection conn =JNDIJdbcUtil.getConnection();
+		Connection conn =JdbcUtil.getConnection();
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		int result = -1;
@@ -260,7 +260,7 @@ public class BaseDao {
 	
 
 	public int getCount(String sql,Object...objs) {
-		Connection conn = JNDIJdbcUtil.getConnection();
+		Connection conn = JdbcUtil.getConnection();
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		int result = -1;
@@ -553,7 +553,7 @@ public class BaseDao {
 
 
     public PreparedStatement getStatement(String sql ,Object ... params) throws SQLException {
-        Connection conn = JNDIJdbcUtil.getConnection();
+        Connection conn = JdbcUtil.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql);
         if (params != null && params.length > 0) {
             for (int i =0 ;i <params.length ;i++) {

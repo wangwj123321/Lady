@@ -29,7 +29,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="css/common.css">
 <!-- 本页面js文件 -->
 <script type="text/javascript" src="js/common.js"></script>
-<link rel="stylesheet" href="css/productDetail/bootstrap.min.css" />
 <link rel="stylesheet" href="css/productDetail/mag.css" />
 <link rel="stylesheet" href="css/productDetail/default.css" />
 <link rel="stylesheet" href="css/productDetail/index.css" />

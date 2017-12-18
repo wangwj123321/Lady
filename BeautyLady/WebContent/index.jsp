@@ -5,10 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Beauty Lady</title>
 </head>
-    <link rel="stylesheet" href="css/index.css">
-    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<!-- 新 Bootstrap4 核心 CSS 文件 -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="js/jquery-3.2.1.js"></script>
+
+<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="js/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!--导入font-awesome 图标字体库-->
+<link rel="stylesheet" href="css/font-awesome.css">
+<!-- 本页面css文件 -->
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/common.css">
+<!-- 本页面js文件 -->
+<script type="text/javascript" src="js/common.js"></script>
     <%
     	Cookie[] cookies=request.getCookies();
     	for(Cookie cookie:cookies){
@@ -21,60 +38,41 @@
     	}
     %>
 <body>
-    <div id="left">
-        <div><img src="images/logo.png" alt=""></div>
-        <div id="side_bar">
-            <ul>
-                <li><a href="servlet/ProductServlet?opr=getListProduct&order=DESC">首页</a></li>
-                <li><a href="">服装</a></li>
-                <li id="quarter">
-                	<a href="">季度</a>
-                	<ul id="quar">
-                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=1&order=ASC">春季</a></li>
-                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=2&order=ASC">夏季</a></li>
-                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=3&order=ASC">秋季</a></li>
-                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li>
-                	</ul>
-                </li>
-                <li><a href="">潮流新宠</a></li>
-                <li><a href="">积分商城</a></li>
-            </ul>
-        </div>
-    </div>
-    <div id="right">
-        <div id="right_top">
-        	<c:if test="${order=='ASC' }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=DESC">价格排序</a></c:if>
-            <c:if test="${order=='DESC' }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=ASC">价格排序</a></c:if>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <form action="servlet/ProductServlet?opr=getListProduct&key=productName&order=ASC" id="search" method="post"><input type="text" placeholder="搜索您感兴趣的内容" name="value"><input type="submit" value="查找" style="display:inline-block;width:40px;text-align:center;height:24px"></form>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="servlet/ProductServlet?opr=getListProduct&order=ASC">全部 </a>|&nbsp;&nbsp;&nbsp;<a href="servlet/ProductServlet?opr=getListProduct&key=categoryNo&value=E&order=ASC">长外套 &nbsp;&nbsp;&nbsp;</a>| &nbsp;&nbsp;&nbsp;<a href="servlet/ProductServlet?opr=getListProduct&key=categoryNo&value=A&order=ASC">马夹</a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;<a href="servlet/ProductServlet?opr=getListProduct&key=categoryNo&value=D&order=ASC">大衣</a>
-        </div>
-        <div id="list">
-            <ul>
-                <c:forEach var="product" items="${ProductPage.list }">
-	                <li>
-	                    <a href="servlet/ProductServlet?opr=productDetail&proId=${product.id }"><img src="images/${product.picpath }" alt=""></a>
-	                    <p><a href="">${product.productName }</a></p>
-	                    <p>￥${product.tagPrice}</p>
-	                </li>
-                </c:forEach>
-            </ul>
-            <div id="right_bottom">
-            	<span>当前页：${ProductPage.pageNo }/${ProductPage.pageCount }</span>
-            	<c:if test="${ProductPage.pageNo>1 }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">首页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">上一页</a></c:if>
-            	<c:if test="${ProductPage.pageNo<ProductPage.pageCount }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">下一页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount}">尾页</a></c:if>
-            </div>
-        </div>
-    </div>
-    <div id="right_bar">
-        <ul>
-            <li><a href="servlet/UserServlet?opr=isLogin"><img src="images/user.png" alt=""></a></li>
-            <li><a href="servlet/BuyCarServlet?opr=getUserCar&userAccount=${userAccount }"><img src="images/cart.png" alt=""></a></li>
-            <li><a href=""><img src="images/sign.png" alt=""></a></li>
-            <li><a href=""><img src="images/favorite.png" alt=""></a></li>
-            <li><a href=""><img src="images/search.png" alt=""></a></li>
-        </ul>
-    </div>
+<%@include file="element_page/header.jsp" %>
+<%@include file="element_page/side_left.jsp" %>
+<div class="product-info row text-center">
+ <c:forEach var="product" items="${ProductPage.list }">
+	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&proId=${product.id }">
+	 	<img class="img-fluid img-thumbnail" src="images/${product.picpath }" alt=""></a>
+	 	<div>${product.productName }</div>
+	 	<span class="price">￥${product.tagPrice}</span>
+	 </div>
+</c:forEach>
+</div>
+<%@include file="element_page/side_right.jsp" %>
+<nav class="pagechange">
+	<span>当前页：${ProductPage.pageNo }/${ProductPage.pageCount }</span>
+	<c:if test="${ProductPage.pageNo>1 }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">首页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">上一页</a></c:if>
+    <c:if test="${ProductPage.pageNo<ProductPage.pageCount }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">下一页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount}">尾页</a></c:if>
+<!--     <ul class="pagination">
+        <li>
+            <button type="button"aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </button>
+        </li>
+        <li><button type="button">1</button></li>
+        <li><button type="button">2</button></li>
+        <li><button type="button">3</button></li>
+        <li><button type="button">4</button></li>
+        <li><button type="button">5</button></li>
+        <li>
+            <button type="button" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </button>
+        </li>
+    </ul> -->
+</nav>
 </body>
 </html>

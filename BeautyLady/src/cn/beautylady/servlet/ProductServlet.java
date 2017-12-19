@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import cn.beautylady.entity.*;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -107,12 +109,79 @@ public class ProductServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			// 往客户端写入cookie  
+	        String bookId = makeId(productNo, request);
+	        Cookie c = new Cookie("history", bookId);
+	        c.setMaxAge(1296000);
+			c.setPath("/BeautyLady");
+	        response.addCookie(c);
 			List<Pic> pics = productService.getPicListByProductNo(product.getProductNo());
 			request.setAttribute("product", product);
 			request.setAttribute("pics", pics);
 			request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
+		}else if("history".equals(opr)){
+			List<Product> history = new ArrayList<>();
+			Cookie[] cs = request.getCookies();
+            for (int i = 0; cs != null && i < cs.length; i++) {
+                if ("history".equals(cs[i].getName())) {
+                    String[] ids = cs[i].getValue().split("-");
+                    for (String s : ids) {
+                    	try {
+                            history.add(productService.getProductByNo(s));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+                    }
+                }
+            }
+            request.getSession().setAttribute("histroys", history);
+            response.sendRedirect("../history.jsp");
 		}
 	}
+	
+	private String makeId(String productNo, HttpServletRequest request) {  
+        // cookie为null
+        Cookie[] cs = request.getCookies();  
+        if (cs == null) {
+            return productNo;
+        }
+        
+        String result = "";
+        for (int i = 0; i < cs.length; i++) {
+            if ("history".equals(cs[i].getName())) {
+                // 浏览历史中不存在该id
+                if (cs[i].getValue().indexOf(productNo) == -1) {
+                    result = productNo + "-" + cs[i].getValue();
+                    break;
+                }
+                else if (cs[i].getValue().indexOf(productNo) == 0) {
+                    result = cs[i].getValue();
+                    break;
+                }
+                else {
+                    result = productNo;
+                    String[] ids = cs[i].getValue().split("-");
+                    for (String str : ids) {
+                        if (!str.equals(productNo)) {
+                            result += "-" + str;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        String[] count = result.split("-");
+        if (count.length <= 8) {
+            return result;
+        }
+        else {
+        	result = "";
+        	for (int i = 0; i < 8; i++) {
+				result += count[i] + "-";
+			}
+            return result;
+        }
+    }  
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

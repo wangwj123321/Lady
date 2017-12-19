@@ -55,6 +55,10 @@ public class CollectServlet extends HttpServlet {
 		}
 		if ("getListCollect".equals(opr)) {
 			String userAccount=(String) request.getSession().getAttribute("userAccount");
+			if(userAccount==null) {
+				response.sendRedirect("../login.jsp");
+				return;
+			}
 			List<Collect> userCollect=collectService.getCollectList(userAccount);
 			request.setAttribute("userCollect", userCollect);
 			request.getRequestDispatcher("/collect.jsp").forward(request, response);

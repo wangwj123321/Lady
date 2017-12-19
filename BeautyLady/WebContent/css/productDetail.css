@@ -65,3 +65,6 @@
 #add_collect:hover{
 	color:orange;
 }
+.img_bottom{
+	position:relative;
+}

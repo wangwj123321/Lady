@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/car2.css">
 </head>
 <body>
-<div id="left">
+	<div id="left">
         <div><img src="images/logo.png" alt=""></div>
         <div id="side_bar">
             <ul>
@@ -18,11 +18,11 @@
                 <li><a href="servlet/OrderServlet?opr=getOrderByUser">我的订单</a></li>
                 <li><a href="servlet/BuyCarServlet?opr=getUserCar&userAccount=${userAccount }" target="_blank">我的购物车</a></li>
                 <li id="quarter">
-                	<a href="">个人资料</a>
+                	<a href="servlet/UserServlet?opr=UserInfo">个人资料</a>
                 	<ul id="quar">
                 		<li><a href="servlet/UserServlet?opr=UserInfo">个人信息</a></li>
                 		<li><a href="servlet/AddressServlet?opr=getAllAddress">我的收货地址</a></li>
-                		<li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=3&order=ASC">个人信息修改</a></li>
+                		<li><a href="servlet/UserServlet?opr=showModifyUser">个人信息修改</a></li>
                 		<!-- <li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li> -->
                 	</ul>
                 </li>

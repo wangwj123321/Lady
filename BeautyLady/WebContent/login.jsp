@@ -10,58 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- <link rel="stylesheet" href="css/login.css"> -->
+    <link rel="stylesheet" href="css/login.css">
 </head>
-<style type="text/css">
-	body{
-		margin: 0;
-		padding: 0;
-	}
-	#img{
-		cursor: pointer;
-	}
-	#backgrounds{
-		position: absolute;;
-		top: 30%;
-		left:37.5%;
-		width: 450px;
-		padding: 10px 30px;
-		background-color: white;
-	}
-	h5,div{
-		margin: 10px 0;
-	}
-	input[type="text"],input[type="password"]{
-		border: 0;
-		background-color: #ebebe0;
-		width: 420px;
-		height: 25px;
-		outline: none;
-		text-indent: 5px;
-	}
-	input[type="button"]{
-		width: 420px;
-		height: 25px;
-		background-color: black;
-		border: 0;
-		color: white;
-	}
-	a{
-		text-decoration: none;
-		color: black;
-	}
-	#last{
-		text-align: right;
-		margin: 0 35px 25px 0;
-		font-size: 12px;
-	}
-	#hint{
-		color: red;
-	}
-	#checkCode{
-		width: 200px;
-	}
-</style>
 <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){

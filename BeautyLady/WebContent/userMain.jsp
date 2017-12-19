@@ -58,12 +58,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    					</td>
 					<td>操作</td>
 				</tr>
-   				<c:forEach items="${order.orderDetail }" var="orderDetail">
+   				<c:forEach items="${order.user_Orders }" var="orderDetail">
    					<tr>
-   						<td><img alt="" class="imgs" src="images/${orderDetail.product.picpath }"></td>
+   						<td><img alt="" class="imgs" src="images/${orderDetail.picpath }"></td>
    						<td>
-   							<div>商品名称：${orderDetail.product.productName }</div>
-   							<div>颜色：${orderDetail.color.colorName } 尺寸：${orderDetail.size.sizeName }</div>
+   							<div>商品名称：${orderDetail.productName } ${orderDetail.productNo }</div>
+   							<div>颜色：${orderDetail.colorName } 尺寸：${orderDetail.sizeName }</div>
    						</td>
    						<td>单价：${orderDetail.tagPrice }</td>
    						<td>数量：${orderDetail.count }</td>
@@ -81,19 +81,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</tr>
     			<tr>
     				<td>图片：</td>
-    				<td><img src="images/${orderDetail.product.picpath }"></td>
+    				<td><img src="images/${orderDetail.picpath }"></td>
     			</tr>
     			<tr>
     				<td>颜色：</td>
-    				<td>${orderDetail.color.colorName }</td>
+    				<td>${orderDetail.colorName }</td>
     			</tr>
     			<tr>
     				<td>尺寸：</td>
-    				<td>${orderDetail.size.sizeName }</td>
+    				<td>${orderDetail.sizeName }</td>
     			</tr>
     			<tr>
     				<td>商品名称：</td>
-    				<td>${orderDetail.product.productName }</td>
+    				<td>${orderDetail.productName }</td>
     			</tr>
     			<tr>
     				<td>单价：</td>
@@ -106,6 +106,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<tr>
     				<td>总价：</td>
     				<td>${orderDetail.amount }</td>
+    			</tr>
+    			<tr>
+    				<td>送货地址：</td>
+    				<td>${orderDetail.address }</td>
+    			</tr>
+    			<tr>
+    				<td>收货人：</td>
+    				<td>${orderDetail.name }</td>
+    			</tr>
+    			<tr>
+    				<td>收货人电话：</td>
+    				<td>${orderDetail.phone }</td>
     			</tr>
     		</table>
     	</c:if>

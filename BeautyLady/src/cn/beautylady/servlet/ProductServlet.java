@@ -40,6 +40,7 @@ public class ProductServlet extends HttpServlet {
 	private ProductService productService=new ProductServiceImpl();
 	private ColorService colorService=new ColorServiceImpl();
 	private SizeService sizeService=new SizeServiceImpl();
+	private ProductExtService productExtService=new ProductExtServiceImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -99,6 +100,7 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("value", value);
 			response.sendRedirect("../index.jsp");
 		}else if("productDetail".equals(opr)) {
+
 			/*Integer proId=Integer.parseInt(request.getParameter("proId"));
 			Product product=productService.getProductById(proId);
 			List<Color> product_Colors=colorService.getListColorByProNo(product.getProductNo());
@@ -124,6 +126,7 @@ public class ProductServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
+
 		}
 	}
 

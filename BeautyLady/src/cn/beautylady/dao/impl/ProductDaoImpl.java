@@ -29,24 +29,28 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 
 	@Override
 	public List<Product> getListProduct(Page<Product> page,Map<String, Object> map,String order) {
-		String sql="SELECT * FROM `product` ";
+		String sql="SELECT `product`.*,`subclasses`.`subClassesName` subClassesName FROM `product`,`subclasses` WHERE  `product`.`subclassesNo`=`subclasses`.`subClassesNo` ";
 		if (map!=null && map.size()!=0) {
 			Set<String> key=map.keySet();
 			for (String s : key) {
 				if ("productName".equals(s)) {
-					sql+="where "+s+" like '%"+map.get(s)+"%'";
+					sql+="and "+s+" like '%"+map.get(s)+"%'";
 					break;
 				}
 				if ("quarter".equals(s)) {
-					sql+="where "+s+"="+map.get(s);
+					sql+="and "+s+"="+map.get(s);
 					break;
 				}
-				sql+="where "+s+"='"+map.get(s)+"'";
+				sql+="and "+s+"='"+map.get(s)+"'";
 			}
 		}
-		sql+=" ORDER BY  createDate "+order+" LIMIT ?,?";
-		Object[] objs= {(page.getPageNo()-1)*page.getPageSize(),page.getPageSize()};
+		sql+=" ORDER BY  createDate DESC";
+		if (order!=null && !order.equals("")) {
+			sql+=", tagPrice "+order;
+		}
+		sql+=" LIMIT ?,?";
 		System.out.println(sql);
+		Object[] objs= {(page.getPageNo()-1)*page.getPageSize(),page.getPageSize()};
 		return getArrayList(sql, Product.class, objs);
 	}
 
@@ -68,7 +72,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 				sql+="where "+s+"='"+map.get(s)+"'";
 			}
 		}
-		System.out.println(sql);
 		return getCount(sql);
 	}
 

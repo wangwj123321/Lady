@@ -2,6 +2,8 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +22,11 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.beautylady.entity.Page;
 import cn.beautylady.service.ColorService;
+import cn.beautylady.service.ProductExtService;
 import cn.beautylady.service.ProductService;
 import cn.beautylady.service.SizeService;
 import cn.beautylady.service.impl.ColorServiceImpl;
+import cn.beautylady.service.impl.ProductExtServiceImpl;
 import cn.beautylady.service.impl.ProductServiceImpl;
 import cn.beautylady.service.impl.SizeServiceImpl;
 import cn.beautylady.util.ClassNameUtil;
@@ -36,6 +40,7 @@ public class ProductServlet extends HttpServlet {
 	private ProductService productService=new ProductServiceImpl();
 	private ColorService colorService=new ColorServiceImpl();
 	private SizeService sizeService=new SizeServiceImpl();
+	private ProductExtService productExtService=new ProductExtServiceImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -94,14 +99,16 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("value", value);
 			response.sendRedirect("../index.jsp");
 		}else if("productDetail".equals(opr)) {
-			Integer proId=Integer.parseInt(request.getParameter("proId"));
-			Product product=productService.getProductById(proId);
-			List<Color> product_Colors=colorService.getListColorByProNo(product.getProductNo());
-			List<Size> product_Sizes=sizeService.getListSizeByProNo(product.getProductNo());
+			String productNo=request.getParameter("productNo");
+			ProductExt product=null;
+			try {
+				product = productExtService.getProductExt(productNo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			List<Pic> pics = productService.getPicListByProductNo(product.getProductNo());
 			request.setAttribute("product", product);
-			request.setAttribute("colors", product_Colors);
-			request.setAttribute("sizes", product_Sizes);
 			request.setAttribute("pics", pics);
 			request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
 		}

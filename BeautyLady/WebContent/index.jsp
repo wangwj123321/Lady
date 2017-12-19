@@ -42,9 +42,9 @@
 <%@include file="element_page/side_left.jsp" %>
 <div class="product-info row text-center">
  <c:forEach var="product" items="${ProductPage.list }">
-	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&proId=${product.id }">
+	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&productNo=${product.productNo }">
 	 	<img class="img-fluid img-thumbnail" src="images/${product.picpath }" alt=""></a>
-	 	<div>${product.productName }</div>
+	 	<div>${product.subClassesName }</div>
 	 	<span class="price">￥${product.tagPrice}</span>
 	 </div>
 </c:forEach>

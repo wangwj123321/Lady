@@ -120,9 +120,9 @@
 		}else if(pageCount>5 && pageNo >=4 && pageNo+2>=pageCount){
 			btnstr += getgroup(getbtn(1,type));
 			for (var k = pageNo-3; k <= pageCount; k++) {
-				btnlist += getbtn(k,type);str += "<button type='button' class='btn btn-link btn-outline-dark' onclick='initProduct("+j+",&quot;"+data.type+"&quot;)'>"+j+"</button>";
+				btnlist += getbtn(k,type);
 			}
-			btnstr += getgroup(getbtn(pageCount,type));
+			btnstr += getgroup(btnlist);
 		}
     	$("#"+type+"pageChange").children().append(btnstr);
     }

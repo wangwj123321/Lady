@@ -25,8 +25,7 @@
                 		<!-- <li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li> -->
                 	</ul>
                 </li>
-                <li><a href="">我的收藏</a></li>
-                <li><a href="">积分商城</a></li>
+                <li><a href="servlet/CollectServlet?opr=getListCollect" target="_blank">我的收藏</a></li>
                 <li>${loginUser }，<a href="servlet/UserServlet?opr=exitLogin">退出登录</a></li>
             </ul>
         </div>

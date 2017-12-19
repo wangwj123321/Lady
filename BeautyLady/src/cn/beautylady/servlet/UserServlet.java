@@ -118,7 +118,13 @@ public class UserServlet extends HttpServlet {
 						response.addCookie(cookie2);
 						response.addCookie(pwdCookie);
 					}
-					response.sendRedirect("../index.jsp");
+					if(loginUser.getStage()==1) {
+						response.sendRedirect("../index.jsp");
+						return ;
+					}else if(loginUser.getStage()==0){
+						response.sendRedirect("/BeautyLady/backstage/backstage.jsp");
+						return ;
+					}
 				}else if(loginUser.getStatus() == 0) {
 					request.setAttribute("hint", "账号未激活，请先激活再尝试登陆！");
 					session.setAttribute("userAccount", userAccount);

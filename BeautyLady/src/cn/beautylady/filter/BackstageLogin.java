@@ -42,7 +42,7 @@ public class BackstageLogin implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		if(request.getSession().getAttribute("user")==null || "".equals(request.getSession().getAttribute("user"))) {
+		if(request.getSession().getAttribute("loginUser")==null || "".equals(request.getSession().getAttribute("user"))) {
 			Cookie[] cookies=request.getCookies();
 			String loginUser = null;
 			String userAccount = null;

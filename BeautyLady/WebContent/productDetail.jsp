@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<<<<<<< HEAD
 <%@ taglib uri="http://mycompany.com"  prefix="myTag"%>
-
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -91,7 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<br/>
 		<br/>
 		<form action="" method="post">
-<<<<<<< HEAD
 			<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
 			<input type="hidden" name="productNo" value=${ext.productNo }>
 			颜色：&nbsp;&nbsp;
@@ -102,50 +99,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				${colorName }<input type="radio" name="colorNo" value="${colorNo }">
 					<a href="servlet/ProductServlet?opr=productDetail&proNo=${ext.productNo }&colorNo=${colorNo }">
 					<img class="img-fluid" src="images/${ext.productNo }/${colorNo }/${ext.productNo }_list_${colorNo}.jpg" />
-					</a>>
+					</a>
 			</myTag:getSplitName>
-=======
-			<input type="hidden" name="tagPrice" value=${product.tagPrice }>
-			<input type="hidden" name="productNo" value=${product.productNo }>
-			<input type="hidden" name="productName" value=${product.productName }>
-			<input type="hidden" name="subClassesName" value=${product.subClassesName }>
-			颜色：&nbsp;&nbsp;
-			<myTag:split symbol="," str="${product.colorName}" var="color" index="i1">
-				<myTag:split var="no" symbol="," str="${product.colorNo}" index="i2">
-					<c:if test="${i1==i2 }">
-						${color}<input type="radio" name="colorNo" value="${no }" <c:if test="${i1== '0' }">checked</c:if>>
-					</c:if>
-				</myTag:split>
-			</myTag:split>
-			<%-- <c:forEach var="color" items="${colors }" varStatus="status">
-				${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</c:forEach> --%>
->>>>>>> 06a23218d251f7d75967e9f80f80fcf72b096261
+			<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
+			<input type="hidden" name="productNo" value=${ext.productNo }>
+			<input type="hidden" name="productName" value=${ext.productName }>
+			<input type="hidden" name="subClassesName" value=${ext.subClassesName }>
 			<br/>
 			<br/>
 			<br/>
 			<br/>
 			尺码：&nbsp;&nbsp;
-<<<<<<< HEAD
 			<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
 				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
 			</c:forEach> --%>
 			<myTag:getSplitName varNo="sizeNo" strName="${ext.sizeName }" symbol="," strNo="${ext.sizeNo }" varName="sizeName">
 				${sizeName }<input type="radio" name="sizeNo" value="${colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
 			</myTag:getSplitName>
-=======
-			<myTag:split symbol="," str="${product.sizeName}" var="size" index="i1">
-				<myTag:split var="no" symbol="," str="${product.sizeNo}" index="i2">
-					<c:if test="${i1==i2 }">
-						${size}<input type="radio" name="sizeNo" value="${no }" <c:if test="${i1== '0' }">checked</c:if>>
-					</c:if>
-				</myTag:split>
-				
-			</myTag:split>
-			<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
-				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</c:forEach> --%>
->>>>>>> 06a23218d251f7d75967e9f80f80fcf72b096261
 		</form>
 		<div id="add_car">
 			<a id="add_car"></a>

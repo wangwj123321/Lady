@@ -28,13 +28,15 @@
 <script type="text/javascript" src="js/common.js"></script>
     <%
     	Cookie[] cookies=request.getCookies();
-    	for(Cookie cookie:cookies){
-    		if(cookie.getName().equals("loginUser")){
-    			session.setAttribute("loginUser", cookie.getValue());
-    		}
-    		if(cookie.getName().equals("userAccount")){
-    			session.setAttribute("userAccount", cookie.getValue());
-    		}
+    	if(cookies!=null){
+    		for(Cookie cookie:cookies){
+        		if(cookie.getName().equals("loginUser")){
+        			session.setAttribute("loginUser", cookie.getValue());
+        		}
+        		if(cookie.getName().equals("userAccount")){
+        			session.setAttribute("userAccount", cookie.getValue());
+        		}
+        	}
     	}
     %>
 <body>

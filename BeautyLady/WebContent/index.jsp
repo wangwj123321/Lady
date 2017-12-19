@@ -39,40 +39,61 @@
     %>
 <body>
 <%@include file="element_page/header.jsp" %>
+<nav class="pagechange text-right">
+<span>当前页：${ProductPage.pageNo }/${ProductPage.pageCount }</span>
+	<ul class="pagination">
+		<c:if test="${ProductPage.pageNo >1}">
+			<li>
+				<a class="btn btn-sm btn-outline-secondary" aria-label="Previous" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">
+		              <span aria-hidden="true">&laquo;</span>
+		         </a>
+	   	 	</li>
+		</c:if>
+	     <c:choose>
+	     	 <c:when test="${ProductPage.pageCount <=5}">
+				<c:forEach var="index" begin="1" end="${ProductPage.pageCount}">
+					<li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
+				</c:forEach>
+			</c:when>
+			<c:when test="${ProductPage.pageCount >5 && ProductPage.pageNo<4 }">
+				<c:forEach var="index" begin="1" end="${ProductPage.pageNo+2 }">
+					 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
+				</c:forEach>
+				 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount }">${ProductPage.pageCount }</a></li>
+			</c:when>
+			<c:when test="${ProductPage.pageCount >5 && ProductPage.pageNo>=4 && (ProductPage.pageNo+2<ProductPage.pageCount )}">
+			     <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">1</a></li>
+					<c:forEach var="index" begin="${ProductPage.pageNo-2}" end="${ProductPage.pageNo+2 }">
+						 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
+					</c:forEach>
+				 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount }">${ProductPage.pageCount }</a></li>
+			</c:when>
+			<c:when test="${ProductPage.pageCount >5 && ProductPage.pageNo>=4 && (ProductPage.pageNo+2>=ProductPage.pageCount) }">
+				<li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">1</a></li>
+				<c:forEach var="index" begin="${ProductPage.pageNo-2}" end="${ProductPage.pageCount }">
+					 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
+				</c:forEach>
+			</c:when>
+	     </c:choose>
+	     <c:if test="${ProductPage.pageNo<ProductPage.pageCount }">
+             <li>
+	            <a class="btn btn-sm btn-outline-secondary" aria-label="Next" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">
+	                <span aria-hidden="true">&raquo;</span>
+	            </a>
+	        </li>
+	     </c:if>
+	</ul>
+</nav>
 <%@include file="element_page/side_left.jsp" %>
 <div class="product-info row text-center">
  <c:forEach var="product" items="${ProductPage.list }">
-	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&proId=${product.id }">
+	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&productNo=${product.productNo }">
 	 	<img class="img-fluid img-thumbnail" src="images/${product.picpath }" alt=""></a>
-	 	<div>${product.productName }</div>
+	 	<div>${product.subClassesName }</div>
 	 	<span class="price">￥${product.tagPrice}</span>
 	 </div>
 </c:forEach>
 </div>
 <%@include file="element_page/side_right.jsp" %>
-<nav class="pagechange">
-	<span>当前页：${ProductPage.pageNo }/${ProductPage.pageCount }</span>
-	<c:if test="${ProductPage.pageNo>1 }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">首页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">上一页</a></c:if>
-    <c:if test="${ProductPage.pageNo<ProductPage.pageCount }"><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">下一页</a><a href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount}">尾页</a></c:if>
-<!--     <ul class="pagination">
-        <li>
-            <button type="button"aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </button>
-        </li>
-        <li><button type="button">1</button></li>
-        <li><button type="button">2</button></li>
-        <li><button type="button">3</button></li>
-        <li><button type="button">4</button></li>
-        <li><button type="button">5</button></li>
-        <li>
-            <button type="button" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </button>
-        </li>
-    </ul> -->
-</nav>
 </body>
 </html>

@@ -57,3 +57,14 @@
 	width:56px;
 	height:32px;
 }
+#add_collect{
+	margin-top:50px;
+	text-align:center;
+	cursor:pointer;
+}
+#add_collect:hover{
+	color:orange;
+}
+.img_bottom{
+	position:relative;
+}

@@ -28,7 +28,7 @@
                 <p>电话：${defaultAddress.phone }</p>
                 <p>地址：${defaultAddress.address }</p>
             </div>
-            <div><a id="ch_dd_btn" name="ture"></a></div>
+            <div><a id="ch_dd_btn" name="true"></a><c:if test="${ empty  defaultAddress}"><span style="font-size:12px;color:red">请选择收货地址</span></c:if> </div>
             <table id="tab">
                 <form action="servlet/AddressServlet?opr=addAdderss" id="aa">
                     <tr>

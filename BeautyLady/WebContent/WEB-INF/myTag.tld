@@ -58,9 +58,14 @@
             <rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->
     	</attribute>
     	<attribute>
-		<name>var</name>
-		<required>true</required>	
-		<rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->	 
+			<name>var</name>
+			<required>true</required>	
+			<rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->	 
+		</attribute>
+		<attribute>
+			<name>index</name>
+			<required>false</required>	
+			<rtexprvalue>true</rtexprvalue><!-- 属性值可以接收el表达式 -->	 
 		</attribute>
     </tag>
 

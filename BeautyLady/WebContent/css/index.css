@@ -14,7 +14,8 @@
     right: 20px;
     top: 70px;
 }
-.pagechange li{
-    width: 20px;
-    height: 20px;
+@media (max-width:640px){
+	.product-info{
+		margin-top:2.3rem;
+	}
 }

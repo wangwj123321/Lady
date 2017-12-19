@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://mycompany.com" prefix="myTag"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -87,22 +88,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form action="" method="post">
 			<input type="hidden" name="tagPrice" value=${product.tagPrice }>
 			<input type="hidden" name="productNo" value=${product.productNo }>
+			<input type="hidden" name="productName" value=${product.productName }>
+			<input type="hidden" name="subClassesName" value=${product.subClassesName }>
 			颜色：&nbsp;&nbsp;
-			<c:forEach var="color" items="${colors }" varStatus="status">
+			<myTag:split symbol="," str="${product.colorName}" var="color" index="i1">
+				<myTag:split var="no" symbol="," str="${product.colorNo}" index="i2">
+					<c:if test="${i1==i2 }">
+						${color}<input type="radio" name="colorNo" value="${no }" <c:if test="${i1== '0' }">checked</c:if>>
+					</c:if>
+				</myTag:split>
+			</myTag:split>
+			<%-- <c:forEach var="color" items="${colors }" varStatus="status">
 				${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</c:forEach>
+			</c:forEach> --%>
 			<br/>
 			<br/>
 			<br/>
 			<br/>
 			尺码：&nbsp;&nbsp;
-			<c:forEach var="size" items="${sizes }" varStatus="status">
+			<myTag:split symbol="," str="${product.sizeName}" var="size" index="i1">
+				<myTag:split var="no" symbol="," str="${product.sizeNo}" index="i2">
+					<c:if test="${i1==i2 }">
+						${size}<input type="radio" name="sizeNo" value="${no }" <c:if test="${i1== '0' }">checked</c:if>>
+					</c:if>
+				</myTag:split>
+				
+			</myTag:split>
+			<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
 				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</c:forEach>
+			</c:forEach> --%>
 		</form>
 		<div id="add_car">
 			<a id="add_car"></a>
 		</div>
+		<div id="add_collect">收藏</div>
 	</div>
 </div>
 	<div id="add_car_hint">
@@ -133,6 +152,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	$("#jxBuy").click(function(){
 		$(this).parent().parent().css("display","none");
+	});
+	$("#add_collect").click(function(){
+		var productNo=$("[name='productNo']").val();
+		var subClassesName=$("[name='subClassesName']").val();
+		$.post("servlet/CollectServlet","opr=addCollect&productNo="+productNo+"&subClassesName="+subClassesName,succ,"text");
+		function succ(data){
+			if(data=="true"){
+				alert("收藏成功！");
+			}else if(data=="login"){
+				location.href="login.jsp";
+			}else{
+				alert("收藏失败！");
+			}
+		}
 	});
 </script>
 <script src="js/productDetail/jquery.bridget.js"></script>

@@ -1,3 +1,5 @@
+<%@page import="cn.beautylady.dao.impl.UserDaoImpl"%>
+<%@page import="cn.beautylady.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -27,14 +29,29 @@
 <!-- 本页面js文件 -->
 <script type="text/javascript" src="js/common.js"></script>
     <%
-    	Cookie[] cookies=request.getCookies();
-    	for(Cookie cookie:cookies){
-    		if(cookie.getName().equals("loginUser")){
-    			session.setAttribute("loginUser", cookie.getValue());
-    		}
-    		if(cookie.getName().equals("userAccount")){
-    			session.setAttribute("userAccount", cookie.getValue());
-    		}
+    	if(session.getAttribute("userAccount")==null){
+        	Cookie[] cookies=request.getCookies();
+       		String loginUser="";
+       		String userAccount="";
+       		String pwd="";
+       		if(cookies!=null){
+            	for(Cookie cookie:cookies){
+            		if(cookie.getName().equals("loginUser")){
+            			loginUser=cookie.getValue();
+            		}
+            		if(cookie.getName().equals("userAccount")){
+            			userAccount=cookie.getValue();
+            		}
+            		if(cookie.getName().equals("pwd")){
+            			pwd=cookie.getValue();
+            		}
+            		User user=new UserDaoImpl().getUserByUserAccount(userAccount);
+            		if(user!=null && user.getPassword().equals(pwd)){
+            			session.setAttribute("loginUser", loginUser);
+            			session.setAttribute("userAccount", userAccount);
+            		}
+            	}
+       		}
     	}
     %>
 <body>
@@ -87,9 +104,10 @@
 <%@include file="element_page/side_left.jsp" %>
 <div class="product-info row text-center">
  <c:forEach var="product" items="${ProductPage.list }">
-	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&productNo=${product.productNo }">
+	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&proNo=${product.productNo }&colorNo=-1">
 	 	<img class="img-fluid img-thumbnail" src="images/${product.picpath }" alt=""></a>
-	 	<div>${product.subClassesName }</div>
+	 	<div>${product.productName }</div>
+	 	<div>${product.productNo }</div>
 	 	<span class="price">￥${product.tagPrice}</span>
 	 </div>
 </c:forEach>

@@ -13,7 +13,7 @@
 			var userAccount = $("[name='userAccount']").val();
 			$.get("servlet/UserServlet","opr=getUserByUserAccount&userAccount="+userAccount,function (data){
 				if(data=="true"){
-					$("#hint").html("该用户以存在，请使用别的登录名！");
+					$("#hint").html("该用户以存在，请使用别的用户名！");
 				}else{
 					$("#hint").html("");
 				}
@@ -54,13 +54,14 @@
 <img src="images/login_ochirly.jpg" id="img" />
 <div id="backgrounds">
 	<form action="servlet/RegServlet" method="post" id="reg">
+		<div id="hint">${requestScope.hint }</div>
 		<h5>新用户注册</h5>
 		<div><input type="text" name="userName" placeholder="登录名" required /></div>
 		<div><input type="text" name="userAccount" placeholder="用户名" required /></div>
 		<div><input type="password" name="pwd" placeholder="密码" required /></div>
 		<div><input type="password" name="repwd" placeholder="确认密码" required /></div>
 		<div><input type="text" name="email" placeholder="邮箱" required /></div>
-		<div><input type="submit" value="注册" /></div>
+		<input type="submit" value="注册" />
 		<div id="last"><a href="login.jsp">返回登录</a></div>
 	</form>
 </div>

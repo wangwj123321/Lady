@@ -14,6 +14,7 @@ import cn.beautylady.service.UserService;
  */
 public class UserServiceImpl implements UserService{
 	UserDao dao = new UserDaoImpl();
+	
 	@Override
 	public User login(User user) {
 		return dao.findUser(user);

@@ -49,4 +49,9 @@ public class ProductServiceImpl implements ProductService{
 		return dao.getPicListByProductNo(productNo);
 	}
 
+	@Override
+	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.getPicListByProductNo(productNo,colorNo);
+	}
+
 }

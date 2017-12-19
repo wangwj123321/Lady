@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.beautylady.entity.User;
 import cn.beautylady.service.IRegService;
 import cn.beautylady.service.impl.RegServiceImpl;
+import cn.beautylady.util.MD5Util;
 import cn.beautylady.util.MySendMailThread;
 import cn.beautylady.service.IRegService;
 
@@ -40,7 +41,7 @@ public class RegServlet extends HttpServlet {
 
 		String userAccount = request.getParameter("userAccount");
 		String userName = request.getParameter("userName");
-		String pwd = request.getParameter("pwd");
+		String pwd = MD5Util.MD5(request.getParameter("pwd"));
 		String email = request.getParameter("email");
 		
 		User user = new User();

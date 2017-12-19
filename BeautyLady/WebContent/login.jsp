@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="backgrounds">
 	<form action="servlet/UserServlet?opr=login" method="post" id="ff">
 		<div id="hint">${requestScope.hint }</div>
-		<h5>新用户注册</h5>
+		<h5>登陆</h5>
 				<div><input type="text" placeholder="邮箱地址/手机号码" name="userAccount" value="${userAccount }"></div>
                 <div><input type="password" placeholder="密码" name="pwd"></div>
                 <div id="cc">

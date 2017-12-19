@@ -54,6 +54,7 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		ProductExtService extService = new ProductExtServiceImpl();
 		String opr=request.getParameter("opr");
 		String pageNo = request.getParameter("pageNo");
 		String type = request.getParameter("type");
@@ -99,18 +100,33 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("value", value);
 			response.sendRedirect("../index.jsp");
 		}else if("productDetail".equals(opr)) {
-			String productNo=request.getParameter("productNo");
-			ProductExt product=null;
-			try {
-				product = productExtService.getProductExt(productNo);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			/*Integer proId=Integer.parseInt(request.getParameter("proId"));
+			Product product=productService.getProductById(proId);
+			List<Color> product_Colors=colorService.getListColorByProNo(product.getProductNo());
+			List<Size> product_Sizes=sizeService.getListSizeByProNo(product.getProductNo());
 			List<Pic> pics = productService.getPicListByProductNo(product.getProductNo());
 			request.setAttribute("product", product);
-			request.setAttribute("pics", pics);
-			request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
+			request.setAttribute("colors", product_Colors);
+			request.setAttribute("sizes", product_Sizes);
+			request.setAttribute("pics", pics);*/
+			String proNo = request.getParameter("proNo");
+			String colorNo = request.getParameter("colorNo");
+			try {
+				ProductExt ext = extService.getProductExt(proNo);
+				if("-1".equals(colorNo)) {
+					colorNo = ext.getColorNo().split(",")[0];				
+				}
+				List<Pic> pics = productService.getPicListByProductNo(ext.getProductNo(),colorNo);
+				request.setAttribute("ext", ext);
+				request.setAttribute("pics", pics);
+				request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
+			} catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InstantiationException
+					| InvocationTargetException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+
 		}
 	}
 

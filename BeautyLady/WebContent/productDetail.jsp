@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://mycompany.com" prefix="myTag"%>
+<<<<<<< HEAD
+<%@ taglib uri="http://mycompany.com"  prefix="myTag"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -42,16 +44,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="col-8">
 		<div class="img_top row">
 			<c:forEach var="pics" items="${pics }">
-				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_1.jpg') || pics.picpath ==  pics.productNo.concat('_m_2.jpg') || pics.picpath ==  pics.productNo.concat('_m_3.jpg') || pics.picpath ==  pics.productNo.concat('_m_4.jpg')}">
-					<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.picpath }" /></div>
+				<%-- <c:if test="${pics.picpath ==  pics.productNo.concat('_m_1.jpg') || pics.picpath ==  pics.productNo.concat('_m_2.jpg') || pics.picpath ==  pics.productNo.concat('_m_3.jpg') || pics.picpath ==  pics.productNo.concat('_m_4.jpg')}">
+					<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
+				</c:if> --%>
+				<c:if test="${pics.picpath.indexOf('_m_1.jpg')>0 || pics.picpath.indexOf('_m_2.jpg')>0 || pics.picpath.indexOf('_m_3.jpg')>0 || pics.picpath.indexOf('_m_4.jpg')>0}">
+					<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
 				</c:if>
 			</c:forEach>
 		</div>
 		<p style="font-size:1.5rem">细节展示</p>
 		<div class="img_section row">
 					<c:forEach var="pics" items="${pics }">
-				<c:if test="${pics.picpath ==  pics.productNo.concat('_m_5.jpg') || pics.picpath ==  pics.productNo.concat('_m_6.jpg') || pics.picpath ==  pics.productNo.concat('_m_7.jpg') }">
-					<div class="col-4"><img class="img-fluid" src="images/${pics.productNo }/${pics.picpath }" /></div>
+				<c:if test="${pics.picpath.indexOf('_m_5.jpg')>0 || pics.picpath.indexOf('_m_6.jpg')>0 || pics.picpath.indexOf('_m_7.jpg')>0}">
+					<div class="col-4"><img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
 				</c:if>
 			</c:forEach>
 		</div>
@@ -61,15 +66,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <div class="proportion">
 		                <div mag-thumb="inner" class="mag-eg-el">
 		                    <c:forEach var="pics" items="${pics }">
-						<c:if test="${pics.picpath ==  pics.productNo.concat('_m_8.jpg')   }">
-							<img class="img-fluid" src="images/${pics.productNo }/${pics.picpath }" />
+						<c:if test="${pics.picpath.indexOf('_m_8.jpg')>0   }">
+							<img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" />
 						</c:if>
 					</c:forEach>
 		                </div>
 		                <div mag-zoom="inner" class="mag-eg-el">
 		                    <c:forEach var="pics" items="${pics }">
 						<c:if test="${pics.picpath ==  pics.productNo.concat('_b_8.jpg')  }">
-							<img class="img-fluid" src="images/${pics.productNo }/${pics.picpath }" />
+							<img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" />
 						</c:if>
 					</c:forEach>
 		                </div>
@@ -80,12 +85,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 	<div class="col-4">
-		<h4>${product.subClassesName }</h4>
-		<h5>编号 &nbsp;&nbsp;${product.productNo }</h5>
-		<p style="font-weight:bold;font-size:16px">￥${product.tagPrice }</p>
+		<h4>${ext.subClassesName }</h4>
+		<h5>编号 &nbsp;&nbsp;${ext.productNo }</h5>
+		<p style="font-weight:bold;font-size:16px">￥${ext.tagPrice }</p>
 		<br/>
 		<br/>
 		<form action="" method="post">
+<<<<<<< HEAD
+			<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
+			<input type="hidden" name="productNo" value=${ext.productNo }>
+			颜色：&nbsp;&nbsp;
+			<%-- <c:forEach var="color" items="${colors }" varStatus="status">
+				${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
+			</c:forEach> --%>
+			<myTag:getSplitName varNo="colorNo" strName="${ext.colorName }" symbol="," strNo="${ext.colorNo }" varName="colorName">
+				${colorName }<input type="radio" name="colorNo" value="${colorNo }">
+					<a href="servlet/ProductServlet?opr=productDetail&proNo=${ext.productNo }&colorNo=${colorNo }">
+					<img class="img-fluid" src="images/${ext.productNo }/${colorNo }/${ext.productNo }_list_${colorNo}.jpg" />
+					</a>>
+			</myTag:getSplitName>
+=======
 			<input type="hidden" name="tagPrice" value=${product.tagPrice }>
 			<input type="hidden" name="productNo" value=${product.productNo }>
 			<input type="hidden" name="productName" value=${product.productName }>
@@ -101,11 +120,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%-- <c:forEach var="color" items="${colors }" varStatus="status">
 				${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
 			</c:forEach> --%>
+>>>>>>> 06a23218d251f7d75967e9f80f80fcf72b096261
 			<br/>
 			<br/>
 			<br/>
 			<br/>
 			尺码：&nbsp;&nbsp;
+<<<<<<< HEAD
+			<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
+				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
+			</c:forEach> --%>
+			<myTag:getSplitName varNo="sizeNo" strName="${ext.sizeName }" symbol="," strNo="${ext.sizeNo }" varName="sizeName">
+				${sizeName }<input type="radio" name="sizeNo" value="${colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
+			</myTag:getSplitName>
+=======
 			<myTag:split symbol="," str="${product.sizeName}" var="size" index="i1">
 				<myTag:split var="no" symbol="," str="${product.sizeNo}" index="i2">
 					<c:if test="${i1==i2 }">
@@ -117,6 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
 				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
 			</c:forEach> --%>
+>>>>>>> 06a23218d251f7d75967e9f80f80fcf72b096261
 		</form>
 		<div id="add_car">
 			<a id="add_car"></a>

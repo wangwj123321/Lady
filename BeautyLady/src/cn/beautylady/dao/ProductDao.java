@@ -61,9 +61,23 @@ public interface ProductDao {
     public Product getProductByNo(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
     
     /**
-     * 根据商品标号，查找商品赌赢的图片
+     * 根据商品标号，查找商品对应的图片
      * @param productNo
      * @return
      */
     public List<Pic> getPicListByProductNo(String productNo);
+    
+    /**
+     * 根据商品标号，查找商品的图片
+     * @param productNo
+     * @param colorNo
+     * @return
+     * @throws SQLException 
+     * @throws InvocationTargetException 
+     * @throws InstantiationException 
+     * @throws IllegalAccessException 
+     * @throws NoSuchMethodException 
+     * @throws NoSuchFieldException 
+     */
+	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 }

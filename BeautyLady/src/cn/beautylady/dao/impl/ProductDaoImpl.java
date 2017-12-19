@@ -93,4 +93,10 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 		String sql = "select * from `pic` where productNo = ?";
 		return getArrayList(sql, Pic.class, productNo);
 	}
+
+	@Override
+	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "SELECT * FROM pic WHERE productNo=? AND colorNo=?";
+		return select(Pic.class, sql, productNo,colorNo);
+	}
 }

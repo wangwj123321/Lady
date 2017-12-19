@@ -3,6 +3,7 @@ package cn.beautylady.entity;
 public class Pic {
 	private Integer id;
 	private String productNo;
+	private String colorNo;
 	private String picpath;
 	public Integer getId() {
 		return id;
@@ -15,6 +16,13 @@ public class Pic {
 	}
 	public void setProductNo(String productNo) {
 		this.productNo = productNo;
+	}
+	
+	public String getColorNo() {
+		return colorNo;
+	}
+	public void setColorNo(String colorNo) {
+		this.colorNo = colorNo;
 	}
 	public String getPicpath() {
 		return picpath;

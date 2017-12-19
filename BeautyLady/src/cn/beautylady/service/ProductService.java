@@ -55,4 +55,18 @@ public interface ProductService {
      * @return
      */
     public List<Pic> getPicListByProductNo(String productNo);
+    
+    /**
+     * 查找商品的图片
+     * @param productNo
+     * @param colorNo
+     * @return
+     * @throws SQLException 
+     * @throws InvocationTargetException 
+     * @throws InstantiationException 
+     * @throws IllegalAccessException 
+     * @throws NoSuchMethodException 
+     * @throws NoSuchFieldException 
+     */
+	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 }

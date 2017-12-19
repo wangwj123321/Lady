@@ -2,6 +2,8 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +22,11 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.beautylady.entity.Page;
 import cn.beautylady.service.ColorService;
+import cn.beautylady.service.ProductExtService;
 import cn.beautylady.service.ProductService;
 import cn.beautylady.service.SizeService;
 import cn.beautylady.service.impl.ColorServiceImpl;
+import cn.beautylady.service.impl.ProductExtServiceImpl;
 import cn.beautylady.service.impl.ProductServiceImpl;
 import cn.beautylady.service.impl.SizeServiceImpl;
 import cn.beautylady.util.ClassNameUtil;
@@ -49,6 +53,7 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		ProductExtService extService = new ProductExtServiceImpl();
 		String opr=request.getParameter("opr");
 		String pageNo = request.getParameter("pageNo");
 		String type = request.getParameter("type");
@@ -94,7 +99,7 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("value", value);
 			response.sendRedirect("../index.jsp");
 		}else if("productDetail".equals(opr)) {
-			Integer proId=Integer.parseInt(request.getParameter("proId"));
+			/*Integer proId=Integer.parseInt(request.getParameter("proId"));
 			Product product=productService.getProductById(proId);
 			List<Color> product_Colors=colorService.getListColorByProNo(product.getProductNo());
 			List<Size> product_Sizes=sizeService.getListSizeByProNo(product.getProductNo());
@@ -102,8 +107,23 @@ public class ProductServlet extends HttpServlet {
 			request.setAttribute("product", product);
 			request.setAttribute("colors", product_Colors);
 			request.setAttribute("sizes", product_Sizes);
-			request.setAttribute("pics", pics);
-			request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
+			request.setAttribute("pics", pics);*/
+			String proNo = request.getParameter("proNo");
+			String colorNo = request.getParameter("colorNo");
+			try {
+				ProductExt ext = extService.getProductExt(proNo);
+				if("-1".equals(colorNo)) {
+					colorNo = ext.getColorNo().split(",")[0];				
+				}
+				List<Pic> pics = productService.getPicListByProductNo(ext.getProductNo(),colorNo);
+				request.setAttribute("ext", ext);
+				request.setAttribute("pics", pics);
+				request.getRequestDispatcher("../productDetail.jsp").forward(request, response);
+			} catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InstantiationException
+					| InvocationTargetException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 		}
 	}
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import cn.beautylady.entity.User;
 import cn.beautylady.service.UserService;
 import cn.beautylady.service.impl.UserServiceImpl;
+import cn.beautylady.util.MD5Util;
 import cn.beautylady.util.MySendMailThread;
 
 /**
@@ -79,7 +80,7 @@ public class UserServlet extends HttpServlet {
 		}
 		if ("login".equals(opr)) {
 			String userAccount=request.getParameter("userAccount");
-			String pwd=request.getParameter("pwd");
+			String pwd=MD5Util.MD5(request.getParameter("pwd"));
 			String pass=request.getParameter("pass");
 			int checkCode=Integer.parseInt(request.getParameter("checkCode"));
 			HttpSession session=request.getSession();
@@ -106,12 +107,16 @@ public class UserServlet extends HttpServlet {
 					if ("true".equals(pass)) {
 						Cookie cookie=new Cookie("loginUser", loginUser.getUserName());
 						Cookie cookie2=new Cookie("userAccount", loginUser.getUserAccount());
+						Cookie pwdCookie=new Cookie("pwd",loginUser.getPassword() );
 						cookie.setMaxAge(1296000);
 						cookie.setPath("/BeautyLady");
-						response.addCookie(cookie);
+						pwdCookie.setMaxAge(1296000);
+						pwdCookie.setPath("/BeautyLady");
 						cookie2.setMaxAge(1296000);
 						cookie2.setPath("/BeautyLady");
+						response.addCookie(cookie);
 						response.addCookie(cookie2);
+						response.addCookie(pwdCookie);
 					}
 					response.sendRedirect("../index.jsp");
 				}else if(loginUser.getStatus() == 0) {
@@ -145,6 +150,11 @@ public class UserServlet extends HttpServlet {
 					cookie.setPath("/BeautyLady");
 					response.addCookie(cookie);
 				}
+				if ("pwd".equals(cookie.getName())) {
+					cookie.setMaxAge(0);
+					cookie.setPath("/BeautyLady");
+					response.addCookie(cookie);
+				}
 			}
 			response.sendRedirect("../login.jsp");
 		}
@@ -162,9 +172,9 @@ public class UserServlet extends HttpServlet {
 		if("modifyUser".equals(opr)){
 			String userAccount = request.getParameter("userAccount");
 			String userName = request.getParameter("userName");
-			String pwd = request.getParameter("pwd");
+			String pwd = MD5Util.MD5(request.getParameter("pwd"));
 			String email = request.getParameter("email");
-			String oldpwd = request.getParameter("oldpwd");
+			String oldpwd = MD5Util.MD5(request.getParameter("oldpwd"));
 			User user = new User();
 			user.setUserAccount(userAccount);
 			user.setPassword(oldpwd);

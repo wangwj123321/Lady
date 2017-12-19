@@ -1,3 +1,5 @@
+<%@page import="cn.beautylady.dao.impl.UserDaoImpl"%>
+<%@page import="cn.beautylady.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -27,14 +29,29 @@
 <!-- 本页面js文件 -->
 <script type="text/javascript" src="js/common.js"></script>
     <%
-    	Cookie[] cookies=request.getCookies();
-    	for(Cookie cookie:cookies){
-    		if(cookie.getName().equals("loginUser")){
-    			session.setAttribute("loginUser", cookie.getValue());
-    		}
-    		if(cookie.getName().equals("userAccount")){
-    			session.setAttribute("userAccount", cookie.getValue());
-    		}
+    	if(session.getAttribute("userAccount")==null){
+        	Cookie[] cookies=request.getCookies();
+       		String loginUser="";
+       		String userAccount="";
+       		String pwd="";
+       		if(cookies!=null){
+            	for(Cookie cookie:cookies){
+            		if(cookie.getName().equals("loginUser")){
+            			loginUser=cookie.getValue();
+            		}
+            		if(cookie.getName().equals("userAccount")){
+            			userAccount=cookie.getValue();
+            		}
+            		if(cookie.getName().equals("pwd")){
+            			pwd=cookie.getValue();
+            		}
+            		User user=new UserDaoImpl().getUserByUserAccount(userAccount);
+            		if(user!=null && user.getPassword().equals(pwd)){
+            			session.setAttribute("loginUser", loginUser);
+            			session.setAttribute("userAccount", userAccount);
+            		}
+            	}
+       		}
     	}
     %>
 <body>

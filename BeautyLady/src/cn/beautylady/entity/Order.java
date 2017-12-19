@@ -17,7 +17,7 @@ public class Order {
 	private Date createDate;
 	private Double costPrice;
 	private Integer status;
-	private List<OrderDetail> orderDetail;
+	private List<User_orders> user_Orders;
 	public Integer getId() {
 		return id;
 	}
@@ -81,11 +81,11 @@ public class Order {
 	public Order() {
 		super();
 	}
-	public List<OrderDetail> getOrderDetail() {
-		return orderDetail;
+	public List<User_orders> getUser_Orders() {
+		return user_Orders;
 	}
-	public void setOrderDetail(List<OrderDetail> orderDetail) {
-		this.orderDetail = orderDetail;
+	public void setUser_Orders(List<User_orders> user_Orders) {
+		this.user_Orders = user_Orders;
 	}
 	
 }

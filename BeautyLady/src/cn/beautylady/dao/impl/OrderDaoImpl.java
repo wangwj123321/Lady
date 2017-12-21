@@ -69,5 +69,18 @@ public class OrderDaoImpl extends BaseDao implements OrderDao{
 		String sql = "select * from `orderdetail` where id = ?";
 		return selectOne(OrderDetail.class, sql, id);
 	}
+
+	@Override
+	public int updateOrderStatus(int orderId, int status) {
+		String sql="UPDATE `order` SET `status`=? WHERE id=?";
+		int count=0;
+		try {
+			count=executeUpdate(sql, status,orderId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 }

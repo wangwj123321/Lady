@@ -81,7 +81,7 @@ public class OrderServlet extends HttpServlet {
 					orderService.addOrderDetail(detail);
 					buyCarService.updateBuyCarStatus(buyCar.getId());
 				}
-				request.getSession().setAttribute("order", lastOrder);
+				request.getSession().setAttribute("newOrder", lastOrder);
 				response.sendRedirect("../car3.jsp");
 			}
 		}else if("getOrderByUser".equals(opr)){
@@ -102,6 +102,12 @@ public class OrderServlet extends HttpServlet {
 			}
 			request.setAttribute("orderDetail", orderDetail);
 			request.getRequestDispatcher("/userMain.jsp").forward(request, response);
+		}else if("updateOrderStatus".equals(opr)) {
+			int id=Integer.parseInt(request.getParameter("id"));
+			int status=Integer.parseInt(request.getParameter("status"));
+			if (orderService.updateOrderStatus(id, status)) {
+				response.sendRedirect("../pay.jsp");
+			}
 		}
 		out.flush();
 		out.close();

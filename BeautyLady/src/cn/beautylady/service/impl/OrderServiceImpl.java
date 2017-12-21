@@ -8,6 +8,7 @@ import cn.beautylady.dao.OrderDao;
 import cn.beautylady.dao.impl.OrderDaoImpl;
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
+import cn.beautylady.entity.Page;
 import cn.beautylady.service.OrderService;
 
 public class OrderServiceImpl implements OrderService{
@@ -47,6 +48,14 @@ public class OrderServiceImpl implements OrderService{
 	public boolean updateOrderStatus(int orderId, int status) {
 		int count=orderDao.updateOrderStatus(orderId, status);
 		return count==1?true:false;
+	}
+	@Override
+	public List<Order> getListOrder(Page<Order> page) {
+		int count=orderDao.getOrderCount();
+		page.setDataCount(count);
+		List<Order> list=orderDao.getListOrder((page.getPageNo()-1)*page.getPageSize(), page.getPageSize());
+		page.setList(list);
+		return list;
 	}
 
 }

@@ -18,6 +18,9 @@ public class Order {
 	private Double costPrice;
 	private Integer status;
 	private List<User_orders> user_Orders;
+	private String address;
+	private String name;
+	private String phone;
 	public Integer getId() {
 		return id;
 	}
@@ -86,6 +89,24 @@ public class Order {
 	}
 	public void setUser_Orders(List<User_orders> user_Orders) {
 		this.user_Orders = user_Orders;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }

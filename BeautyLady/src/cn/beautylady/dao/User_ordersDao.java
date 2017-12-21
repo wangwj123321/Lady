@@ -19,4 +19,5 @@ public interface User_ordersDao {
 	 * @return 订单详情对象
 	 */
 	public User_orders getgetUser_ordersById(Integer id) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
 }

@@ -101,7 +101,7 @@ $(function(){
            " <input type='text' class='form-control' name='modifyDate' id='exampleInputAmount1' value='"+isNull(data.modifyDate)+"'>" +
          "</div></div>" +
          "<div class='clean'></div>"+
-         "<button type='button' class='btn btn-default' onclick=modify('"+userName+"','"+type+"',"+data.id+",'"+propName+"','"+propNo+"',"+data.status+",'"+data.createdBy+"','"+data.createDate+"','"+data.modifyBy+"','"+data.modifyDate+"')>Submit</button>"+
+         "<button type='button' class='btn btn-default' onclick=\"modify('"+userName+"','"+type+"',"+data.id+",'"+propName+"','"+propNo+"',"+data.status+",'"+data.createdBy+"','"+data.createDate+"','"+data.modifyBy+"','"+data.modifyDate+"')\">Submit</button>"+
     	"</form>");
 		},"JSON");
 	}

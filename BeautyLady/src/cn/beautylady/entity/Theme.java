@@ -63,16 +63,10 @@ public class Theme {
 		this.modifyDate = modifyDate;
 	}
 	@Override
-    public String toString() {
-        return "Theme{" +
-        		"id'" + id + '\'' +
-                "themeNo='" + themeNo + '\'' +
-                ", themeName='" + themeName + '\'' +
-                ", status=" + status +
-                ", createdBy='" + createdBy + '\'' +
-                ", createDate=" + createDate.toString() +
-                ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate.toString() +
-                '}';
-    }
+	public String toString() {
+		return "Theme [id=" + id + ", themeNo=" + themeNo + ", themeName=" + themeName + ", status=" + status
+				+ ", createdBy=" + createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate="
+				+ modifyDate + "]";
+	}
+	
 }

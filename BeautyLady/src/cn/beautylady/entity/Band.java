@@ -63,16 +63,10 @@ public class Band {
 		this.modifyDate = modifyDate;
 	}
 	@Override
-    public String toString() {
-        return "Band{" +
-        		"id'" + id + '\'' +
-                "bandNo='" + bandNo + '\'' +
-                ", bandName='" + bandName + '\'' +
-                ", status=" + status +
-                ", createdBy='" + createdBy + '\'' +
-               ", createDate=" + createDate.toString() +
-                ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate.toString() +
-                '}';
-    }
+	public String toString() {
+		return "Band [id=" + id + ", bandNo=" + bandNo + ", bandName=" + bandName + ", status=" + status
+				+ ", createdBy=" + createdBy + ", modifyBy=" + modifyBy + "]";
+	}
+	
+	
 }

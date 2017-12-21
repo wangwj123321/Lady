@@ -63,16 +63,9 @@ public class Size {
 		this.modifyDate = modifyDate;
 	}
 	@Override
-    public String toString() {
-        return "Size{" +
-        		"id'" + id + '\'' +
-                "sizeNo='" + sizeNo + '\'' +
-                ", sizeName='" + sizeName + '\'' +
-                ", status=" + status +
-                ", createdBy='" + createdBy + '\'' +
-                ", createDate=" + createDate.toString() +
-                ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate.toString() +
-                '}';
-    }
+	public String toString() {
+		return "Size [id=" + id + ", sizeNo=" + sizeNo + ", sizeName=" + sizeName + ", status=" + status
+				+ ", createdBy=" + createdBy + ", modifyBy=" + modifyBy + "]";
+	}
+	
 }

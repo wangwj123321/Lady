@@ -60,10 +60,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <td>${order.orderNo }</td>
 		            <td>${order.costPrice }</td>
 		            <td>
-		            	<c:if test="${order.status == 0 }">未发货</c:if>
-   						<c:if test="${order.status == 1 }">已发货</c:if>
-   						<c:if test="${order.status == 2 }">已收货</c:if>
-   						<c:if test="${order.status == 3 }">已评价</c:if>
+		            	<c:if test="${order.status == 0 }">未支付</c:if>
+   						<c:if test="${order.status == 1 }">已支付</c:if>
+   						<c:if test="${order.status == 2 }">未发货</c:if>
+   						<c:if test="${order.status == 3 }">已发货</c:if>
+   						<c:if test="${order.status == 4 }">已收货</c:if>
 		            </td>
 		            <td>
 		            	<table class="table table-bordered">

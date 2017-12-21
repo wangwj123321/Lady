@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
 						</c:forEach> --%>
 						<myTag:getSplitName varNo="sizeNo" strName="${ext.sizeName }" symbol="," strNo="${ext.sizeNo }" varName="sizeName">
-							${sizeName }<input type="radio" name="sizeNo" value="${colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
+							${sizeName }<input type="radio" name="sizeNo" value="${sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
 						</myTag:getSplitName>
 					</form>
 					<div id="add_car">

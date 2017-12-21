@@ -15,18 +15,18 @@
         <div id="comp_img"><img src="images/comp.png" alt=""></div>
         <div id="order_no">
             <h2>订单已生成，请继续完成支付！</h2>
-            <p>订单编号：<span>${sessionScope.order.orderNo } </span>支付金额：<b>￥<span>${sessionScope.order.costPrice }</span></b></p>
+            <p>订单编号：<span>${sessionScope.newOrder.orderNo } </span>支付金额：<b>￥<span>${sessionScope.newOrder.costPrice }</span></b></p>
         </div>
     </div>
     <div id="ch_pay">
-        <p>你需要支付：<b>￥${sessionScope.order.costPrice }</b>元，请选择：</p>
+        <p>你需要支付：<b>￥${sessionScope.newOrder.costPrice }</b>元，请选择：</p>
         <div id="pay">
             <img src="images/zfb.png" alt="">
             <img src="images/wx.png" alt="">
             <img src="images/xyyh.png" alt="">
         </div>
-        <p>支付 <b>￥${sessionScope.order.costPrice }</b></p>
-        <p><a id="pay_btn">支付</a></p>
+        <p>支付 <b>￥${sessionScope.newOrder.costPrice }</b></p>
+        <p><a href="servlet/OrderServlet?opr=updateOrderStatus&id=${sessionScope.newOrder.id }&status=1" id="pay_btn">支付</a></p>
     </div>
     <div id="fotter">
         <h3>tyj有限公司</h3>

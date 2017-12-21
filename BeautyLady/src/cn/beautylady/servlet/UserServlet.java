@@ -265,6 +265,33 @@ public class UserServlet extends HttpServlet {
 			}
 			out.print(count);
 		}
+		if("showModifyBackUser".equals(opr)){
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			User user = new User();
+			user.setId(id);
+			user=userService.login(user);
+			String str = JSON.toJSONStringWithDateFormat(user, "yyyy-MM-dd");
+			out.print(str);
+		}
+		if("modifyBackUser".equals(opr)){
+			String userAccount = request.getParameter("muserAccount");
+			String userName = request.getParameter("muserName");
+			String pwd = MD5Util.MD5(request.getParameter("mpwd"));
+			String email = request.getParameter("memail");
+			User user = new User();
+			user.setUserAccount(userAccount);
+			user.setUserName(userName);
+			user.setPassword(pwd);
+			user.setEmail(email);
+			int count = 0;
+			try {
+				count = userService.modifyUser(user);
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+			out.print(count);
+		}
 	}
 
 	/**

@@ -43,5 +43,10 @@ public class OrderServiceImpl implements OrderService{
 			IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		return orderDao.getOrderDetailById(id);
 	}
+	@Override
+	public boolean updateOrderStatus(int orderId, int status) {
+		int count=orderDao.updateOrderStatus(orderId, status);
+		return count==1?true:false;
+	}
 
 }

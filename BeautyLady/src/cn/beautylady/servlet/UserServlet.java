@@ -3,6 +3,8 @@ package cn.beautylady.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.UUID;
 
 import javax.mail.Session;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.alibaba.fastjson.JSON;
 
 import cn.beautylady.entity.User;
 import cn.beautylady.service.UserService;
@@ -211,6 +215,55 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("hint", "密码错误！");
 				request.getRequestDispatcher("../modifyUser.jsp").forward(request, response);
 			}
+		}
+		/**
+		 * 显示所有用户
+		 */
+		if("showUser".equals(opr)){
+			List<User> list = userService.getUsersList();
+			String str = JSON.toJSONStringWithDateFormat(list, "yyyy-MM-dd");
+			out.print(str);
+		}
+		/**
+		 * 冻结用户
+		 */
+		if("FreeAndRecovery".equals(opr)){
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			Integer status = Integer.parseInt(request.getParameter("status"));
+			try {
+				userService.FreeAndRecovery(id, status);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			out.print("true");
+		}
+		/**
+		 * 后台用户新增
+		 */
+		if("backAddUser".equals(opr)){
+			String name = (String)request.getSession().getAttribute("userAccount");
+			String userAccount=request.getParameter("userAccount");
+			String userName = request.getParameter("userName");
+			String pwd=MD5Util.MD5(request.getParameter("pwd"));
+			String email = request.getParameter("email");
+			String acode = UUID.randomUUID().toString().replaceAll("-", "");
+			User user = new User();
+			user.setUserAccount(userAccount);
+			user.setUserName(userName);
+			user.setPassword(pwd);
+			user.setEmail(email);
+			user.setAcode(acode);
+			user.setStatus(1);
+			user.setStage(0);
+			user.setCreatedBy(name);
+			int count = 0;
+			try {
+				count = userService.addBackUser(user);
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+			out.print(count);
 		}
 	}
 

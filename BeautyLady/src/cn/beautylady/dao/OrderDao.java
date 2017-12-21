@@ -52,4 +52,11 @@ public interface OrderDao {
 	 * @return 订单详情
 	 */
 	public OrderDetail getOrderDetailById(Integer id) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	/**
+	 * 修改订单状态
+	 * @param orderId
+	 * @param status
+	 * @return
+	 */
+	public int updateOrderStatus(int orderId,int status);
 }

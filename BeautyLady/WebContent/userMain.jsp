@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="main col-10">
     <%@include file="element_page/header.jsp" %>
         <div class="main_info row">
-            <div class="main_text row col-11 text-center" style="min-height:390px">
+            <div class="main_text row col-11 text-center" style="min-height:540px">
             <c:if test="${not empty orderList }">
     	<c:forEach items="${orderList }" var="order">
     	<table class="table table-bordered">
@@ -60,10 +60,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <td>${order.orderNo }</td>
 		            <td>${order.costPrice }</td>
 		            <td>
-		            	<c:if test="${order.status == 0 }">未发货</c:if>
-   						<c:if test="${order.status == 1 }">已发货</c:if>
-   						<c:if test="${order.status == 2 }">已收货</c:if>
-   						<c:if test="${order.status == 3 }">已评价</c:if>
+		            	<c:if test="${order.status == 0 }">未支付</c:if>
+   						<c:if test="${order.status == 1 }">已支付</c:if>
+   						<c:if test="${order.status == 2 }">未发货</c:if>
+   						<c:if test="${order.status == 3 }">已发货</c:if>
+   						<c:if test="${order.status == 4 }">已收货</c:if>
 		            </td>
 		            <td>
 		            	<table class="table table-bordered">
@@ -98,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       		<tbody>
 				<tr>
 					<td>${orderDetail.orderNo }</td>
-					<td><img src="images/${orderDetail.picpath }"></td>
+					<td><img class="imgs" src="images/${orderDetail.picpath }"></td>
 					<td>${orderDetail.productName }</td>
 					<td>${orderDetail.colorName }</td>
 					<td>${orderDetail.sizeName }</td>

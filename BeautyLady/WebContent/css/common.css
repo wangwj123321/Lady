@@ -33,7 +33,7 @@ a:hover{
 .side_left{
     font-size: 1.5rem;
     height: 100%;
-    padding: 3rem 0 0;
+    padding: 3rem 0 0 1rem;
     background-color: #F4F3F3;
 }
 .logo{
@@ -58,6 +58,7 @@ a:hover{
     margin-top: 2rem;
     position: absolute;
     overflow-y: scroll;
+    padding-left:1rem;
 }
 #row_nav ul,#row_nav li{
     width: 100%;
@@ -74,7 +75,7 @@ a:hover{
     padding-top: 0.4rem;
 }
 
-.side_left,.main,.main_text,.side_right{
+.main,.main_text,.side_right{
     padding: 0;
     margin: 0;
 }

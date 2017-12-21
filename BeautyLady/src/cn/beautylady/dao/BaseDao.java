@@ -724,5 +724,20 @@ public class BaseDao {
         StringBuffer sql = new StringBuffer("SELECT * FROM " + tableName +" where "+primaryKey+"= ?");
         return selectOne(clazz, sql.toString(),key);
     }
-
+    /**
+     * 获取单一属性所有值的字符串数组
+     * @param sql SQL语句字符串
+     * @return 字符串数组
+     * @throws SQLException
+     */
+    public List<String> getcolumValues(String sql) throws SQLException{
+    	PreparedStatement pstmt = getStatement(sql, null);
+		ResultSet rs = pstmt.executeQuery();
+		List<String> strList = new ArrayList<String>();
+		while(rs.next()){
+			strList.add(rs.getString(1));
+		}
+		return strList;
+    	
+    }
 }

@@ -1,0 +1,20 @@
+#tab{
+    font-size: 14px;
+}
+[type="text"]{
+    width: 350px;
+    height: 25px;
+    line-height: 25px;
+}
+#addBtu{
+    background: url("../images/addAddressButton.png");
+    width: 63px;
+    height: 27px;
+    border: 0;
+    cursor:pointer;
+}
+form{
+	position:absolute;
+	left:0;
+	right:0;
+}

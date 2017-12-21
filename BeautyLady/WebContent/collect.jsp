@@ -10,30 +10,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-    <link rel="stylesheet" href="css/collect.css">
-    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<title>我的收藏</title>
+
+<!-- 新 Bootstrap4 核心 CSS 文件 -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="js/jquery-3.2.1.js"></script>
+
+<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="js/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!--导入font-awesome 图标字体库-->
+<link rel="stylesheet" href="css/font-awesome.css">
+<!-- 本页面css文件 -->
+<link rel="stylesheet" href="css/collect.css">
+<link rel="stylesheet" href="css/common.css">
+<!-- 本页面js文件 -->
+<script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/collect.js"></script>
 </head>
-<body>
-    <div id="top"><a href=""><img src="images/ochirly.png" alt=""></a>	<span>${sessionScope.loginUser } ,您好！&nbsp;&nbsp;<a href="servlet/UserServlet?opr=exitLogin">退出</a></span></div>
-    <div id="coll">
-    	<h4>收藏夹</h4>
-        <ul id="collect_list">
-        	<c:forEach var="collect" items="${userCollect }">
-	        	<li>
-	                <a href="servlet/ProductServlet?opr=productDetail&productNo=${collect.productNo }"><img src="images/${collect.picpath }" alt=""></a>
-	                <p>${collect.subClassesName }</p>
-	                <p>￥<span>${collect.tagPrice }</span></p>
-	                <p id="${collect.id }" class="del">删除</p>
-	            </li>
-        	</c:forEach>
-        </ul>
+<body class="container-fulid">
+<div class="contain row text-center">
+	<%@include file="element_page/usermain_side_left.jsp" %>
+    <div class="main col-10">
+    <%@include file="element_page/header.jsp" %>
+    	<div class="title"><h3>收藏夹</h3></div>
+        <div class="main_info row">
+            <div class="main_text row col-11 text-center" style="min-height:545px">
+            	<c:forEach var="collect" items="${userCollect }">
+			        <div id="collect_list" class="col-12 col-md-6 col-lg-4 col-xl-3">
+		                <a href="servlet/ProductServlet?opr=productDetail&productNo=${collect.productNo }"><img class="img-fluid img-thumbnail" src="images/${collect.picpath }" alt=""></a>
+		                <p>${collect.subClassesName }</p>
+		                <p>￥<span>${collect.tagPrice }</span></p>
+		                <p id="${collect.id }" class="del">删除</p>
+			        </div>
+		        </c:forEach>
+            </div>
+			<%@include file="element_page/side_right.jsp" %>
+        </div>
+		<%@include file="element_page/footer.jsp" %>
     </div>
-    <div id="fotter">
-        <h3>tyj有限公司</h3>
-        <p>隐私申明 联系我们</p>
-        <p>Copyright @ 2010-2017 广州赫基信息科技有限公司版权所有 增值电信业务经营许可证 粤B2-20100553 粤ICP备10229258-1号</p>
-    </div>
+</div>
 </body>
 </html>

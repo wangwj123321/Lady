@@ -6,6 +6,7 @@ import java.util.List;
 
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
+import cn.beautylady.entity.Page;
 
 public interface OrderService {
 	/**
@@ -57,4 +58,9 @@ public interface OrderService {
 	 * @return
 	 */
 	public boolean updateOrderStatus(int orderId,int status);
+	/**
+	 * 获取所有订单
+	 * @return
+	 */
+	public List<Order> getListOrder(Page<Order> page);
 }

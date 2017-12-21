@@ -14,9 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.beautylady.entity.BuyCar;
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
+import cn.beautylady.entity.Page;
 import cn.beautylady.entity.User_orders;
 import cn.beautylady.service.BuyCarService;
 import cn.beautylady.service.OrderService;
@@ -52,6 +55,7 @@ public class OrderServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out=response.getWriter();
 		String opr=request.getParameter("opr");
+		String json="";
 		if ("addOrder".equals(opr)) {
 			List<BuyCar> list=(List<BuyCar>) request.getSession().getAttribute("detailList");
 			List<OrderDetail> details=new ArrayList<>();
@@ -108,6 +112,20 @@ public class OrderServlet extends HttpServlet {
 			if (orderService.updateOrderStatus(id, status)) {
 				response.sendRedirect("../pay.jsp");
 			}
+		}else if("getListOrder".equals(opr)) {
+			int pageNo=Integer.parseInt(request.getParameter("pageNo"));
+			int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+			Page<Order> page=new Page<>();
+			page.setPageNo(pageNo);
+			page.setPageSize(pageSize);
+			orderService.getListOrder(page);
+			json=JSON.toJSONStringWithDateFormat(page,"yyyy-MM-dd hh:mm:ss");
+			out.print(json);
+		}else if("getUser_ordersByOrderNo".equals(opr)) {
+			String orderNo=request.getParameter("orderNo");
+			List<User_orders> list=user_ordersService.getUser_ordersByorderNo(orderNo);
+			json=JSON.toJSONString(list);
+			out.print(json);
 		}
 		out.flush();
 		out.close();

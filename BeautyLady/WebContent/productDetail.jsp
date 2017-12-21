@@ -34,94 +34,101 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="css/productDetail/default.css" />
 <link rel="stylesheet" href="css/productDetail/index.css" />
 </head>
-<body>
-<%@include file="element_page/header.jsp" %>
-<%@include file="element_page/side_left.jsp" %>
-<%@include file="element_page/side_right.jsp" %>
-<div class="product_show row" style="margin:0 2rem 0 20%">
-	<div class="col-8">
-		<div class="img_top row">
-			<c:forEach var="pics" items="${pics }">
-				<%-- <c:if test="${pics.picpath ==  pics.productNo.concat('_m_1.jpg') || pics.picpath ==  pics.productNo.concat('_m_2.jpg') || pics.picpath ==  pics.productNo.concat('_m_3.jpg') || pics.picpath ==  pics.productNo.concat('_m_4.jpg')}">
-					<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
-				</c:if> --%>
-				<c:if test="${pics.picpath.indexOf('_m_1.jpg')>0 || pics.picpath.indexOf('_m_2.jpg')>0 || pics.picpath.indexOf('_m_3.jpg')>0 || pics.picpath.indexOf('_m_4.jpg')>0}">
-					<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
-				</c:if>
-			</c:forEach>
-		</div>
-		<p style="font-size:1.5rem">细节展示</p>
-		<div class="img_section row">
-					<c:forEach var="pics" items="${pics }">
-				<c:if test="${pics.picpath.indexOf('_m_5.jpg')>0 || pics.picpath.indexOf('_m_6.jpg')>0 || pics.picpath.indexOf('_m_7.jpg')>0}">
-					<div class="col-4"><img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
-				</c:if>
-			</c:forEach>
-		</div>
-		<div class="img_bottom">
-			<div class="out">
-		        <div class="mag-eg-el-wrap img-fluid img-thumbnail">
-		            <div class="proportion">
-		                <div mag-thumb="inner" class="mag-eg-el">
-		                    <c:forEach var="pics" items="${pics }">
-						<c:if test="${pics.picpath.indexOf('_m_8.jpg')>0   }">
-							<img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" />
-						</c:if>
-					</c:forEach>
-		                </div>
-		                <div mag-zoom="inner" class="mag-eg-el">
-		                    <c:forEach var="pics" items="${pics }">
-						<c:if test="${pics.picpath ==  pics.productNo.concat('_b_8.jpg')  }">
-							<img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" />
-						</c:if>
-					</c:forEach>
-		                </div>
-		                <div class="filler"></div>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-	</div>
-	<div class="col-4">
-		<h4>${ext.subClassesName }</h4>
-		<h5>编号 &nbsp;&nbsp;${ext.productNo }</h5>
-		<p style="font-weight:bold;font-size:16px">￥${ext.tagPrice }</p>
-		<br/>
-		<br/>
-		<form action="" method="post">
-			<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
-			<input type="hidden" name="productNo" value=${ext.productNo }>
-			颜色：&nbsp;&nbsp;
-			<%-- <c:forEach var="color" items="${colors }" varStatus="status">
-				${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</c:forEach> --%>
-			<myTag:getSplitName varNo="colorNo" strName="${ext.colorName }" symbol="," strNo="${ext.colorNo }" varName="colorName">
-				${colorName }<input type="radio" name="colorNo" value="${colorNo }">
-					<a href="servlet/ProductServlet?opr=productDetail&proNo=${ext.productNo }&colorNo=${colorNo }">
-					<img class="img-fluid" src="images/${ext.productNo }/${colorNo }/${ext.productNo }_list_${colorNo}.jpg" />
-					</a>
-			</myTag:getSplitName>
-			<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
-			<input type="hidden" name="productNo" value=${ext.productNo }>
-			<input type="hidden" name="productName" value=${ext.productName }>
-			<input type="hidden" name="subClassesName" value=${ext.subClassesName }>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			尺码：&nbsp;&nbsp;
-			<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
-				${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</c:forEach> --%>
-			<myTag:getSplitName varNo="sizeNo" strName="${ext.sizeName }" symbol="," strNo="${ext.sizeNo }" varName="sizeName">
-				${sizeName }<input type="radio" name="sizeNo" value="${colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
-			</myTag:getSplitName>
-		</form>
-		<div id="add_car">
-			<a id="add_car"></a>
-		</div>
-		<div id="add_collect">收藏</div>
-	</div>
+<body class="container-fulid">
+<div class="contain row text-center">
+	<%@include file="element_page/side_left.jsp" %>
+    <div class="main col-10">
+    <%@include file="element_page/header.jsp" %>
+        <div class="main_info row">
+            <div class="main_text row col-11 text-center">
+            	<div class="col-8">
+					<div class="img_top row">
+						<c:forEach var="pics" items="${pics }">
+							<%-- <c:if test="${pics.picpath ==  pics.productNo.concat('_m_1.jpg') || pics.picpath ==  pics.productNo.concat('_m_2.jpg') || pics.picpath ==  pics.productNo.concat('_m_3.jpg') || pics.picpath ==  pics.productNo.concat('_m_4.jpg')}">
+								<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
+							</c:if> --%>
+							<c:if test="${pics.picpath.indexOf('_m_1.jpg')>0 || pics.picpath.indexOf('_m_2.jpg')>0 || pics.picpath.indexOf('_m_3.jpg')>0 || pics.picpath.indexOf('_m_4.jpg')>0}">
+								<div class="col-6"><img class="img-fluid img-thumbnail" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
+							</c:if>
+						</c:forEach>
+					</div>
+					<p style="font-size:1.5rem">细节展示</p>
+					<div class="img_section row">
+								<c:forEach var="pics" items="${pics }">
+							<c:if test="${pics.picpath.indexOf('_m_5.jpg')>0 || pics.picpath.indexOf('_m_6.jpg')>0 || pics.picpath.indexOf('_m_7.jpg')>0}">
+								<div class="col-4"><img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" /></div>
+							</c:if>
+						</c:forEach>
+					</div>
+					<div class="img_bottom">
+						<div class="out">
+					        <div class="mag-eg-el-wrap img-fluid img-thumbnail">
+					            <div class="proportion">
+					                <div mag-thumb="inner" class="mag-eg-el">
+					                    <c:forEach var="pics" items="${pics }">
+									<c:if test="${pics.picpath.indexOf('_m_8.jpg')>0   }">
+										<img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" />
+									</c:if>
+								</c:forEach>
+					                </div>
+					                <div mag-zoom="inner" class="mag-eg-el">
+					                    <c:forEach var="pics" items="${pics }">
+									<c:if test="${pics.picpath ==  pics.productNo.concat('_b_8.jpg')  }">
+										<img class="img-fluid" src="images/${pics.productNo }/${pics.colorNo }/${pics.picpath }" />
+									</c:if>
+								</c:forEach>
+					                </div>
+					                <div class="filler"></div>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+				<div class="col-4">
+					<h4>${ext.subClassesName }</h4>
+					<h5>编号 &nbsp;&nbsp;${ext.productNo }</h5>
+					<p style="font-weight:bold;font-size:16px">￥${ext.tagPrice }</p>
+					<br/>
+					<br/>
+					<form action="" method="post">
+						<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
+						<input type="hidden" name="productNo" value=${ext.productNo }>
+						颜色：&nbsp;&nbsp;
+						<%-- <c:forEach var="color" items="${colors }" varStatus="status">
+							${color.colorName }<input type="radio" name="colorNo" value="${color.colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
+						</c:forEach> --%>
+						<myTag:getSplitName varNo="colorNo" strName="${ext.colorName }" symbol="," strNo="${ext.colorNo }" varName="colorName">
+							${colorName }<input type="radio" name="colorNo" value="${colorNo }">
+								<a href="servlet/ProductServlet?opr=productDetail&proNo=${ext.productNo }&colorNo=${colorNo }">
+								<img class="img-fluid" src="images/${ext.productNo }/${colorNo }/${ext.productNo }_list_${colorNo}.jpg" />
+								</a>
+						</myTag:getSplitName>
+						<input type="hidden" name="tagPrice" value=${ext.tagPrice }>
+						<input type="hidden" name="productNo" value=${ext.productNo }>
+						<input type="hidden" name="productName" value=${ext.productName }>
+						<input type="hidden" name="subClassesName" value=${ext.subClassesName }>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						尺码：&nbsp;&nbsp;
+						<%-- <c:forEach var="size" items="${sizes }" varStatus="status">
+							${size.sizeName }<input type="radio" name="sizeNo" value="${size.sizeNo }" <c:if test="${status.index==0 }">checked</c:if>>
+						</c:forEach> --%>
+						<myTag:getSplitName varNo="sizeNo" strName="${ext.sizeName }" symbol="," strNo="${ext.sizeNo }" varName="sizeName">
+							${sizeName }<input type="radio" name="sizeNo" value="${colorNo }" <c:if test="${status.index==0 }">checked</c:if>>
+						</myTag:getSplitName>
+					</form>
+					<div id="add_car">
+						<a id="add_car"></a>
+					</div>
+					<div id="add_collect">收藏</div>
+				</div>
+            </div>
+			<%@include file="element_page/side_right.jsp" %>
+        </div>
+		<%@include file="element_page/footer.jsp" %>
+    </div>
 </div>
 	<div id="add_car_hint">
 		<h3>加入购物车成功</h3>

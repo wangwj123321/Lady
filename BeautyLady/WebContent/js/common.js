@@ -1,25 +1,24 @@
 $(function () {
     /*导航栏点击下拉弹窗*/
     $(".menu").click(function () {
-        $(".top-menu ul").slideToggle("slow",function () {
+        $(".main_top ul").slideToggle("slow",function () {
         })
     });
     $(window).resize(function () {
         if($(document).width()>=991){
-            $(".top-menu ul").css("display","block");
+            $(".main_top ul").css("display","block");
         }else{
-        	$(".top-menu ul").css("display","none");
+        	$(".main_top ul").css("display","none");
         }
     });
-  /*  随页面滚动的内容*/
-      FixPosition = function () {
-          $(".side_right").css("top",$(document).scrollTop()+200+"px");
-          $("#products").css("top",$(document).scrollTop()+150+"px");
-      };
-    FixPosition();
-    $(window).scroll(function () {
-        FixPosition();
-    });
+    /*  随页面滚动的内容*/
+    FixPosition = function () {
+        $(".side_right ul").css("top",$(".main").scrollTop()+50+"px");
+    };
+  FixPosition();
+  $(".main").scroll(function () {
+      FixPosition();
+  });
     /*改变右侧框样式*/
     $(".side_right ul li span:eq(0)").hover(function () {
         $(this).removeClass("fa-user-circle-o").addClass("fa-user-circle").parent().siblings().show();
@@ -51,7 +50,11 @@ $(function () {
     },function () {
         $(this).removeClass("fa-envelope").addClass("fa-envelope-o").parent().siblings().hide();
     });
-   /* 轮播*/
+    $(".side_right ul li span:eq(6)").hover(function () {
+        $(this).parent().siblings().show();
+    },function () {
+        $(this).parent().siblings().hide();
+    });
 });
 
 

@@ -54,64 +54,20 @@
        		}
     	}
     %>
-<body>
-<%@include file="element_page/header.jsp" %>
-<nav class="pagechange text-right">
-<span>当前页：${ProductPage.pageNo }/${ProductPage.pageCount }</span>
-	<ul class="pagination">
-		<c:if test="${ProductPage.pageNo >1}">
-			<li>
-				<a class="btn btn-sm btn-outline-secondary" aria-label="Previous" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo-1}">
-		              <span aria-hidden="true">&laquo;</span>
-		         </a>
-	   	 	</li>
-		</c:if>
-	     <c:choose>
-	     	 <c:when test="${ProductPage.pageCount <=5}">
-				<c:forEach var="index" begin="1" end="${ProductPage.pageCount}">
-					<li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
-				</c:forEach>
-			</c:when>
-			<c:when test="${ProductPage.pageCount >5 && ProductPage.pageNo<4 }">
-				<c:forEach var="index" begin="1" end="${ProductPage.pageNo+2 }">
-					 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
-				</c:forEach>
-				 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount }">${ProductPage.pageCount }</a></li>
-			</c:when>
-			<c:when test="${ProductPage.pageCount >5 && ProductPage.pageNo>=4 && (ProductPage.pageNo+2<ProductPage.pageCount )}">
-			     <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">1</a></li>
-					<c:forEach var="index" begin="${ProductPage.pageNo-2}" end="${ProductPage.pageNo+2 }">
-						 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
-					</c:forEach>
-				 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageCount }">${ProductPage.pageCount }</a></li>
-			</c:when>
-			<c:when test="${ProductPage.pageCount >5 && ProductPage.pageNo>=4 && (ProductPage.pageNo+2>=ProductPage.pageCount) }">
-				<li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=1">1</a></li>
-				<c:forEach var="index" begin="${ProductPage.pageNo-2}" end="${ProductPage.pageCount }">
-					 <li><a class="btn btn-sm btn-outline-secondary" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${index }">${index}</a></li>
-				</c:forEach>
-			</c:when>
-	     </c:choose>
-	     <c:if test="${ProductPage.pageNo<ProductPage.pageCount }">
-             <li>
-	            <a class="btn btn-sm btn-outline-secondary" aria-label="Next" href="servlet/ProductServlet?opr=getListProduct&key=${key }&value=${value}&order=${order}&pageNO=${ProductPage.pageNo+1}">
-	                <span aria-hidden="true">&raquo;</span>
-	            </a>
-	        </li>
-	     </c:if>
-	</ul>
-</nav>
-<%@include file="element_page/side_left.jsp" %>
-<div class="product-info row text-center">
- <c:forEach var="product" items="${ProductPage.list }">
-	 <div class="col-6 col-md-4 col-lg-3 col-xl-3"><a href="servlet/ProductServlet?opr=productDetail&proNo=${product.productNo }&colorNo=-1">
-	 	<img class="img-fluid img-thumbnail" src="images/${product.picpath }" alt=""></a>
-	 	<div>${product.productName }</div>
-	 	<div>${product.productNo }</div>
-	 	<span class="price">￥${product.tagPrice}</span>
-	 </div>
-</c:forEach>
+<body class="container-fluid">
+<div class="contain row text-center">
+	<%@include file="element_page/side_left.jsp" %>
+    <div class="main col-10">
+    <%@include file="element_page/header.jsp" %>
+        <div class="main_info row">
+            <div class="main_text row col-11 text-center">
+				<%@include file="element_page/carousel.jsp" %>
+				<%@include file="element_page/carousel.jsp" %>
+            </div>
+			<%@include file="element_page/side_right.jsp" %>
+        </div>
+		<%@include file="element_page/footer.jsp" %>
+    </div>
 </div>
-<%@include file="element_page/side_right.jsp" %>
 </body>
 </html>

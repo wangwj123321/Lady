@@ -100,7 +100,7 @@ public class ProductServlet extends HttpServlet {
 			application.setAttribute("order", order);
 			application.setAttribute("key", key);
 			application.setAttribute("value", value);
-			response.sendRedirect("../index.jsp");
+			response.sendRedirect("../product.jsp");
 		}else if("productDetail".equals(opr)) {
 			/*Integer proId=Integer.parseInt(request.getParameter("proId"));
 			Product product=productService.getProductById(proId);

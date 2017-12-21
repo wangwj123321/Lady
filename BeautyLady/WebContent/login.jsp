@@ -50,9 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  			location.href="index.jsp";
  		});
 	});
-	function myReload() {  
-	    document.getElementById("CreateCheckCode").src = document  
-	            .getElementById("CreateCheckCode").src;
+	function myReload() { 
+		 document.getElementById("CreateCheckCode").src = document  
+         .getElementById("CreateCheckCode").src  
+         + "?nocache=" + new Date().getTime();   
 	             
 	}
 </script>
@@ -68,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	<input name="checkCode" type="text" id="checkCode" title="验证码区分大小写"  
 	                size="8" ,maxlength="4" placeholder="验证码"/>  
 	            	<img src="PictureCheckCode" id="CreateCheckCode" align="middle">  
-	            	<a href="" onclick="myReload()"> 看不清,换一个</a>
+	            	<a onclick="myReload()"> 看不清,换一个</a>
                 </div>
 			<input type="button" value="登陆">
 		 <p><input type="checkbox" name="pass" value="true"><span style="color:grey;font-size:12px">15天免登陆</span></p>

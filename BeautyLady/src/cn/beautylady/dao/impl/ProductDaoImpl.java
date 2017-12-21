@@ -18,8 +18,8 @@ import cn.beautylady.entity.Product;
  */
 public class ProductDaoImpl extends BaseDao implements ProductDao{
 	@Override
-	public <T> int addProduct(T t) throws SQLException {
-		return insertData(t.getClass());
+	public <T> int addProduct(T t) throws SQLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		return insert(t);
 	}
 
 	@Override
@@ -98,5 +98,16 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		String sql = "SELECT * FROM pic WHERE productNo=? AND colorNo=?";
 		return select(Pic.class, sql, productNo,colorNo);
+	}
+
+	@Override
+	public <T> T getProperty(Class<T> clazz, Integer id) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException, SQLException {
+		T t = selectOne(clazz, id);
+		return t;
+	}
+
+	@Override
+	public int updateProperty(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException {
+		return update(obj);
 	}
 }

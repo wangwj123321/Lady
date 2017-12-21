@@ -12,8 +12,6 @@ $(function() {
 			+ "<td class='inline laydate-icon' id='start' style='width:150px; margin-right:10px;'></td>"
 			+ "<td>结束日期</td><td class='inline laydate-icon' id='end' style='width:150px;'></td>"
 			+ "</tr><tr>"
-			+ "<td>商品名称</td><td><input type='text' name='productName'></td>"
-			+ "<td>订单编号</td><td><input type='text' name='orderNo' readonly='true' value='"+ getOrderNo()+"'></td>"
 			+ "</tr><tr>"
 			+ "<td><button><a href='javaScript:void(0)' onclick='getStorageOrderDetail()'>新增单据</a></button></td>"
 			+ "<td><button>搜索</button></td>" + "</tr></table>"

@@ -3,152 +3,261 @@
     font-family: 'Buda-Light';
     src:url(../fonts/Buda-Light.ttf) format('truetype');
 }
-/*全局样式*/
-h1,h2,h3,h4,h5,h6,p,ul,body{
-    padding: 0;
+body {
     margin: 0;
+    padding: 0;
+    font-size: 15px;
+    font-family: 幼圆,serif;
+}
+ul li{
+    list-style: none;
 }
 a{
     color: black;
 }
+i{
+	color:red;	
+}
 a:hover{
+    color: #ff00ab;
     text-decoration: none;
 }
-body{
-    font-size: 15px;
-    font-family: 幼圆,serif;
+.contain{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    width: 100%;
+    height:100%;
 }
-i{
-    color:  red;
-    font: bolder 0.7rem 宋体;
-}
-/*头部样式*/
-.logo a{
-    color: #ff3144;
-    font-size: 3.5rem;
-    font-weight: bold;
-    font-family: 'Buda-Light',serif;
+/*左侧页面*/
+.side_left{
+    font-size: 1.5rem;
+    height: 100%;
+    padding: 3rem 0 0 1rem;
+    background-color: #F4F3F3;
 }
 .logo{
-    padding: 1rem;
+    margin-top: 2rem;
+    height: 3rem;
+    font-size: 2.1rem;
+
+}
+.logo a{
+    color: #ff3b00;
+    font-family: Buda-Light, serif;
 }
 .logo span{
-    font-size: 0.8em;
-    color: #ff5ec6;
+    font-size:0.7em;
+    color: #ff41b1;
 }
-.top-menu{
-    margin-top: 2rem;
-}
-.top-menu span{
-    display: none;
-    font-size: 2.5rem;
-    margin-right: 3rem;
-    color: #ffa134;
-}
-.top-menu ul li{
-    display: inline-block;
-    padding: 0.5rem 1rem;
-}
-.top-menu ul li a:active{
-    color: #ff6a28;
-}
-.top-menu ul li a:hover{
-    color: #ff1fef;
-}
-.top-menu ul li a{
-    font-size: 1.2rem;
-    color: #747474;
-}
-#products{
-    position: absolute;
+#row_nav{
+    top: 8rem;
+    bottom: 0;
     left: 0;
-    width: 20%;
+    right: 0;
+    margin-top: 2rem;
+    position: absolute;
+    overflow-y: scroll;
+    padding-left:1rem;
 }
-#products a{
-    display: block;
+#row_nav ul,#row_nav li{
+    width: 100%;
     text-align: center;
 }
-#products div >a{
-    padding: 0.5rem 0;
+#row_nav>div>a{
+    font-size: 1.3rem;
+    display: block;
+    font-weight: bolder;
 }
-#products div div a{
-    font-size: 0.8rem;
+#row_nav>div>div a{
+    font-size: 0.9rem;
+    display: block;
+    padding-top: 0.4rem;
 }
-/*右侧导航*/
+
+.main,.main_text,.side_right{
+    padding: 0;
+    margin: 0;
+}
+/*右侧页面*/
+.main{
+    overflow: auto;
+    overflow-x: hidden;
+}
+/*
+右侧头部*/
+.main_top{
+    font-size: 1.2rem;
+    line-height: 3rem;
+    height: 3rem;
+    background-color: #F4F3F3;
+}
+.main_top .menu{
+    font-size: 2rem;
+    display: none;
+    line-height: 3rem;
+    color: #ff1343;
+    padding-right: 0.5rem;
+    cursor: pointer;
+}
+.main_top ul{
+    display: block;
+}
+.main_top ul li{
+    display: inline-block;
+    padding: 0 1.3rem;
+}
+#pics{
+    padding: 0;
+    width: 100%;
+    background-color: #F4F3F3;
+    border: solid 1px white;
+}
+.pagechange{
+	position:absolute;
+	top:0;
+	width:100%;
+    height: 3rem;
+	margin:0;
+	padding:0;
+}
+.pagechange ul{
+	position:absolute;
+	right:0;
+}
+.main_info{
+    width: 100%;
+    margin: 0;
+}
+.product_info{
+	margin-top:3rem;
+}
 .side_right{
-    position: absolute;
-    right: 2px;
+    position: relative;
+    background-color: #F4F3F3;
+}
+.side_right ul{
+	position:absolute;
+    padding: 0;
+    margin: 0;
+}
+.side_right ul form,.side_right ul i{
+	display:none;
 }
 .side_right ul li{
+	position:absolute
     list-style: none;
-    text-align: right;
-    width: 14px;
-    height: 30px;
-    opacity: 0.7;
-    position: relative;
+    margin-top: 1rem
 }
-.side_right ul li i,.side_right ul li form{
-    position: absolute;
-    right: 30px;
+.side_right i,.side_right form{
+	width:160px;
     display: none;
-    width: 160px;
+    position:absolute;
+    right:30px;
 }
 .side_right ul li input{
-    width: 100px;
+	width:100px;
 }
-.side_right ul li span{
-    position: absolute;
-    right: 0;
+.side_right span{
+	min-width:40px;
+	height:100%;
+    font-size: 2rem;
+    color: #6610f2;
 }
-@media(max-width: 1080px){
-    .top-menu ul{
+.footer{
+    width: 100%;
+    border-left: solid 1px white;
+    font-size: 1rem;
+    height: 14rem;
+    border-top: solid 1px white;
+    background-color: #F4F3F3;
+}
+.footer ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+@media (max-width: 991px) {
+    .logo{
+        font-size: 1.8rem;
+    }
+    #row_nav>div>a{
+        font-size: 1.3rem;
         display: block;
     }
-}
-@media(max-width: 991px){
-    .top-menu span{
-        display: block;
-        text-align: left;
-        cursor: pointer;
-        position: relative;
+    /*
+    右侧头部*/
+    .main_top{
+        font-size: 1rem;
     }
-    .top-menu ul{
+    .main_top .menu{
+        display: block;
+    }
+    .main_top ul{
         display: none;
         position: absolute;
-        width: 100%;
-        z-index: 99;
+        z-index:99;
         left: 0;
-        margin: 0.5rem 0;
-        background-color:rgba(29, 28, 24, 0.93);
-        border: 0;
+        width: 100%;
+        background-color:#F4F3F3;
     }
-    .top-menu ul li{
+    .main_top ul li{
         display: block;
-        float: none;
-        text-align: center;
+        float:none;
+        text-align:center;
     }
-    .top-menu ul li a,.top-menu ul li span{
-        color:white;
-        display:block;
-        margin:0;
-        background:none;
-        border:none;
-        padding:0.4em;
-        font-size:1em;
+    .side_right span{
+        font-size: 1.6rem;
     }
 }
-@media(max-width: 640px){
-    .logo a{
-        font-size: 3rem;
+@media(max-width: 768px){
+    .logo{
+        font-size: 1.3rem;
+    }
+    #row_nav>div>a{
+        font-size: 1rem;
+    }
+    /*
+    右侧头部*/
+    .main_top{
+        font-size: 1rem;
+    }
+    .main_top .menu{
+        display: block;
+    }
+    .main_top ul{
+        display: none;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+    .main_top ul li{
+        display: block;
+    }
+    .side_right span{
+        font-size: 1.6rem;
     }
 }
-@media(max-width:480px ){
-    .logo a{
-        font-size: 2.5rem;
+@media (max-width: 640px) {
+    .logo{
+        font-size: 1rem;
+    }
+    .side_right span,.footer{
+        font-size: 1.4rem;
+    }
+        .footer{
+    	font-size: 1rem;
     }
 }
-@media(max-width: 320px){
-    .logo a{
-        font-size: 2rem;
+@media (max-width: 480px){
+    #row_nav>div>a{
+        font-size: 0.8rem;
+        display: block;
+    }
+    .side_right span,{
+        font-size: 1.2rem;
+    }
+    .footer{
+    	font-size: 0.8rem;
     }
 }

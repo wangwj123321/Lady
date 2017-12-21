@@ -50,4 +50,11 @@ public interface OrderService {
 	 * @return 订单详情
 	 */
 	public OrderDetail getOrderDetailById(Integer id) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	/**
+	 * 修改订单状态
+	 * @param orderId
+	 * @param status
+	 * @return
+	 */
+	public boolean updateOrderStatus(int orderId,int status);
 }

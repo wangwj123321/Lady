@@ -10,9 +10,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/index.css">
+<title>个人信息管理</title>
+<!-- 新 Bootstrap4 核心 CSS 文件 -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="js/jquery-3.2.1.js"></script>
+
+<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="js/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!--导入font-awesome 图标字体库-->
+<link rel="stylesheet" href="css/font-awesome.css">
+<!-- 本页面css文件 -->
 <link rel="stylesheet" href="css/userMain.css">
+<link rel="stylesheet" href="css/common.css">
+<!-- 本页面js文件 -->
+<script type="text/javascript" src="js/common.js"></script>
 </head>
 <%
 	String loginUser=(String)session.getAttribute("loginUser");
@@ -20,164 +37,131 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		response.sendRedirect("login.jsp");
 	}
 %>
-<body>
-	<div id="left">
-        <div><img src="images/logo.png" alt=""></div>
-        <div id="side_bar">
-            <ul>
-                <li><a href="servlet/ProductServlet?opr=getListProduct&order=DESC">首页</a></li>
-                <li><a href="servlet/OrderServlet?opr=getOrderByUser">我的订单</a></li>
-                <li><a href="servlet/BuyCarServlet?opr=getUserCar&userAccount=${userAccount }" target="_blank">我的购物车</a></li>
-                <li id="quarter">
-                	<a href="servlet/UserServlet?opr=UserInfo">个人资料</a>
-                	<ul id="quar">
-                		<li><a href="servlet/UserServlet?opr=UserInfo">个人信息</a></li>
-                		<li><a href="servlet/AddressServlet?opr=getAllAddress">我的收货地址</a></li>
-                		<li><a href="servlet/UserServlet?opr=showModifyUser">个人信息修改</a></li>
-                		<!-- <li><a href="servlet/ProductServlet?opr=getListProduct&key=QUARTER&value=4&order=ASC">冬季</a></li> -->
-                	</ul>
-                </li>
-                <li><a href="servlet/CollectServlet?opr=getListCollect" target="_blank">我的收藏</a></li>
-                <li>${loginUser }，<a href="servlet/UserServlet?opr=exitLogin">退出登录</a></li>
-            </ul>
-        </div>
-    </div>
-    <div id="right">
-    <c:if test="${not empty orderList }">
+<body class="container-fulid">
+<div class="contain row text-center">
+	<%@include file="element_page/usermain_side_left.jsp" %>
+    <div class="main col-10">
+    <%@include file="element_page/header.jsp" %>
+        <div class="main_info row">
+            <div class="main_text row col-11 text-center" style="min-height:540px">
+            <c:if test="${not empty orderList }">
     	<c:forEach items="${orderList }" var="order">
-			<table class="tag" cellspacing="0">
-				<tr class="tagfirst">
-					<td id="td1" colspan="2">订单号：${order.orderNo }</td>
-					<td>总价：${order.costPrice }</td>
-   					<td>状态：
-   						<c:if test="${order.status == 0 }">未发货</c:if>
-   						<c:if test="${order.status == 1 }">已发货</c:if>
-   						<c:if test="${order.status == 2 }">已收货</c:if>
-   						<c:if test="${order.status == 3 }">已评价</c:if>
-   					</td>
-					<td>操作</td>
-				</tr>
-   				<c:forEach items="${order.user_Orders }" var="orderDetail">
-   					<tr>
-   						<td><img alt="" class="imgs" src="images/${orderDetail.picpath }"></td>
-   						<td>
-   							<div>商品名称：${orderDetail.productName } ${orderDetail.productNo }</div>
-   							<div>颜色：${orderDetail.colorName } 尺寸：${orderDetail.sizeName }</div>
-   						</td>
-   						<td>单价：${orderDetail.tagPrice }</td>
-   						<td>数量：${orderDetail.count }</td>
-   						<td><a href="servlet/OrderServlet?opr=OrderDetail&id=${orderDetail.id }" >订单详情</a></td>
-   					</tr>
-   				</c:forEach>
-			</table>
-    	</c:forEach>
+    	<table class="table table-bordered">
+		    <thead>
+		        <tr>
+		            <th>订单号</th>
+		            <th>总价</th>
+		            <th>状态</th>
+		            <th>操作</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <td>${order.orderNo }</td>
+		            <td>${order.costPrice }</td>
+		            <td>
+		            	<c:if test="${order.status == 0 }">未支付</c:if>
+   						<c:if test="${order.status == 1 }">已支付</c:if>
+   						<c:if test="${order.status == 2 }">未发货</c:if>
+   						<c:if test="${order.status == 3 }">已发货</c:if>
+   						<c:if test="${order.status == 4 }">已收货</c:if>
+		            </td>
+		            <td>
+		            	<table class="table table-bordered">
+		            		<thead>
+		            			<tr><th>图片</th><th>商品名称</th><th>颜色</th><th>尺寸</th><th>单价</th><th>数量</th><th>订单详情</th></tr>
+		            		</thead>
+		            		<tbody>
+            				<c:forEach items="${order.user_Orders }" var="orderDetail">
+            					<tr>
+            						<td><img alt="" class="imgs" src="images/${orderDetail.picpath }"></td>
+            						<td>${orderDetail.productName }${orderDetail.productNo }</td>
+            						<td>${orderDetail.colorName }</td>
+            						<td>${orderDetail.sizeName }</td>
+            						<td>${orderDetail.tagPrice }</td>
+            						<td>${orderDetail.count }</td>
+            						<td><a href="servlet/OrderServlet?opr=OrderDetail&id=${orderDetail.id }" >查看详情</a></td>
+            					</tr>
+            				</c:forEach>
+		            		</tbody>
+		            	</table>
+		            </td>
+		        </tr>
+		    </tbody>
+		</table>
+		</c:forEach>
     </c:if>
     	<c:if test="${not empty orderDetail }">
-    		<table class="tag" cellspacing="0">
-    			<tr>
-    				<td>订单号：</td>
-    				<td>${orderDetail.orderNo }</td>
-    			</tr>
-    			<tr>
-    				<td>图片：</td>
-    				<td><img src="images/${orderDetail.picpath }"></td>
-    			</tr>
-    			<tr>
-    				<td>颜色：</td>
-    				<td>${orderDetail.colorName }</td>
-    			</tr>
-    			<tr>
-    				<td>尺寸：</td>
-    				<td>${orderDetail.sizeName }</td>
-    			</tr>
-    			<tr>
-    				<td>商品名称：</td>
-    				<td>${orderDetail.productName }</td>
-    			</tr>
-    			<tr>
-    				<td>单价：</td>
-    				<td>${orderDetail.tagPrice }</td>
-    			</tr>
-    			<tr>
-    				<td>数量：</td>
-    				<td>${orderDetail.count }</td>
-    			</tr>
-    			<tr>
-    				<td>总价：</td>
-    				<td>${orderDetail.amount }</td>
-    			</tr>
-    			<tr>
-    				<td>送货地址：</td>
-    				<td>${orderDetail.address }</td>
-    			</tr>
-    			<tr>
-    				<td>收货人：</td>
-    				<td>${orderDetail.name }</td>
-    			</tr>
-    			<tr>
-    				<td>收货人电话：</td>
-    				<td>${orderDetail.phone }</td>
-    			</tr>
-    		</table>
+        <table class="table table-bordered">
+      		<thead>
+      			<tr><th>订单号</th><th>图片</th><th>商品名称</th><th>颜色</th><th>尺寸</th><th>单价</th><th>数量</th><th>总价</th><th>送货地址</th><th>收货人</th><th>收货电话</th></tr>
+      		</thead>
+      		<tbody>
+				<tr>
+					<td>${orderDetail.orderNo }</td>
+					<td><img class="imgs" src="images/${orderDetail.picpath }"></td>
+					<td>${orderDetail.productName }</td>
+					<td>${orderDetail.colorName }</td>
+					<td>${orderDetail.sizeName }</td>
+					<td>${orderDetail.tagPrice }</td>
+					<td>${orderDetail.count }</td>
+					<td>${orderDetail.amount }</td>
+					<td>${orderDetail.address }</td>
+					<td>${orderDetail.name }</td>
+					<td>${orderDetail.phone }</td>
+				</tr>
+      		</tbody>
+      	</table>
     	</c:if>
     	<c:if test="${not empty user }">
-    		<table class="tag" cellspacing="0">
-    			<tr>
-    				<td>登录名：</td>
-    				<td>${user.userAccount }</td>
-    			</tr>
-    			<tr>
-    				<td>真实名：</td>
-    				<td>${user.userName }</td>
-    			</tr>
-    			<tr>
-    				<td>邮箱：</td>
-    				<td>${user.email }</td>
-    			</tr>
-    			<tr>
-    				<td>状态：</td>
-    				<td>
-						<c:if test="${user.status == 0 }">未激活</c:if>
-						<c:if test="${user.status == 1 }">激活</c:if>
-						<c:if test="${user.status == 2 }">冻结</c:if>
-					</td>
-    			</tr>
-    		</table>
+    	    <table class="table table-bordered">
+	      		<thead>
+	      			<tr><th>登录名</th><th>真实名</th><th>邮箱</th><th>状态</th></tr>
+	      		</thead>
+	      		<tbody>
+					<tr>
+						<td>${user.userAccount }</td>
+						<td>${user.userName }</td>
+						<td>${user.email }</td>
+						<td>
+							<c:if test="${user.status == 0 }">未激活</c:if>
+							<c:if test="${user.status == 1 }">激活</c:if>
+							<c:if test="${user.status == 2 }">冻结</c:if>
+						</td>
+					</tr>
+	      		</tbody>
+	      	</table>
     	</c:if>
     	<c:if test="${not empty allAddress }">
-    		<div style="margin-bottom:10px;"><a href="addaddress.jsp">添加地址</a></div>
-    		<c:forEach items="${allAddress }" var="address">
-    			<table class="tag" cellspacing="0">
-	    			<tr>
-	    				<td>名字：</td>
-	    				<td>${address.name }</td>
-	    			</tr>
-	    			<tr>
-	    				<td>地址：</td>
-	    				<td>${address.address }</td>
-	    			</tr>
-	    			<tr>
-	    				<td>电话：</td>
-	    				<td>${address.phone }</td>
-	    			</tr>
-	    			<tr>
-	    				<td>是否默认：</td>
-	    				<td>
+    		<table class="table table-bordered">
+	      		<thead>
+	      			<tr><th>名字</th><th>地址</th><th>电话</th><th>是否默认</th><th>操作</th></tr>
+	      		</thead>
+	      		<tbody>
+    			<c:forEach items="${allAddress }" var="address">
+					<tr>
+						<td>${address.name }</td>
+						<td>${address.address }</td>
+						<td>${address.phone }</td>
+						<td>
 	    					<c:if test="${address.isDefault == 1 }">默认地址</c:if>
 	    					<c:if test="${address.isDefault == 0 }">不是默认</c:if>
-	    				</td>
-	    			</tr>
-	    			<tr>
-	    				<td>操作：</td>
-	    				<td>
-	    					<a href="servlet/AddressServlet?opr=deleteAddress&id=${address.id }">删除</a>
+						</td>
+						<td>
+							<a href="servlet/AddressServlet?opr=deleteAddress&id=${address.id }">删除</a>
 	    					<a href="servlet/AddressServlet?opr=modifys&id=${address.id }">修改</a>
-	    				</td>
-	    			</tr>
-    			</table>
-    			<br>
-    		</c:forEach>
+						</td>
+					</tr>
+					</c:forEach>
+	      		</tbody>
+			</table>
+			<div><a href="addaddress.jsp"><strong>添加地址</strong></a></div>
     	</c:if>
+            </div>
+			<%@include file="element_page/side_right.jsp" %>
+        </div>
+		<%@include file="element_page/footer.jsp" %>
     </div>
+</div>
 </body>
 </html>

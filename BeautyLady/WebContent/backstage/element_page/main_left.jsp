@@ -59,7 +59,7 @@
                                     <a class="dropdown-item" href="javascirpt:void(0)" onclick="return initProduct(1,'Series')">系列</a>
                                 </div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="#">添加新商品</a></li>
+                            <li class="nav-item"><a class="nav-link" href="javaScript:void(0)" onclick="addProduct()">添加新商品</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">商品分类</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">用户评论</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">商品回收站</a></li>

@@ -63,16 +63,10 @@ public class Series {
 		this.modifyDate = modifyDate;
 	}
 	@Override
-    public String toString() {
-        return "Series{" +
-        		"id='" + id + '\'' +
-                "seriesNo='" + seriesNo + '\'' +
-                ", seriesName='" + seriesName + '\'' +
-                ", status=" + status +
-                ", createdBy='" + createdBy + '\'' +
-               ", createDate=" + createDate.toString() +
-                ", modifyBy='" + modifyBy + '\'' +
-                ", modifyDate=" + modifyDate.toString() +
-                '}';
-    }
+	public String toString() {
+		return "Series [id=" + id + ", seriesNo=" + seriesNo + ", seriesName=" + seriesName + ", status=" + status
+				+ ", createdBy=" + createdBy + ", createDate=" + createDate + ", modifyBy=" + modifyBy + ", modifyDate="
+				+ modifyDate + "]";
+	}
+	
 }

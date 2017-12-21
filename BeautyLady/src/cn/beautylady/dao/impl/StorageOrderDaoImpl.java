@@ -1,6 +1,7 @@
 package cn.beautylady.dao.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,24 @@ public class StorageOrderDaoImpl extends BaseDao implements StorageOrderDao{
 			insert(storageOrderDetail);
 		}
 		
+	}
+
+	@Override
+	public List<StorageOrder> getAllStorageOrder() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "SELECT * FROM `storageorder`";
+		return select(StorageOrder.class, sql);
+	}
+
+	@Override
+	public int delStorageOrder(Connection conn, String orderNo) throws SQLException {
+		String sql = "delete from `storageorder` where orderNo= ? ";
+		return delete(conn,sql,orderNo);
+	}
+
+	@Override
+	public int delStorageOrderDetail(Connection conn, String orderNo) throws SQLException {
+		String sql = "delete from `storageorderdetail` where orderNo= ? ";
+		return delete(conn,sql,orderNo);
 	}
 
 	

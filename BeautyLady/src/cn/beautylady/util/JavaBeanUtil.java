@@ -44,10 +44,12 @@ public class JavaBeanUtil {
                 String type = field.getType().getName();
                 Method method = clazz.getMethod(methodName, field.getType());   //获取方法对象--field.getType数据类型
                 String[] valus = map.get(field.getName());
-                if (!"null".equals(valus[0]) && !"".equals(valus[0])) {
-                    String value = valus[0];
-                    Object obj = getObject(field.getType(), value);
-                    method.invoke(t, obj);
+                if(valus!=null && valus.length>0) {
+                	if (!"null".equals(valus[0]) && !"".equals(valus[0])) {
+                        String value = valus[0];
+                        Object obj = getObject(field.getType(), value);
+                        method.invoke(t, obj);
+                    }
                 }
 
             }

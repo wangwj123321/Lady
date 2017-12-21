@@ -36,4 +36,13 @@
 		<fileName>Product_Size</fileName>
 		<className>cn.beautylady.entity.Product_Size</className>
 	</file-pattern>
+	<file-pattern>
+		<fileName>StorageOrder</fileName>
+		<className>cn.beautylady.entity.StorageOrder</className>
+	</file-pattern>
+	<file-pattern>
+		<fileName>StorageOrderDetail</fileName>
+		<className>cn.beautylady.entity.StorageOrderDetail</className>
+	</file-pattern>
+	
 </url-Pattern>

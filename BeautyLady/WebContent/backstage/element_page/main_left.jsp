@@ -9,7 +9,7 @@
                     <a data-toggle="collapse" data-parent="#oper_list" data-target="#order_oper" href="javascript:void(0)">订单管理</a>
                     <div class="collapse" id="order_oper">
                         <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="javaScript:void(0)" onclick="getStorageOrder()">商品入库单</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javaScript:void(0)" onclick="getStorageOrder('StorageOrder','findOrder')">商品入库单</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">订单列表</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">合并订单</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">订单打印</a></li>

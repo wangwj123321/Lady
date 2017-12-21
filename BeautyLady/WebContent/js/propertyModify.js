@@ -1,8 +1,11 @@
 $(function(){
 	
-	var name="";//表单提交的name
-	var no="";//表单提交的编号名称
+	name="";//表单提交的name
+	no="";//表单提交的编号名称
 	
+	/**
+	 * 显示属性信息
+	 */
 	propertyModify = function(id,type){
 		var opr = "getProp";
 		$.get("/BeautyLady/servlet/prop","opr="+opr+"&id="+id+"&type="+type,function(data){
@@ -101,20 +104,31 @@ $(function(){
            " <input type='text' class='form-control' name='modifyDate' id='exampleInputAmount1' value='"+isNull(data.modifyDate)+"'>" +
          "</div></div>" +
          "<div class='clean'></div>"+
-         "<button type='button' class='btn btn-default' onclick=\"modify('"+userName+"','"+type+"',"+data.id+",'"+propName+"','"+propNo+"',"+data.status+",'"+data.createdBy+"','"+data.createDate+"','"+data.modifyBy+"','"+data.modifyDate+"')\">Submit</button>"+
+         "<button type='button' class='btn btn-default' onclick=\"modify('"+userName+"','"+type+"',"+data.id+",'"+propName+"','"+propNo+"','"+data.createdBy+"','"+data.createDate+"','"+userName+"','"+isNull(data.modifyDate)+"')\">Submit</button>"+
     	"</form>");
 		},"JSON");
 	}
 	
-	modify = function (userName,type,id,propName,propNo,status,createdBy,createDate,modifyBy,modifyDate){
-		$.post("/BeautyLady/servlet/prop",{"opr":"modify","userName":userName,"type":type,"id":id,name:propName,no:propNo,"status":status,"createdBy":createdBy,"createDate":createDate,"modifyBy":modifyBy,"modifyDate":modifyDate},callModify,"JSON");
+	/**
+	 * 提交修改
+	 */
+	modify = function (userName,type,id,propName,propNo,createdBy,createDate,modifyBy,modifyDate){
+		var status = $($("[name='status']:checked")[0]).val();
+		$.post("/BeautyLady/servlet/prop","opr=modify&userName="+userName+"&type="+type+"&id="+id+"&"+name+"="+propName+"&"+no+"="+propNo+"&status="+status+"&createdBy="+createdBy+"&createDate="+createDate+"&modifyBy="+modifyBy+"&modifyDate="+modifyDate,callModify);
 	}
 	
+	/**
+	 * 打印修改是否成功
+	 */
 	function callModify(data){
-		console.log(data);
-		console.log(typeof(data));
+		createWindow("prop","属性");
+		$("#prop").empty();
+		$("#prop").html(data);
 	}
 	
+	/**
+	 * 打印默认的选择
+	 */
 	isZero = function (key,status){
 		if(status == 0 || status == null){
 			var str ="<label class='radio-inline'>"+
@@ -123,7 +137,6 @@ $(function(){
 		"<label class='radio-inline'>"+
 		  "<input type='radio' name="+key+" id='inlineRadio2' value='1'> 停用"+
 			"</label>";
-			
 		}else {
 			var str ="<label class='radio-inline'>"+
 		  	"<input type='radio' name="+key+" id='inlineRadio1' value='0' > 使用"+
@@ -135,6 +148,9 @@ $(function(){
 		return str;
 	}
 	
+	/**
+	 * 如何值为空，或者为undefined，则输出空
+	 */
 	isNull = function(value){
 		if(value == null || value == "" || value == undefined){
 			return "";

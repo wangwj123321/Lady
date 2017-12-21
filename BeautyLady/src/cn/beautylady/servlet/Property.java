@@ -56,11 +56,13 @@ public class Property extends HttpServlet {
 				Class clazz = Class.forName(ClassNameUtil.getClassName(request.getParameter("type")));
 				Object obj = JavaBeanUtil.populate(clazz, request.getParameterMap());
 				int result = service.updateProperty(obj);
+				PrintWriter out = response.getWriter();
 				if(result > 0) {
-					System.out.println("修改成功");
+					out.println("修改成功");
 				}else {
-					System.out.println("修改失败");
+					out.println("修改失败");
 				}
+				out.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

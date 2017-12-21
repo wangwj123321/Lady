@@ -69,4 +69,46 @@ public interface ProductService {
      * @throws NoSuchFieldException 
      */
 	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	
+	/**
+	 * 根据id，获取class类的对象
+	 * @param clazz	属性的类
+	 * @param id	属性id
+	 * @return
+	 * @throws SQLException 
+	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 */
+	public <T>T getProperty(Class<T> clazz , Integer id) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException, SQLException;
+
+	/**
+	 * 传入一个对象添加到数据库
+	 * @param t
+	 * @return
+	 * @throws SQLException 
+	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException 
+	 * @throws NoSuchMethodException 
+	 */
+	public <T>int addProperty(T t) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException;
+
+	
+	
+	/**
+	 * 传入一个对象修改对象
+	 * @param obj
+	 * @return
+	 * @throws SQLException 
+	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException 
+	 * @throws NoSuchMethodException 
+	 */
+	public int updateProperty(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException;
+
+
 }

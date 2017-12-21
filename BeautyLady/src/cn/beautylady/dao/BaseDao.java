@@ -466,7 +466,7 @@ public class BaseDao {
         List<Object> list = new ArrayList<>();
         boolean flag = true;
         StringBuffer sql = new StringBuffer("update " + tableName +" set ");
-        String primaryKey = getPrimaryKey(clazz);
+        String primaryKey = getPrimaryKey(tableName);
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             String fieldName = field.getName();
@@ -697,7 +697,7 @@ public class BaseDao {
     public <T> T selectOne(T t) throws SQLException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         Class<T> clazz = (Class<T>) t.getClass();
         String tableName = getClassName(clazz);
-        String primaryKey = getPrimaryKey(clazz);
+        String primaryKey = getPrimaryKey(tableName);
         String methodName = getGetter(primaryKey);
         Method method = clazz.getDeclaredMethod(methodName);
         Object obj = method.invoke(t);
@@ -720,7 +720,7 @@ public class BaseDao {
      */
     public <T> T selectOne(Class<T> clazz, Object key) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
         String tableName = getClassName(clazz);
-        String primaryKey = getPrimaryKey(clazz);
+        String primaryKey = getPrimaryKey(tableName);
         StringBuffer sql = new StringBuffer("SELECT * FROM " + tableName +" where "+primaryKey+"= ?");
         return selectOne(clazz, sql.toString(),key);
     }

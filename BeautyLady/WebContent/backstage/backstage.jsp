@@ -5,6 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>后台管理系统</title>
+
+<style type="text/css">
+	.left {
+		float:left;
+	}
+	.clean{
+		clear: both;
+	}
+</style>
+
 </head>
 <!-- 新 Bootstrap4 核心 CSS 文件 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
@@ -18,12 +28,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/backstage.js"></script>
 <script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
+	/* 后台登陆的用户名 */
+	var userName = "${sessionScope.backUser.userName}";
 </script>
 <!-- 引入日历的JavaScript代码 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/laydate.js"></script>
-
+<!-- 入库单的js文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/storageOrder.js"></script>
-
+<!-- 属性修改的js文件 -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/propertyModify.js"></script>
 <!-- 商品入库单的js文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/storage.js"></script>
 <body>

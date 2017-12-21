@@ -10,10 +10,10 @@
 		$("#"+id).addClass("active").siblings().removeClass("active");
     }
 	//生成窗体的方法及删除窗体
-	createWindow = function(id,winName){
+	createWindow = function(id,winName,type){
 		if($("#"+id).length == 0){
 			$("#tablist").append("<li class='nav-item'><a class='nav-link' data-toggle='tab' href='#"+id+"'>"+winName+"" +
-			"&nbsp;&nbsp;&nbsp;<span class='close_btn'>&times;</span></a></li>");//添加窗体关闭title
+			"&nbsp;&nbsp;&nbsp;<span class='d-none'>"+type+"</span><span class='close_btn'>&times;</span></a></li>");//添加窗体关闭title
 			$("#tabcontent").append("<div id="+id+" class='tab_item show_info tab-pane'></div>");//添加窗体内容容器
 			//关闭窗体的方法
 			var $closes = $(".close_btn");;//获取所有窗体
@@ -53,7 +53,7 @@
     			//相同类型的表格数据
     			var comm = "<td>"+arr[i].status+"</td><td>"+arr[i].createdBy+"</td><td>"+arr[i].createDate+"</td>" +
 				"<td>"+arr[i].modifyBy+"</td><td>"+arr[i].modifyDate+"</td>"
-				+"<td><a href='javaScript:void(0)' onclick='propertyModify("+arr[i].id+","+data.type+")'>修改</a>&nbsp;&nbsp;&nbsp;" +
+				+"<td><a href='javaScript:void(0)' onclick=propertyModify("+arr[i].id+",'"+data.type+"')>修改</a>&nbsp;&nbsp;&nbsp;" +
 						"<a href='"+ctx+"/stop.jsp?id="+arr[i].id+"&type="+data.type+"'>停用</a></td></tr>";
     			//根据商品信息的不同插入不同的表头及数据
 				if(data.type == "Category"){

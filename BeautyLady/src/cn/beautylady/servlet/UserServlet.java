@@ -78,6 +78,7 @@ public class UserServlet extends HttpServlet {
 				out.print("false"); 
 			}
 		}
+		
 		if ("login".equals(opr)) {
 			String userAccount=request.getParameter("userAccount");
 			String pwd=MD5Util.MD5(request.getParameter("pwd"));
@@ -122,6 +123,7 @@ public class UserServlet extends HttpServlet {
 						response.sendRedirect("../index.jsp");
 						return ;
 					}else if(loginUser.getStage()==0){
+						session.setAttribute("backUser", loginUser);
 						response.sendRedirect("/BeautyLady/backstage/backstage.jsp");
 						return ;
 					}

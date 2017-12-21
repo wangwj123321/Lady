@@ -19,8 +19,11 @@ public interface ProductDao {
 	 * @param t 商品对象
 	 * @return 执行结果
 	 * @throws SQLException 
+	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException 
+	 * @throws NoSuchMethodException 
 	 */
-    public <T>int addProduct(T t) throws SQLException;
+    public <T>int addProduct(T t) throws SQLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
     /**
      * 查找页面对象
      * @param pageNo 页码
@@ -80,4 +83,34 @@ public interface ProductDao {
      * @throws NoSuchFieldException 
      */
 	public List<Pic> getPicListByProductNo(String productNo, String colorNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+
+	
+	/**
+	 * 根据id，获取class类的对象
+	 * @param clazz	属性的类
+	 * @param id	属性id
+	 * @return
+	 * @throws SQLException 
+	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 */
+	<T>T getProperty(Class<T> clazz, Integer id) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException, SQLException;
+	
+	
+	/**
+	 * 传入对象数据里的数据
+	 * @param obj
+	 * @return
+	 * @throws SQLException 
+	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException 
+	 * @throws NoSuchMethodException 
+	 */
+	public int updateProperty(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException;
+
+
 }

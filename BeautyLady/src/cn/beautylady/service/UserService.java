@@ -1,6 +1,7 @@
 package cn.beautylady.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.entity.User;
 /**
@@ -56,4 +57,23 @@ public interface UserService {
      * @return 影响行数
      */
     public int modifyUserStatusToZero(User user) throws SQLException;
+    /**
+     * 获得所有用户列表
+     * @return
+     */
+    public List<User> getUsersList();
+    /**
+     * 后台停用用户
+     * @param id 用户id
+     * @return 影响行数
+     */
+    public int FreeAndRecovery(Integer id,Integer status) throws SQLException;
+    
+    /**
+     * 添加后台人员功能
+     * @param user 后台人员对象
+     * @return
+     * @throws SQLException 
+     */
+    public int addBackUser(User user) throws SQLException;
 }

@@ -1,5 +1,6 @@
 package cn.beautylady.dao.impl;
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.dao.BaseDao;
 import cn.beautylady.dao.UserDao;
@@ -46,4 +47,23 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		String sql = "update `user` set userName = ?,password = ?,email = ?,status = 0 where userAccount = ?";
 		return executeUpdate(sql, user.getUserName(),user.getPassword(),user.getEmail(),user.getUserAccount());
 	}
+
+	@Override
+	public List<User> getUsersList() {
+		String sql = "select * from `user`";
+		return getArrayList(sql, User.class);
+	}
+
+	@Override
+	 public int FreeAndRecovery(Integer id,Integer status) throws SQLException {
+		String sql = "update `user` set status = ? where id = ?";
+		return executeUpdate(sql, status, id);
+	}
+
+	@Override
+	public int addBackUser(User user) throws SQLException {
+		String sql = "insert into `user`(userAccount,userName,password,email,acode,status,stage,createdBy) values(?,?,?,?,?,?,?,?)";
+		return executeUpdate(sql, user.getUserAccount(),user.getUserName(),user.getPassword(),user.getEmail(),user.getAcode(),user.getStatus(),user.getStage(),user.getCreatedBy());
+	}
+
 }

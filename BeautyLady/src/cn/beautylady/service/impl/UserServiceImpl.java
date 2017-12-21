@@ -1,6 +1,7 @@
 package cn.beautylady.service.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.dao.UserDao;
 import cn.beautylady.dao.impl.UserDaoImpl;
@@ -57,6 +58,21 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int modifyUserStatusToZero(User user) throws SQLException {
 		return dao.modifyUserStatusToZero(user);
+	}
+
+	@Override
+	public List<User> getUsersList() {
+		return dao.getUsersList();
+	}
+
+	@Override
+	public int FreeAndRecovery(Integer id,Integer status) throws SQLException {
+		return dao.FreeAndRecovery(id, status);
+	}
+
+	@Override
+	public int addBackUser(User user) throws SQLException {
+		return dao.addBackUser(user);
 	}
 
 }

@@ -67,12 +67,28 @@
                         </ul>
                     </div>
                 </div>
-                <div>
+                <!-- <div>
                     <a data-toggle="collapse" data-parent="#oper_list" data-target="#product_oper" href="javascript:void(0)">商品管理</a>
                     <div class="collapse" id="product_oper">
                         <ul class="navbar-nav">
                             <li class="nav-item"><a class="nav-link" href="#">数据备份</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">邮件/短信管理</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">上传/下载</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">权限</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">网站设置</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">第三方支付</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">提现 /转账 出入账汇率</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">平台设置</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">声音文件</a></li>
+                        </ul>
+                    </div>
+                </div> -->
+                <div>
+                    <a data-toggle="collapse" data-parent="#oper_list" data-target="#product_oper" href="javascript:void(0)">用户管理</a>
+                    <div class="collapse" id="product_oper">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="#">用户列表</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">新增用户</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">上传/下载</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">权限</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">网站设置</a></li>

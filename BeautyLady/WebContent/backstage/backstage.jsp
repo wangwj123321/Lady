@@ -26,6 +26,9 @@
 
 <!-- 商品入库单的js文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/storage.js"></script>
+
+<!--用户管理的js文件  -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/userManager.js"></script>
 <body>
 <%@include file="element_page/header.jsp" %>
 <div id="main">

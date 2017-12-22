@@ -161,6 +161,8 @@ public class ProductServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if("addProduct".equals(opr)){
+			
 		}
 	}
 	

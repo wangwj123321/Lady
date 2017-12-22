@@ -6,7 +6,7 @@ $(function(){
 	}
 	//获取formgroup拼接字段 itemsList:拼接字段属性的字符串数组
 	getFormGroup = function(itemsList){
-		return "<div class='form-group row' style='position:relative'>"+itemsList+"</div>";
+		return "<div enctype='multipart/form-data' class='form-group row' style='position:relative'>"+itemsList+"</div>";
 	}
 	//获取商品各属性字段fieldset title综合属性 formGroupList同类型属性
 	getFieldSet =function(title,formGroupList){
@@ -31,8 +31,9 @@ $(function(){
 		formGroupList2 += getFormGroup(getItem("系列编号","seriesNo","text","11A") +getItem("系列名称","seriesName","text","11A"));
 		formGroupList3 += getFormGroup(getItem("主图","mainpic","file",""));
 		formGroupList3 += getFormGroup(getItem("小图1","pic1","file","") + getItem("小图2","pic2","file","") + getItem("小图3","pic3","file","") + getItem("小图4","pic4","file",""));
-		formGroupList3 += getFormGroup(getItem("细节1","detailpic1","file","") + getItem("细节2","detailpic2","file","") + getItem("细节3","detailpic3","file","") + getItem("细节4","detailpic4","file",""));
-		formGroupList3 += getFormGroup(getItem("放大镜","magnifypic","file",""));
+		formGroupList3 += getFormGroup(getItem("细节1","detailpic1","file","") + getItem("细节2","detailpic2","file","") + getItem("细节3","detailpic3","file",""));
+		formGroupList3 += getFormGroup(getItem("放大镜1","magnifypic1","file","") + getItem("放大镜2","magnifypic2","file",""));
+		formGroupList3 += getFormGroup(getItem("颜色图1","colorpic1","file","") + getItem("颜色图2","colorpic2","file",""));
 		fieldsetList += getFieldSet("基本信息",formGroupList1) + getFieldSet("商品属性",formGroupList2) + getFieldSet("图片",formGroupList3);
 		var formStr = "<form class='form-horizontal' role='form' style='font-size:13px'>"+fieldsetList+"<input type='submit' value='提交'/></form>";
 		$("#newProduct").append(formStr);
@@ -48,7 +49,7 @@ $(function(){
 					$.get(ctx+"/servlet/ProductServlet","opr="+getNumber+"&className="+id.substr(0,id.length-2),function(data){
 						if(data == null){return;}
 						for(i in data){
-							$("#"+id+"form ul").append("<li class='col-2' style='color:white' ><input type='radio' name='"+id+"' value='"+data[i][id]+"'>"+data[i][id]+"</li>")
+							$("#"+id+"form ul").append("<li class='col-2' style='color:white' ><input type='radio' name='"+id+"' value='"+data[i][id]+"'>"+data[i][id]+"<span>  "+data[i][id.substr(0,id.length-2)+"Name"]+"</span></li>")
 						}
 						$("#"+id+"form ul").append("<li class='col-12'><input type='button' name='"+id+"btn' value='确认'></li>")
 						/*点击下拉弹框确认按钮*/
@@ -70,12 +71,18 @@ $(function(){
 						});
 					},"JSON");
 				}
-				
 			}); 
+			$("#newProduct>form").submit(function(){
+				var formData = new FormData($(this));
+				var addProduct = "addProduct";
+				$.get(ctx+"/servlet/ProductServlet","opr="+addProduct+"&formData="+formData,function(data){
+					if(data){alert("上传成功")}else{alert("上传失败")};
+				},"JSON")
+			});
 		});
 		//生成下拉弹框
 		createform = function(id){
-			$("#"+id).parent().append("<div class='bg-dark' style='position:absolute;top:40px;width:600px;z-index:999;border:1px solid red'>" +
+			$("#"+id).parent().append("<div class='bg-dark' style='position:absolute;top:40px;width:900px;z-index:999;border:1px solid red'>" +
 					"<form id='"+id+"form'><ul class='row'></ul></form></div>")
 		}
 

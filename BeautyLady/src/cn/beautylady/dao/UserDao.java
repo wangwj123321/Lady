@@ -3,6 +3,7 @@ package cn.beautylady.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import cn.beautylady.entity.Page;
 import cn.beautylady.entity.User;
 /**
  * 管理员信息操作接口
@@ -65,4 +66,5 @@ public interface UserDao {
      * @throws SQLException 
      */
     public int addBackUser(User user) throws SQLException;
+    
 }

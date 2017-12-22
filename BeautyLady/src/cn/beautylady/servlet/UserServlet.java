@@ -17,8 +17,10 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSON;
 
+import cn.beautylady.entity.Page;
 import cn.beautylady.entity.User;
 import cn.beautylady.service.UserService;
+import cn.beautylady.service.impl.ProductServiceImpl;
 import cn.beautylady.service.impl.UserServiceImpl;
 import cn.beautylady.util.MD5Util;
 import cn.beautylady.util.MySendMailThread;
@@ -220,8 +222,11 @@ public class UserServlet extends HttpServlet {
 		 * 显示所有用户
 		 */
 		if("showUser".equals(opr)){
-			List<User> list = userService.getUsersList();
-			String str = JSON.toJSONStringWithDateFormat(list, "yyyy-MM-dd");
+			String pageNos = request.getParameter("pageNo");
+			Integer pageSize = 20;
+			Integer pageNo = pageNos==null||pageNos==""?1:Integer.parseInt(pageNos);
+			Page<User> pages = new ProductServiceImpl().getPageObj(pageNo, pageSize, User.class);
+			String str = JSON.toJSONStringWithDateFormat(pages, "yyyy-MM-dd");
 			out.print(str);
 		}
 		/**

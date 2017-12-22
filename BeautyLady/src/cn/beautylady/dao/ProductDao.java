@@ -111,6 +111,16 @@ public interface ProductDao {
 	 * @throws NoSuchMethodException 
 	 */
 	public int updateProperty(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException;
-
-
+	/**
+	 * 获取对应商品所有的编号
+	 * @param clazz
+	 * @return 商品编号列表
+	 * @throws SQLException 
+	 * @throws InvocationTargetException 
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchMethodException 
+	 * @throws NoSuchFieldException 
+	 */
+	<T>List getProductList(Class<T> clazz) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 }

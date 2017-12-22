@@ -6,6 +6,7 @@ import java.util.List;
 
 import cn.beautylady.dao.OrderDao;
 import cn.beautylady.dao.impl.OrderDaoImpl;
+import cn.beautylady.entity.BuyCar;
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
 import cn.beautylady.entity.Page;
@@ -14,9 +15,15 @@ import cn.beautylady.service.OrderService;
 public class OrderServiceImpl implements OrderService{
 	private OrderDao orderDao=new OrderDaoImpl();
 	@Override
-	public boolean addOrder(Order order) {
-		int count=orderDao.addOrder(order);
-		return count==1?true:false;
+	public boolean addOrder(Order order,List<OrderDetail> Details,List<BuyCar> cars) {
+		int[] counts=orderDao.addOrder(order, Details, cars);
+		boolean flag=true;
+		for (int i : counts) {
+			if (i==0) {
+				flag=false;
+			}
+		}
+		return flag;
 	}
 	@Override
 	public Order getOrderByOrderNo(String orderNo) {

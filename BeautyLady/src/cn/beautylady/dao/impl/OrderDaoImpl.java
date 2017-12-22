@@ -2,27 +2,48 @@ package cn.beautylady.dao.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import cn.beautylady.dao.BaseDao;
 import cn.beautylady.dao.OrderDao;
+import cn.beautylady.entity.BuyCar;
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
 
 public class OrderDaoImpl extends BaseDao implements OrderDao{
 
 	@Override
-	public int addOrder(Order order) {
-		String sql="INSERT INTO `order` VALUES(NULL,?,?,?,?,NOW(),?,0)";
-		Object[] objs= {order.getOrderNo(),order.getUserAccount(),order.getUserName(),order.getAddressID(),order.getCostPrice()};
-		int count=0;
-		try {
-			count = executeUpdate(sql, objs);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public int[] addOrder(Order order,List<OrderDetail> Details,List<BuyCar> cars) {
+		String orderNo="";
+		while (true) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+			Date date = new Date();
+			String nn = sdf.format(date);
+			Random random = new Random();
+			int ran = random.nextInt(1000);
+			orderNo = nn + ran;
+			Order sure=getOrderByOrderNo(orderNo);
+			if (sure==null) {
+				break;
+			}
 		}
-		return count;
+		List<String> sqls=new ArrayList<>();
+		String addOrder=String.format("INSERT INTO `order` VALUES(NULL,'%s','%s','%s',%d,NOW(),%f,0)", orderNo,order.getUserAccount(),order.getUserName(),order.getAddressID(),order.getCostPrice());
+		sqls.add(addOrder);
+		for (BuyCar buyCar : cars) {
+			String sql=String.format("UPDATE `buycar` SET `status`=2 WHERE id=%d", buyCar.getId());
+			sqls.add(sql);
+		}
+		for (OrderDetail detail : Details) {
+			String sql=String.format("INSERT INTO `orderdetail` VALUES(NULL,'%s','%s','%s','%s',%f,%d,%f,%f)",orderNo,detail.getColorNo(),detail.getSizeNo(),detail.getProductNo(),detail.getTagPrice(),detail.getCount(),detail.getAmount(),detail.getZk() );
+			sqls.add(sql);
+		}
+		int[] counts=transactionExcute(sqls);
+		return counts;
 	}
 
 	@Override

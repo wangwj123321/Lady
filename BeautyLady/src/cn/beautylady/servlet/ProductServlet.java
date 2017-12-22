@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.beautylady.entity.Page;
@@ -150,6 +151,18 @@ public class ProductServlet extends HttpServlet {
             }
             request.getSession().setAttribute("histroys", history);
             response.sendRedirect("../history.jsp");
+		}else if("getNumber".equals(opr)){
+			String className = request.getParameter("className");
+			Class clazz;
+			try {
+				clazz = Class.forName(ClassNameUtil.getClassName(className));
+				List<String> productList = productService.getProductList(clazz);
+				out.print(JSONArray.toJSONString(productList));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if("addProduct".equals(opr)){
+			
 		}
 	}
 	

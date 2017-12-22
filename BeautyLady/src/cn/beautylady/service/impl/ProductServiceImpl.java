@@ -81,4 +81,8 @@ public class ProductServiceImpl implements ProductService{
 		return dao.updateProperty(obj);
 	}
 
+	public <T>List getProductList(Class<T> clazz) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.getProductList(clazz);
+	}
+
 }

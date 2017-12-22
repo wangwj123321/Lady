@@ -10,8 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import cn.beautylady.entity.Page;
 import cn.beautylady.util.C3p0Utils;
@@ -830,5 +832,55 @@ public class BaseDao {
         StringBuffer sql = new StringBuffer("SELECT * FROM " + tableName +" where "+primaryKey+"= ?");
         return selectOne(clazz, sql.toString(),key);
     }
+    /**
+     * 获取单一属性所有值的字符串数组
+     * @param sql SQL语句字符串
+     * @return 字符串数组
+     * @throws SQLException
+     */
+    public List<String> getcolumValues(String sql) throws SQLException{
+    	PreparedStatement pstmt = getStatement(sql, null);
+		ResultSet rs = pstmt.executeQuery();
+		List<String> strList = new ArrayList<String>();
+		while(rs.next()){
+			strList.add(rs.getString(1));
+		}
+		return strList;	
+    }
 
+    /**
+	 * 事务处理批处理语句
+	 * @param sqls 需要执行的SQL语句批处理
+	 * @return 各条语句执行后的受影响行数
+	 */
+	public int[] transactionExcute(List<String> sqls){
+		Connection conn = null;
+		Statement st = null;
+		int[] counts = null;
+		try{
+			conn = JdbcUtil.getConnection();
+			conn.setAutoCommit(false);  //将自动提交设置为false  
+			st = conn.createStatement();
+			for (String sql : sqls) {
+				//添加要批量执行的SQL
+				st.addBatch(sql);
+			}
+			//执行批处理SQL语句
+			counts = st.executeBatch();
+			//清除批处理命令
+			st.clearBatch();
+			conn.commit();      //当多个操作成功后手动提交  
+		}catch (Exception e) {
+			try {
+				conn.rollback();//事务回滚
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally{
+			JNDIJdbcUtil.closeAll(conn, st,null);
+		}
+		return counts;
+	}
 }

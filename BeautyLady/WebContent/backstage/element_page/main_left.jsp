@@ -60,7 +60,18 @@
                                 </div>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="javaScript:void(0)" onclick="addProduct()">添加新商品</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">商品分类</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">添加分类</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('category','大类')">大类</a>
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('subClasses','小类')">小类</a>
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('color','颜色')">颜色</a>
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('size','尺码')">尺码</a>
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('band','波段')">波段</a>
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('theme','主题')">主题</a>
+                                    <a class="dropdown-item" href="javascirpt:void(0)" onclick="initCategory('series','系列')">系列</a>
+                                </div>
+                            </li>
                             <li class="nav-item"><a class="nav-link" href="#">用户评论</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">商品回收站</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">库存管理</a></li>

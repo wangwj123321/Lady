@@ -296,11 +296,34 @@ public class BaseDao {
         }
         return new String(ch);
     }
-
+    
+    
+    
+    /**
+     * 根据传入的sql文件进行删除数据
+     * @param conn
+     * @param sql
+     * @param params
+     * @return
+     * @throws SQLException
+     */
+    public <T>int delete(String sql,Object ...params) throws SQLException{
+    	Connection conn = JdbcUtil.getConnection();
+    	return executeUpdate(conn, sql, params);
+    }
     
 
-
-    
+    /**
+     * 根据传入的sql文件进行删除数据
+     * @param conn
+     * @param sql
+     * @param params
+     * @return
+     * @throws SQLException
+     */
+    public <T>int delete(Connection conn ,String sql,Object ...params) throws SQLException{
+    	return executeUpdate(conn, sql, params);
+    }
 
 
     /**
@@ -324,6 +347,31 @@ public class BaseDao {
         sql.append(")");
         return executeUpdate(sql.toString(), keys);
     }
+    
+    /**
+     * 提供事务控制
+     * @param conn
+     * @param clazz
+     * @param keys
+     * @return
+     * @throws SQLException
+     */
+    public <T>int delete(Connection conn ,Class<T> clazz,Object...keys) throws SQLException{
+    	StringBuffer sql = new StringBuffer().append("DELETE FROM `"+getClassName(clazz)+"` WHERE " +getPrimaryKey(clazz)+ " IN (");
+        boolean flag = true;//判断是否拼接的是第一个属性
+        for (int i = 0; i < keys.length; i++) {
+            if(flag){
+                sql.append("?");
+                flag = false;
+            }else{
+                sql.append(",?");
+            }
+        }
+        sql.append(")");
+        return executeUpdate(conn,sql.toString(), keys);
+    }
+    
+    
     /**
      * 根据用户提供的对象信息删除
      * @param t
@@ -335,7 +383,13 @@ public class BaseDao {
      * @throws InvocationTargetException
      */
     public <T>int delete(T t) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException {
-        Class clazz = t.getClass();
+        Connection conn = JdbcUtil.getConnection();
+        return delete(conn,t);
+    }
+    
+    
+    public <T>int delete(Connection conn , T t) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException{
+    	Class clazz = t.getClass();
         StringBuffer sql = new StringBuffer().append("DELETE FROM `"+getClassName(clazz)+"` WHERE ");
         StringBuffer condition = new StringBuffer().append(" WHERE ");
         Field[] fields = clazz.getDeclaredFields();//获取对象所有属性
@@ -356,7 +410,7 @@ public class BaseDao {
                 }
             }
         }
-        return executeUpdate(sql.toString(), paramList.toArray());
+        return executeUpdate(conn,sql.toString(), paramList.toArray());
     }
     
     
@@ -412,6 +466,21 @@ public class BaseDao {
      * @return
      */
     public <T>int insert(T t) throws SQLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Connection conn = JdbcUtil.getConnection();
+    	return insert(conn,t);
+    }
+    
+    /**
+     * 传入一个COnnection对象，来控制事务
+     * @param conn
+     * @param t
+     * @return
+     * @throws SQLException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    public <T>int insert(Connection conn , T t) throws SQLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<?> clazz = t.getClass();  //根据对象获取class类
         String sql1=null;
         StringBuffer sql =new StringBuffer("INSERT INTO `" + getClassName(clazz) + "`");//根据class类获取类名称
@@ -444,9 +513,8 @@ public class BaseDao {
             }else {
                 throw new RuntimeException("传入的对象属性值都为空");
             }
-            return executeUpdate(sql1, list.toArray());
+            return executeUpdate(conn,sql1, list.toArray());
     }
-
 
 
     /**
@@ -550,11 +618,37 @@ public class BaseDao {
         Class<T> clazz= (Class<T>) t.getClass();
         return getPrimaryKey(clazz);
     }
-
-
+    
+    
+    /**
+     * 获取PreparedStatement对象
+     * @param sql
+     * @param params
+     * @return
+     * @throws SQLException
+     */
     public PreparedStatement getStatement(String sql ,Object ... params) throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql);
+        if (params != null && params.length > 0) {
+            for (int i =0 ;i <params.length ;i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+        }
+        return pstmt;
+    }
+    
+    
+    /**
+     * 传入一个Connection和sql语句来获取一个PreparedStatement对象
+     * @param conn
+     * @param sql
+     * @param params
+     * @return
+     * @throws SQLException
+     */
+    public PreparedStatement getStatement(Connection conn,String sql,Object ...params) throws SQLException {
+    	PreparedStatement pstmt = conn.prepareStatement(sql);
         if (params != null && params.length > 0) {
             for (int i =0 ;i <params.length ;i++) {
                 pstmt.setObject(i + 1, params[i]);
@@ -571,6 +665,18 @@ public class BaseDao {
      */
     public int executeUpdate(String sql,Object...params) throws SQLException {
         PreparedStatement pstmt = getStatement(sql, params);
+        return pstmt.executeUpdate();
+    }
+    
+    
+    /**
+     * 传入一个connection的增删改操作
+     * @param sql SQL语句字符串
+     * @param params 参数字符串数组
+     * @return 执行结果
+     */
+    public int executeUpdate(Connection conn , String sql,Object...params) throws SQLException {
+        PreparedStatement pstmt = getStatement(conn,sql, params);
         return pstmt.executeUpdate();
     }
 

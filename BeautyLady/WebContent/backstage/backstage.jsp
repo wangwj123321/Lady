@@ -39,9 +39,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/propertyModify.js"></script>
 <!-- 商品入库单的js文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/storage.js"></script>
+<!-- 订单列表单的js文件 -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/orderList.js"></script>
 <!-- 添加商品 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/product.js"></script>
-
 <!--用户管理的js文件  -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/userManager.js"></script>
 <body>

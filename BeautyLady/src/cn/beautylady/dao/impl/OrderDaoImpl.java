@@ -82,5 +82,19 @@ public class OrderDaoImpl extends BaseDao implements OrderDao{
 		}
 		return count;
 	}
+
+	@Override
+	public List<Order> getListOrder(int pageNo,int pageSize) {
+		String sql="SELECT `order`.*,`address`.`address`,`address`.`name`,`address`.`phone` \r\n" + 
+				"FROM `order`,`address`\r\n" + 
+				"WHERE `order`.`addressID`=`address`.`id` LIMIT ?,?";
+		return getArrayList(sql, Order.class,pageNo,pageSize);
+	}
+
+	@Override
+	public int getOrderCount() {
+		int count=getCountByClass(Order.class);
+		return count;
+	}
 	
 }

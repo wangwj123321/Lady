@@ -1,6 +1,7 @@
 package cn.beautylady.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import cn.beautylady.entity.ProductExt;
 import cn.beautylady.entity.StorageOrder;
 import cn.beautylady.entity.StorageOrderDetail;
 import cn.beautylady.service.StorageOrderService;
+import cn.beautylady.util.JdbcUtil;
 
 public class StorageOrderServiceImpl implements StorageOrderService {
 	StorageOrderDao dao = new StorageOrderDaoImpl();
@@ -43,5 +45,40 @@ public class StorageOrderServiceImpl implements StorageOrderService {
 		StorageOrder storageOrder = new StorageOrder(order,userName,totalNum,totalMoney,desc);
 		dao.addStorageOrder(list,storageOrder);
 	}
+
+	@Override
+	public List<StorageOrder> getAllStorageOrder() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.getAllStorageOrder();
+	}
+
+	@Override
+	public int delStorageOrder(String orderNo) {
+		Connection conn = JdbcUtil.getConnection();
+		int result = -1;
+		try {
+			conn.setAutoCommit(false);
+			result = dao.delStorageOrderDetail(conn, orderNo);
+			result += dao.delStorageOrder(conn,orderNo);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	
 
 }

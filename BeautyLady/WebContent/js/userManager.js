@@ -177,6 +177,4 @@ $(document).ready(function(){
 				"<tr><td class='text-right'><input type='button' onclick='addBackUser()'  value='新增' /></td><td><input type='reset'  value='重置' /></td></tr>" +
 				"</table></form>");
 	});
-	
-	
 });

@@ -1,6 +1,7 @@
 package cn.beautylady.dao;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,5 +27,25 @@ public interface StorageOrderDao {
 	
 
 	public void addStorageOrder(List<StorageOrderDetail> list, StorageOrder storageOrder) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException;
+
+	public List<StorageOrder> getAllStorageOrder() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	/**
+	 * 根据订单编号删除订单
+	 * @param conn
+	 * @param orderNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int delStorageOrder(Connection conn, String orderNo) throws SQLException;
+	
+	/**
+	 * 根据订单编号删除订单明细
+	 * @param conn
+	 * @param orderNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int delStorageOrderDetail(Connection conn, String orderNo) throws SQLException;
 
 }

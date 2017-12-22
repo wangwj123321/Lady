@@ -11,6 +11,7 @@ public class Address {
 	private String name;
 	private String phone;
 	private Integer isDefault;
+	private Integer status;
 	public Integer getId() {
 		return id;
 	}
@@ -47,6 +48,13 @@ public class Address {
 	}
 	public void setIsDefault(Integer isDefault) {
 		this.isDefault = isDefault;
+	}
+	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public Address(Integer id, String userAccount, String address, String name, String phone, Integer isDefault) {
 		super();

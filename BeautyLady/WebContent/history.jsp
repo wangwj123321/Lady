@@ -45,7 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <a href="servlet/ProductServlet?opr=productDetail&productNo=${history.productNo }"><img class="img-fluid img-thumbnail" src="images/${history.picpath }" alt=""></a>
 		                <p>${history.productName } ${history.productNo }</p>
 		                <p>￥<span>${history.tagPrice }</span></p>
-		                <p class="del">删除</p>
 			        </div>
 		        </c:forEach>
             </div>

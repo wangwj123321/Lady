@@ -5,21 +5,44 @@ $(function() {
 		return orderNo;
 	}
 
-	getStorageOrder = function() {
-		createWindow("storageOrder", "商品入库单");
-		$("#storageOrder")
-		.append("<table><tr><td>开始日期</td>"
-			+ "<td class='inline laydate-icon' id='start' style='width:150px; margin-right:10px;'></td>"
-			+ "<td>结束日期</td><td class='inline laydate-icon' id='end' style='width:150px;'></td>"
-			+ "</tr><tr>"
-			+ "</tr><tr>"
-			+ "<td><button><a href='javaScript:void(0)' onclick='getStorageOrderDetail()'>新增单据</a></button></td>"
-			+ "<td><button>搜索</button></td>" + "</tr></table>"
-			+ "<div id='content'>" + "<table><tr>"
-			+ "<td>订单编号</td>" + "<td>订单数量</td>" + "<td>订单总额</td>"
-			+ "<td>订单审核</td>" + "<td>订单日期</td>" + "<td>用户名</td>"
-			+ "<td>订单描述</td>" + "</tr></table></div>")
+	getStorageOrder = function(type,opr) {
+		$("#storageOrder").empty();
+		$.post("/BeautyLady/servlet/storageOrder","type="+type+"&opr="+opr,callStorageOrder,"JSON");
 	}
+	
+	callStorageOrder = function(data){
+		createWindow("storageOrder", "商品入库单");
+		$("#storageOrder").append("<table id='soId' class='table table-hover table-condensed content'><tr><td>开始日期</td>" +
+			"<td>显示日期</td>" +
+			"<td>结束日期</td><td>显示日期</td>" +
+			"<td>搜索</td><td>新增</td></tr>" +
+			"<tr>"+
+			"<td>订单编号</td><td>订单数量</td><td>订单总额</td>"+ 
+			"<td>订单审核</td><td>订单日期</td><td>用户名</td>"+ 
+			"<td>订单描述</td><td>操作</td></tr>"+
+			"</table>");
+		var $table = $("#soId");
+		console.log(data);
+		console.log(typeof(data));
+		$.each(data,function(i,d){
+			$table.append("<tr><td>"+d.orderNo+"</td><td>"+d.number+"</td><td>"+d.totalMoney+"</td>" +
+					"<td>"+d.status+"</td><td>"+d.storageDate+"</td><td>"+d.userName+"</td><td>"+d.desc+"</td>" +
+							"<td><a href='#'>验收</a>&nbsp;&nbsp;<a href='#'>修改</a>&nbsp;&nbsp;<a href='javaScript:void(0)' onclick='del(\""+d.orderNo+"\")'>删除</a><td></tr>")
+		});
+	}
+	
+	del = function(orderNo){
+		var opr="del";
+		$.post("/BeautyLady/servlet/storageOrder","orderNo="+orderNo+"&opr="+opr,function(data){
+		if(data=="true"){
+		getStorageOrder('StorageOrder','findOrder')
+		}else{
+			$("#storageOrder").empty();
+			createWindow("storageOrder", "商品入库单");
+			$("#storageOrder").append("<p>删除失败</p>");
+		}});
+	}
+	
 	
 	/**
 	 * 商品的明细表单

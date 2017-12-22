@@ -22,6 +22,10 @@ public class StorageOrder {
 	private String modifyBy;
 	private Date modifyDate;
 	
+	
+	
+	public StorageOrder() {
+	}
 	public StorageOrder(String order ,String userName, Integer totalNum, Double totalMoney, String desc) {
 		this.orderNo=order;
 		this.createdBy=userName;

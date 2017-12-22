@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
     <div class="side_left col-2">
-        <div class="logo"><a href="index.html">Beauty <span>Lady</span></a></div>
+        <div class="logo"><a href="index.jsp">Beauty <span>Lady</span></a></div>
         <div id="row_nav"  class="nav_menu">
             <div>
                <a href="servlet/ProductServlet?opr=getListProduct">所有商品</a>

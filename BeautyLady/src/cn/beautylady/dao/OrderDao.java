@@ -6,6 +6,8 @@ import java.util.List;
 
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
+import cn.beautylady.entity.Page;
+import cn.beautylady.entity.User_orders;
 
 public interface OrderDao {
 	/**
@@ -59,4 +61,14 @@ public interface OrderDao {
 	 * @return
 	 */
 	public int updateOrderStatus(int orderId,int status);
+	/**
+	 * 分页获取订单
+	 * @return
+	 */
+	public List<Order> getListOrder(int pageNo,int pageSize);
+	/**
+	 * 获取所有订单总数
+	 * @return
+	 */
+	public int getOrderCount();
 }

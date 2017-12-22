@@ -3,6 +3,8 @@ package cn.beautylady.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.UUID;
 
 import javax.mail.Session;
 import javax.servlet.ServletException;
@@ -13,8 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSON;
+
+import cn.beautylady.entity.Page;
 import cn.beautylady.entity.User;
 import cn.beautylady.service.UserService;
+import cn.beautylady.service.impl.ProductServiceImpl;
 import cn.beautylady.service.impl.UserServiceImpl;
 import cn.beautylady.util.MD5Util;
 import cn.beautylady.util.MySendMailThread;
@@ -211,6 +217,85 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("hint", "密码错误！");
 				request.getRequestDispatcher("../modifyUser.jsp").forward(request, response);
 			}
+		}
+		/**
+		 * 显示所有用户
+		 */
+		if("showUser".equals(opr)){
+			String pageNos = request.getParameter("pageNo");
+			Integer pageSize = 20;
+			Integer pageNo = pageNos==null||pageNos==""?1:Integer.parseInt(pageNos);
+			Page<User> pages = new ProductServiceImpl().getPageObj(pageNo, pageSize, User.class);
+			String str = JSON.toJSONStringWithDateFormat(pages, "yyyy-MM-dd");
+			out.print(str);
+		}
+		/**
+		 * 冻结用户
+		 */
+		if("FreeAndRecovery".equals(opr)){
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			Integer status = Integer.parseInt(request.getParameter("status"));
+			try {
+				userService.FreeAndRecovery(id, status);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			out.print("true");
+		}
+		/**
+		 * 后台用户新增
+		 */
+		if("backAddUser".equals(opr)){
+			String name = (String)request.getSession().getAttribute("userAccount");
+			String userAccount=request.getParameter("userAccount");
+			String userName = request.getParameter("userName");
+			String pwd=MD5Util.MD5(request.getParameter("pwd"));
+			String email = request.getParameter("email");
+			String acode = UUID.randomUUID().toString().replaceAll("-", "");
+			User user = new User();
+			user.setUserAccount(userAccount);
+			user.setUserName(userName);
+			user.setPassword(pwd);
+			user.setEmail(email);
+			user.setAcode(acode);
+			user.setStatus(1);
+			user.setStage(0);
+			user.setCreatedBy(name);
+			int count = 0;
+			try {
+				count = userService.addBackUser(user);
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+			out.print(count);
+		}
+		if("showModifyBackUser".equals(opr)){
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			User user = new User();
+			user.setId(id);
+			user=userService.login(user);
+			String str = JSON.toJSONStringWithDateFormat(user, "yyyy-MM-dd");
+			out.print(str);
+		}
+		if("modifyBackUser".equals(opr)){
+			String userAccount = request.getParameter("muserAccount");
+			String userName = request.getParameter("muserName");
+			String pwd = MD5Util.MD5(request.getParameter("mpwd"));
+			String email = request.getParameter("memail");
+			User user = new User();
+			user.setUserAccount(userAccount);
+			user.setUserName(userName);
+			user.setPassword(pwd);
+			user.setEmail(email);
+			int count = 0;
+			try {
+				count = userService.modifyUser(user);
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+			out.print(count);
 		}
 	}
 

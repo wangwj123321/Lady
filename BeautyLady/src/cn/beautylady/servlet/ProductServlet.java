@@ -196,12 +196,12 @@ public class ProductServlet extends HttpServlet {
             }
         }
         String[] count = result.split("-");
-        if (count.length <= 10) {
+        if (count.length <= 8) {
             return result;
         }
         else {
         	result = "";
-        	for (int i = 0; i < 10; i++) {
+        	for (int i = 0; i < 8; i++) {
 				result += count[i] + "-";
 			}
             return result;

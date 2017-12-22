@@ -109,6 +109,17 @@ public interface ProductService {
 	 * @throws NoSuchMethodException 
 	 */
 	public int updateProperty(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException;
-
+	/**
+	 * 获取对象列表
+	 * @param clazz
+	 * @return 编号集合
+	 * @throws SQLException 
+	 * @throws InvocationTargetException 
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchMethodException 
+	 * @throws NoSuchFieldException 
+	 */
+	public <T>List getProductList(Class<T> clazz) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException; 
 
 }

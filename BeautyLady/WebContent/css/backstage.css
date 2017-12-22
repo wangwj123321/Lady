@@ -1,3 +1,7 @@
+ul li{
+	list-style:none;
+}
+
 #header a[class='nav-link']:hover{
     background-color: #ff2ebe;
 }

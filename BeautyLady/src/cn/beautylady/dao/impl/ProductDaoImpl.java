@@ -110,4 +110,10 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 	public int updateProperty(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException, SQLException {
 		return update(obj);
 	}
+
+	@Override
+	public <T>List getProductList(Class<T> clazz) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "SELECT `"+getClassName(clazz)+"No`,`"+getClassName(clazz)+"Name` FROM "+getClassName(clazz);
+		return select(clazz, sql, null);
+	}
 }

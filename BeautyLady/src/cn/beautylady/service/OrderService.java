@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
+import cn.beautylady.entity.BuyCar;
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
 import cn.beautylady.entity.Page;
@@ -12,9 +13,11 @@ public interface OrderService {
 	/**
 	 * 添加订单
 	 * @param order 订单对象
-	 * @return 是否成功
+	 * @param Details 订单详情列表
+	 * @param cars 购物车列表
+	 * @return
 	 */
-	public boolean addOrder(Order order);
+	public boolean addOrder(Order order,List<OrderDetail> Details,List<BuyCar> cars);
 	/**
 	 * 获取指定订单号的订单
 	 * @param orderNo 订单号

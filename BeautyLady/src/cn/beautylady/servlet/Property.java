@@ -2,12 +2,15 @@ package cn.beautylady.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections4.map.HashedMap;
 
 import com.alibaba.fastjson.JSON;
 
@@ -65,6 +68,28 @@ public class Property extends HttpServlet {
 				out.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		/**
+		 * 获取用户提交增加的数据
+		 */
+		else if("adds".equals(opr)){
+			String createdBy = request.getParameter("createdBy");
+			String type = request.getParameter("type");
+			try {
+				Class clazz = Class.forName(ClassNameUtil.getClassName(type));
+				Object obj = JavaBeanUtil.populate(clazz, request.getParameterMap());
+				int result = service.addProperty(obj);
+				PrintWriter out = response.getWriter();
+				if(result > 0) {
+					out.print("1");
+				}else {
+					out.print("-1");
+				}
+				out.close();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			

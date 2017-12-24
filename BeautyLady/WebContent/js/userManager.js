@@ -62,11 +62,13 @@ function addBackUser(){
 		return;
 	}
 	$("#hint").html("");
+	var obj = $("#addForm").serialize();
+	obj = decodeURIComponent(obj,true);
 	if($("#hint").html() == ""){
-		$.getJSON("/BeautyLady/servlet/UserServlet","opr=backAddUser&"+$("#addForm").serialize(),function(data){
+		$.post("/BeautyLady/servlet/UserServlet","opr=backAddUser&"+obj,function(data){
 			alert("新增成功");
 			$.getJSON("/BeautyLady/servlet/UserServlet","opr=showUser",showUser);
-		});
+		},"json");
 	}
 }
 function modifyBackUser(){
@@ -79,7 +81,6 @@ function modifyBackUser(){
 		return;
 	}
 	$("#mhint").html("");
-	alert($("#modifyForm").serialize());
 	if($("#mhint").html() == ""){
 		$.getJSON("/BeautyLady/servlet/UserServlet","opr=modifyBackUser&"+$("#modifyForm").serialize(),function(data){
 			alert("修改成功");

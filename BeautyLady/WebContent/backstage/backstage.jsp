@@ -45,6 +45,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/orderList.js"></script>
 <!--用户管理的js文件  -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/userManager.js"></script>
+<!--类别添加  -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/category.js"></script>
 <body>
 <%@include file="element_page/header.jsp" %>
 <div id="main">

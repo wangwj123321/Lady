@@ -4,18 +4,21 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
+import cn.beautylady.entity.BuyCar;
 import cn.beautylady.entity.Order;
 import cn.beautylady.entity.OrderDetail;
 import cn.beautylady.entity.Page;
 import cn.beautylady.entity.User_orders;
 
 public interface OrderDao {
-	/**
-	 * 添加订单
-	 * @param order 订单对象
-	 * @return 影响行数
-	 */
-	public int addOrder(Order order);
+/**
+ * 添加订单
+ * @param order 订单对象
+ * @param Details 订单详情列表
+ * @param cars 购物车列表
+ * @return
+ */
+	public int[] addOrder(Order order,List<OrderDetail> Details,List<BuyCar> cars);
 	/**
 	 * 获取指定订单号的订单
 	 * @param orderNo 订单号

@@ -31,10 +31,34 @@ $(function() {
 		console.log(data);
 		console.log(typeof(data));
 		$.each(data,function(i,d){
-			$table.append("<tr><td>"+d.orderNo+"</td><td>"+d.number+"</td><td>"+d.totalMoney+"</td>" +
-					"<td>"+d.status+"</td><td>"+d.storageDate+"</td><td>"+d.userName+"</td><td>"+d.desc+"</td>" +
+			$table.append("<tr><td><a href='javaScript:void(0)' onclick='showDetail(\""+d.orderNo+"\")'>"+d.orderNo+"</a></td><td>"+d.number+"</td><td>"+d.totalMoney+"</td>" +
+					"<td>"+d.status+"</td><td>"+isNull(d.storageDate)+"</td><td>"+isNull(d.userName)+"</td><td>"+isNull(d.desc)+"</td>" +
 							"<td><a href='JavaScript:void(0)' onclick='accept(\""+d.orderNo+"\")'>验收</a>&nbsp;&nbsp;<a href='#'>修改</a>&nbsp;&nbsp;<a href='javaScript:void(0)' onclick='del(\""+d.orderNo+"\")'>删除</a><td></tr>")
 		});
+	}
+	
+	
+	
+	
+	showDetail = function(orderNo){		
+		$("#showDetail").empty();
+		var opr = "showDetail";
+		$.post("/BeautyLady/servlet/storageOrder","opr="+opr+"&orderNo="+orderNo,function(data){
+			console.log(data);
+			console.log(typeof(data));
+			createWindow("showDetail", "商品库存");
+			$("#showDetail").append("<table id='sd' class='table table-hover table-condensed content'>" +
+			"<tr>"+
+			"<td>订单编号</td><td>商品编号</td><td>颜色编号</td>"+ 
+			"<td>尺码编号</td><td>数量</td></tr>"+
+			"</table>");
+			var $table = $("#sd");
+			for (var i = 0; i < data.length; i++) {
+				$table.append("<tr><td>"+data[i].orderNo+"</td><td>"+data[i].productNo+"</td><td>"+data[i].colorNo+"</td><td>"+data[i].sizeNo+"</td>" +
+					"<td>"+data[i].number+"</td></tr>")
+			}
+		},"JSON");
+		
 	}
 	
 	/**
@@ -159,6 +183,9 @@ $(function() {
     	
     }
     
+    /**
+     * 显示分页
+     */
     callPage = function(data) {
 		if (data != false) {
 			var $choosePro = $("#choosePro");
@@ -379,6 +406,9 @@ $(function() {
 			+ "</tr>");
 	}
 	
+	/**
+	 * 显示库存
+	 */
 	showStorage = function(){
 		var opr = "showStorage";
 		$.post("/BeautyLady/servlet/storageOrder","opr="+opr,function(data){

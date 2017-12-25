@@ -120,5 +120,18 @@ public interface StorageOrderDao {
 	 * @throws NoSuchFieldException 
 	 */
 	public List<Storage> showStorage() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	/**
+	 * 显示订单详情
+	 * @param orderNo
+	 * @return	
+	 * @throws SQLException 
+	 * @throws InvocationTargetException 
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchMethodException 
+	 * @throws NoSuchFieldException 
+	 */
+	public List<StorageOrderDetail> showDetail(String orderNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
 
 }

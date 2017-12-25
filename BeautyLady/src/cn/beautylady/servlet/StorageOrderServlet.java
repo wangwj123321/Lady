@@ -122,6 +122,22 @@ public class StorageOrderServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		else if("showDetail".equals(opr)) {
+			String orderNo = request.getParameter("orderNo");
+			try {
+				List<StorageOrderDetail> list = service.showDetail(orderNo);
+				String jsonData = JSON.toJSONString(list);
+				PrintWriter out = response.getWriter();
+				out.println(jsonData);
+				out.flush();
+				out.close();
+			} catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InstantiationException
+					| InvocationTargetException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

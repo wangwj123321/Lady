@@ -9,6 +9,7 @@ import java.util.List;
 import cn.beautylady.entity.ProductExt;
 import cn.beautylady.entity.Storage;
 import cn.beautylady.entity.StorageOrder;
+import cn.beautylady.entity.StorageOrderDetail;
 
 
 public interface StorageOrderService {
@@ -71,5 +72,21 @@ public interface StorageOrderService {
 	 * @throws NoSuchFieldException 
 	 */
 	public List<Storage> showStorage() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	
+	/**
+	 * 显示商品明细
+	 * @param orderNo
+	 * @return
+	 * @throws SQLException 
+	 * @throws InvocationTargetException 
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchMethodException 
+	 * @throws NoSuchFieldException 
+	 */
+	public List<StorageOrderDetail> showDetail(String orderNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	
 
 }

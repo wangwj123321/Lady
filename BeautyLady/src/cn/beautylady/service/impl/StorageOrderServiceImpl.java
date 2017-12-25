@@ -79,7 +79,8 @@ public class StorageOrderServiceImpl implements StorageOrderService {
 		}
 		return result;
 	}
-
+	
+	
 	@Override
 	public int addStorageOrder(StorageOrder order,List list) {
 		Connection conn = JdbcUtil.getConnection();
@@ -124,6 +125,13 @@ public class StorageOrderServiceImpl implements StorageOrderService {
 	public List<Storage> showStorage() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		return dao.showStorage();
 	}
+
+	@Override
+	public List<StorageOrderDetail> showDetail(String orderNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.showDetail(orderNo);
+	}
+
+	
 	
 	
 	

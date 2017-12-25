@@ -52,7 +52,7 @@
     			var diff = "";//不同商品的数据信息
     			//相同类型的表格数据
     			var comm = "<td>"+arr[i].status+"</td><td>"+arr[i].createdBy+"</td><td>"+arr[i].createDate+"</td>" +
-				"<td>"+arr[i].modifyBy+"</td><td>"+arr[i].modifyDate+"</td>"
+				"<td>"+isNull(arr[i].modifyBy)+"</td><td>"+isNull(arr[i].modifyDate)+"</td>"
 				+"<td><a href='javaScript:void(0)' onclick=propertyModify("+arr[i].id+",'"+data.type+"')>修改</a>&nbsp;&nbsp;&nbsp;" +
 						"<a href='"+ctx+"/stop.jsp?id="+arr[i].id+"&type="+data.type+"'>停用</a></td></tr>";
     			//根据商品信息的不同插入不同的表头及数据

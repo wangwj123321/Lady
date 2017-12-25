@@ -106,6 +106,14 @@ public class StorageOrderDaoImpl extends BaseDao implements StorageOrderDao{
 		return select(Storage.class, sql);
 	}
 
+	@Override
+	public List<StorageOrderDetail> showDetail(String orderNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		String sql = "SELECT * FROM `storageorderdetail` WHERE `orderNo`=?";
+		return select(StorageOrderDetail.class, sql,orderNo);
+	}
+
+	
+
 	
 
 }

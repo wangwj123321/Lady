@@ -74,7 +74,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao{
 
 	@Override
 	public List<Order> getOrderByUserAccount(String userAccount) {
-		String sql = "select * from `order` where userAccount = ?";
+		String sql = "select * from `order` where userAccount = ? order by createDate desc";
 		return getArrayList(sql, Order.class, userAccount);
 	}
 

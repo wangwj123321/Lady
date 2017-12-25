@@ -4,6 +4,15 @@ public class Product_Color {
 	private Integer id;
 	private String productNo;
 	private String colorNo;
+	
+	public Product_Color() {
+	}
+	
+	public Product_Color(String productNo, String colorNo) {
+		this.productNo = productNo;
+		this.colorNo = colorNo;
+	}
+
 	public Integer getId() {
 		return id;
 	}

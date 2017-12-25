@@ -27,6 +27,27 @@ public class Product {
     private Date modifyDate;
     private String subClassesName; //小类名称
     
+	public Product() {
+	}
+	
+	public Product(String productNo, String productName, Double tagPrice, Double costPrice,
+			String categoryNo, String subclassesNo, String bandNo, String themeNo, String seriesNo, Integer year,
+			Integer quarter, String picpath, String createdBy) {
+		this.productNo = productNo;
+		this.productName = productName;
+		this.tagPrice = tagPrice;
+		this.costPrice = costPrice;
+		this.categoryNo = categoryNo;
+		this.subclassesNo = subclassesNo;
+		this.bandNo = bandNo;
+		this.themeNo = themeNo;
+		this.seriesNo = seriesNo;
+		this.year = year;
+		this.quarter = quarter;
+		this.picpath = picpath;
+		this.createdBy = createdBy;
+	}
+
 	public Integer getId() {
 		return id;
 	}

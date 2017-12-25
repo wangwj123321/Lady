@@ -3,12 +3,15 @@ package cn.beautylady.entity;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 public class NewProduct {
+	private Integer id;//id值
     private String productNo;//商品编号
     private String productName;//商品名称
-    private Double unit;//单价
-    private Double tagPrice;//成本
+    private String unit;//公司名 
+    private Double costPrice;//成本价格
+    private Double tagPrice;//售卖价格
     private Integer year;//商品年份
     private Integer quarter;//商品季节
     private String categoryNo;//大类编号
@@ -39,18 +42,25 @@ public class NewProduct {
     private String magnifypic2;//放大镜2
     private String colorpic1;//本商品颜色款式图
     private String colorpic2;//其他颜色款式图
+    private List<Pic> picList;//图片名称集合
+    private Integer status;
+    private String picpath;
+    private String createdBy;
+    private Date createDate;
+    private String modifyBy;
+    private Date modifyDate;
     
 	public NewProduct() {
 	}
-	public NewProduct(String productNo, String productName, Double unit, Double tagPrice, Integer year, Integer quarter,
+	public NewProduct(String productNo, String productName, Double costPrice, Double tagPrice, Integer year, Integer quarter,
 			String categoryNo, String categoryName, String subclassesNo, String subclassesName, String colorNo1,
 			String colorName1, String colorNo2, String colorName2, String sizeNo, String sizeName, String bandNo,
 			String bandName, String themeNo, String themeName, String seriesNo, String seriesName, String mainpic,
 			String pic1, String pic2, String pic3, String pic4, String detailpic1, String detailpic2, String detailpic3,
-			String magnifypic1, String magnifypic2, String colorpic1, String colorpic2) {
+			String magnifypic1, String magnifypic2, String colorpic1, String colorpic2,List<Pic> picList,String createdBy) {
 		this.productNo = productNo;
 		this.productName = productName;
-		this.unit = unit;
+		this.costPrice = costPrice;
 		this.tagPrice = tagPrice;
 		this.year = year;
 		this.quarter = quarter;
@@ -82,6 +92,14 @@ public class NewProduct {
 		this.magnifypic2 = magnifypic2;
 		this.colorpic1 = colorpic1;
 		this.colorpic2 = colorpic2;
+		this.picList = picList;
+		this.createdBy = createdBy;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getProductNo() {
 		return productNo;
@@ -105,11 +123,18 @@ public class NewProduct {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public Double getUnit() {
+	
+	public String getUnit() {
 		return unit;
 	}
-	public void setUnit(Double unit) {
+	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public Double getCostPrice() {
+		return costPrice;
+	}
+	public void setCostPrice(Double costPrice) {
+		this.costPrice = costPrice;
 	}
 	public Double getTagPrice() {
 		return tagPrice;
@@ -230,6 +255,9 @@ public class NewProduct {
 	public String getMainpic() {
 		return mainpic;
 	}
+	public void setMainpic(String mainpic) {
+		this.mainpic = mainpic;
+	}
 	public String getPic1() {
 		return pic1;
 	}
@@ -265,4 +293,48 @@ public class NewProduct {
 	public String getColorpic2() {
 		return colorpic2;
 	}
+	public List<Pic> getPicList() {
+		return picList;
+	}
+	public void setPicList(List<Pic> picList) {
+		this.picList = picList;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public String getModifyBy() {
+		return modifyBy;
+	}
+	public void setModifyBy(String modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	public String getPicpath() {
+		return picpath;
+	}
+	public void setPicpath(String picpath) {
+		this.picpath = picpath;
+	}
+	
+	
 }

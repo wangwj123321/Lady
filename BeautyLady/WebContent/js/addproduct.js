@@ -19,7 +19,7 @@ $(function(){
 		var formGroupList2 = "";//商品属性
 		var formGroupList3 = "";//商品图片
 		var fieldsetList = "";
-		formGroupList1 += getFormGroup(getItem("商品编号","proNumber","text","proNumber","1JY4032020010") +getItem("商品名称","proName","text","proName","长外套"));
+		formGroupList1 += getFormGroup(getItem("创建者","userName","text","userName","???") + getItem("商品编号","proNumber","text","proNumber","1JY4032020010") +getItem("商品名称","proName","text","proName","长外套"));
 		formGroupList1 += getFormGroup(getItem("商品价格","proPrice","text","proPrice","99.00") +getItem("商品成本","proTagPrice","text","proTagPrice","99.00"));
 		formGroupList1 += getFormGroup(getItem("商品年份","proYear","text","proYear","2017") +getItem("商品季节","proSeason","text","proSeason","1"));
 		formGroupList2 += getFormGroup(getItem("大类编号","categoryNo1","text","categoryNo","BY") +getItem("大类名称","categoryName1","text","categoryName","长外套"));
@@ -38,6 +38,7 @@ $(function(){
 		fieldsetList += getFieldSet("基本信息",formGroupList1) + getFieldSet("商品属性",formGroupList2) + getFieldSet("图片",formGroupList3);
 		var formStr = "<form enctype='multipart/form-data' action='"+ctx+"/servlet/AddProductServlet' method='post' class='form-horizontal' role='form' style='font-size:13px'>"+fieldsetList+"<input type='submit' value='提交'/></form>";
 		$("#newProduct").append(formStr);
+		$("input[name='userName'").val(userName).parent().addClass("d-none").prev().addClass("d-none");
 		//遍历所有No属性
 		var $idlist = $("input[id*='No']");
 		$idlist.each(function(){
@@ -75,6 +76,7 @@ $(function(){
 			}); 
 			$("#newProduct>form").submit(function(){
 				var formData = new FormData($(this)[0]);
+				formData.append("userName",userName);
 				var addProduct = "addProduct";
 				$.get(ctx+"/servlet/AddProductServlet",formData,function(data){
 					alert(data);

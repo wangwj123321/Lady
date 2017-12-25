@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,7 +27,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import cn.beautylady.entity.NewProduct;
+import cn.beautylady.entity.Pic;
 import cn.beautylady.entity.Product;
+import cn.beautylady.service.AddProductService;
+import cn.beautylady.service.impl.AddProductServiceImpl;
 
 /**
  * Servlet implementation class AddProductServlet
@@ -48,6 +52,7 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		AddProductService service = new AddProductServiceImpl();
 		FileItemFactory factory = new DiskFileItemFactory();//创建DiskFileItemFactory工厂
 		((DiskFileItemFactory)factory).setSizeThreshold(1024*100);
 		ServletFileUpload upload = new ServletFileUpload(factory);//创建上传文件解析器
@@ -68,21 +73,26 @@ public class AddProductServlet extends HttpServlet {
 		}
 	    try {
 	        List<FileItem> items = upload.parseRequest(request);
+	        List<Pic> picList = new ArrayList<>();
 	    	NewProduct newProduct = new NewProduct();
-	    	newProduct.setProductNo(items.get(0).getString("UTF-8"));
-	    	newProduct.setProductName(items.get(1).getString("UTF-8"));
-	    	newProduct.setUnit(Double.parseDouble(items.get(2).getString("UTF-8")));
-	    	newProduct.setTagPrice(Double.parseDouble(items.get(3).getString("UTF-8")));
-	    	newProduct.setYear(Integer.parseInt(items.get(4).getString("UTF-8")));
-	    	newProduct.setQuarter(Integer.parseInt(items.get(5).getString("UTF-8")));
-	    	newProduct.setCategoryNo(items.get(6).getString("UTF-8"));
-	    	newProduct.setSubclassesNo(items.get(8).getString("UTF-8"));
-	    	newProduct.setColorNo1(items.get(10).getString("UTF-8"));
-	    	newProduct.setColorNo2(items.get(12).getString("UTF-8"));
-	    	newProduct.setSizeNo(items.get(14).getString("UTF-8"));
-	    	newProduct.setBandNo(items.get(16).getString("UTF-8"));
-	    	newProduct.setThemeNo(items.get(18).getString("UTF-8"));
-	    	newProduct.setSeriesNo(items.get(20).getString("UTF-8"));
+	    	newProduct.setCreatedBy(items.get(0).getString("UTF-8"));
+	    	newProduct.setProductNo(items.get(1).getString("UTF-8"));
+	    	newProduct.setProductName(items.get(2).getString("UTF-8"));
+	    	newProduct.setCostPrice(Double.parseDouble(items.get(3).getString("UTF-8")));
+	    	newProduct.setTagPrice(Double.parseDouble(items.get(4).getString("UTF-8")));
+	    	newProduct.setYear(Integer.parseInt(items.get(5).getString("UTF-8")));
+	    	newProduct.setQuarter(Integer.parseInt(items.get(6).getString("UTF-8")));
+	    	newProduct.setCategoryNo(items.get(7).getString("UTF-8"));
+	    	newProduct.setSubclassesNo(items.get(9).getString("UTF-8"));
+	    	newProduct.setColorNo1(items.get(11).getString("UTF-8"));
+	    	newProduct.setColorNo2(items.get(13).getString("UTF-8"));
+	    	newProduct.setSizeNo(items.get(15).getString("UTF-8"));
+	    	newProduct.setBandNo(items.get(17).getString("UTF-8"));
+	    	newProduct.setThemeNo(items.get(19).getString("UTF-8"));
+	    	newProduct.setSeriesNo(items.get(21).getString("UTF-8"));
+	    	String productNo = newProduct.getProductNo();
+	    	String colorNo = newProduct.getColorNo1();
+	    	String userName = "";//创建者
 	    	String fileName  = "";//文件名
 	    	boolean flag = true;//判断是否上传图片为主页图片
 	    	Properties prop = new Properties();
@@ -94,10 +104,14 @@ public class AddProductServlet extends HttpServlet {
 	    	file.mkdirs();
 	    	file.setWritable(true);
 	    	for (FileItem item : items) {
+				if("userName".equals(item.getFieldName())){
+					userName = item.getString();
+				}
 				if(!item.isFormField()){
 					if("mainpic".equals(item.getFieldName())){
 						fileName = newProduct.getMainpic() + item.getName().substring(item.getName().lastIndexOf("."));
 						File file1 = new File(path + "\\WebContent\\images\\" +fileName);
+						newProduct.setMainpic(fileName);
 						item.write(file1);
 						flag = false;
 					}
@@ -127,9 +141,25 @@ public class AddProductServlet extends HttpServlet {
 						}
 						File file2 = new File(file.getPath()+"\\"+fileName);
 						item.write(file2);
+						picList.add(new Pic(productNo,colorNo,fileName));//添加图片信息
 					}
 				}
 			}
+	    	newProduct.setCreatedBy(userName);//获取创建者姓名
+	    	newProduct.setPicList(picList);
+	    	NewProduct findProduct = service.findNewProduct(newProduct);
+	    	int count = -1;
+	    	if(findProduct == null){
+	    		count = service.addNewProduct(newProduct);
+	    	}else{
+	    		count = service.addDiffColorProduct(newProduct);
+	    	}
+	    	if(count == 3){
+	    		out.print("新增成功");
+	    	}else{
+	    		out.print("新增失败");
+	    	}
+	    	response.sendRedirect("../backstage/backstage.jsp");
 	    }catch(Exception e){
 	    	System.out.println("文件上传失败");
 	    	e.printStackTrace();

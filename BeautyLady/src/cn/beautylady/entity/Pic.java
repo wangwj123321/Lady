@@ -5,6 +5,16 @@ public class Pic {
 	private String productNo;
 	private String colorNo;
 	private String picpath;
+	public Pic() {
+	}
+	
+	public Pic(String productNo, String colorNo, String picpath) {
+		super();
+		this.productNo = productNo;
+		this.colorNo = colorNo;
+		this.picpath = picpath;
+	}
+
 	public Integer getId() {
 		return id;
 	}

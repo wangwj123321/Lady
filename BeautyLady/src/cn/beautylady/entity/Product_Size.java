@@ -4,6 +4,15 @@ public class Product_Size {
 	private Integer id;
 	private String productNo;
 	private String sizeNo;
+	
+	public Product_Size() {
+	}
+	
+	public Product_Size(String productNo, String sizeNo) {
+		this.productNo = productNo;
+		this.sizeNo = sizeNo;
+	}
+
 	public Integer getId() {
 		return id;
 	}

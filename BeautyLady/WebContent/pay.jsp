@@ -22,7 +22,7 @@
     </script>
 </head>
 <body>
-	<div id="top"><a href="index.jsp"><img src="images/ochirly.png" alt=""></a>	<span>${sessionScope.loginUser } ,您好！&nbsp;&nbsp;<a href="">退出<span>购物车</span></a></span></div>
+	<div id="top"><a href="index.jsp">Beauty <span>Lady</span></a>	<span>${sessionScope.loginUser } ,您好！&nbsp;&nbsp;<a href="">退出<span>购物车</span></a></span></div>
 	<div id="complete">
         <div id="comp_img"><img src="images/comp.png" alt=""></div>
         <div id="order_no">

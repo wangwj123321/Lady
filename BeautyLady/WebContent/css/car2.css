@@ -9,33 +9,9 @@ a{
     text-decoration: none;
     color: darkgray;
 }
-#top{
-    background: white;
-    width: 100%;
-    text-align: center;
-    margin-bottom:20px;
-    height:40px;
-    line-height:40px;
-    position:relative;
-}
-#top>a{
-    display:inline-block;
-    vertical-align:middle;
-    height:40px;
-    padding:5px 0;
-}
-#top>span{
-    margin-right:20px;
-    position:absolute;
-    right:0px;
-}
-#top>span span{
-    margin-left: 20px;
-}
 #gwd{
     background: white;
     border-top: 3px solid black;
-    width: 80%;
     margin: 0 auto;
     height: 100px;
     text-align: center;
@@ -48,7 +24,6 @@ body>p{
     font-size: 20px;
 }
 #order_content{
-    width: 80%;
     margin: 0 auto;
     padding: 40px 20px;
     background: white;
@@ -60,7 +35,6 @@ body>p{
 }
 #order_left{
     float: left;
-    width: 50%;
     margin-right: 80px;
 }
 #ab{
@@ -170,19 +144,14 @@ body>p{
     font-size: 12px;
 }
 #order_right{
-    float: left;
-    width: 40%;
-    height: 550px;
-    padding: 20px;
     box-sizing: border-box;
     background: white;
+    border:1px solid white;
 }
 #order_summary{
     background: #f1f1f1;
-    width: 100%;
     padding: 0 30px;
     box-sizing: border-box;
-    padding-bottom: 30px;
 }
 #order_summary h4{
     height: 60px;
@@ -213,11 +182,9 @@ body>p{
     background: #a70432;
     height: 45px;
     line-height: 45px;
-    width:100%;
     text-align: center;
     margin-top: 30px;
 }
 #add_order_btn{
-    width: 100%;
     text-align: center;
 }

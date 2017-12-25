@@ -40,10 +40,10 @@
     	<div class="title"><h3>购物车</h3></div>
         <div class="main_info row">
             <div class="main_text row col-11 text-center" style="min-height:545px">
-            	 <div id="gwd"><img class="img-fulid" src="images/car1.png" alt=""><br>购物车</div>
-            	 <p>优惠：单笔消费，满699元免邮</p>
+            	 <div class="col-12" id="gwd"><img class="img-fulid" src="images/car1.png" alt=""><br>购物车</div>
+            	 <p class="col-12">优惠：单笔消费，满699元免邮</p>
             	<c:if test="${! empty list }">
-				<div id="gw_details">
+				<div class="col-12" id="gw_details">
 					<div>
 						<table cellspacing="0" id="tab" border="1">
 							<tr>
@@ -73,7 +73,7 @@
 						<input type="checkbox" style="margin-right: 10px" id="allch">全选
 						<span style="margin-left: 20px"><a id="del_ch">删除已选</a></span>
 					</p>
-					<div id="clearing">
+					<div class="col-12" id="clearing">
 						<span>已选：<span id="count">0</span>件
 						</span><br> <span>总计金额(不含运费)：￥ <b>0</b></span><br> <a
 							id="carClear"></a>

@@ -59,32 +59,18 @@ public class OrderServlet extends HttpServlet {
 		if ("addOrder".equals(opr)) {
 			List<BuyCar> list=(List<BuyCar>) request.getSession().getAttribute("detailList");
 			List<OrderDetail> details=new ArrayList<>();
+			for (BuyCar buyCar : list) {
+				OrderDetail detail=new OrderDetail(null, null, buyCar.getColorNo(), buyCar.getSizeNo(), buyCar.getProductNo(), buyCar.getTagPrice(), buyCar.getCount(), buyCar.getAmount(), buyCar.getZk());
+				details.add(detail);
+			}
 			String userAccount=(String) request.getSession().getAttribute("userAccount");
 			String userName=(String) request.getSession().getAttribute("loginUser");
 			int addressID=Integer.parseInt(request.getParameter("addressID"));
 			double costPrice=Double.parseDouble(request.getParameter("costPrice"));
-			String orderNo="";
-			while (true) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
-				Date date = new Date();
-				String nn = sdf.format(date);
-				Random random = new Random();
-				int ran = random.nextInt(1000);
-				orderNo = nn + ran;
-				Order order=orderService.getOrderByOrderNo(orderNo);
-				if (order==null) {
-					break;
-				}
-			}
-			Order order=new Order(null, orderNo, userAccount, userName, addressID, null, costPrice, null);
-			if (orderService.addOrder(order)) {
+			Order order=new Order(null, null, userAccount, userName, addressID, null, costPrice, null);
+			if (orderService.addOrder(order,details,list)) {
 				System.out.println("添加订单成功");
 				Order lastOrder=orderService.getUserAccountLastOrder(userAccount);
-				for (BuyCar buyCar : list) {
-					OrderDetail detail=new OrderDetail(null, lastOrder.getOrderNo(), buyCar.getColorNo(), buyCar.getSizeNo(), buyCar.getProductNo(), buyCar.getTagPrice(), buyCar.getCount(), buyCar.getAmount(), buyCar.getZk());
-					orderService.addOrderDetail(detail);
-					buyCarService.updateBuyCarStatus(buyCar.getId());
-				}
 				request.getSession().setAttribute("newOrder", lastOrder);
 				response.sendRedirect("../car3.jsp");
 			}

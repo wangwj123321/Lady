@@ -1,1 +1,17 @@
+<<<<<<< HEAD
 /cn/
+=======
+<<<<<<< HEAD
+/ClassName.xml
+/c3p0-config.xml
+/cn/
+/log4j.properties
+/savePath.properties
+=======
+/ClassName.xml
+/c3p0-config.xml
+/cn/
+/log4j.properties
+/test.class
+>>>>>>> 3df4267799c2acc0dd6e954c7301ba765b9bbad3
+>>>>>>> 38c006246b94ec29224a3d3621f1044642f7828b

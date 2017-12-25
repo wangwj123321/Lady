@@ -45,4 +45,9 @@
 		<className>cn.beautylady.entity.StorageOrderDetail</className>
 	</file-pattern>
 	
+	<file-pattern>
+		<fileName>ProductExt</fileName>
+		<className>cn.beautylady.entity.ProductExt</className>
+	</file-pattern>
+	
 </url-Pattern>

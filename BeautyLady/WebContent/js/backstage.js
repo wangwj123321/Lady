@@ -95,6 +95,7 @@
     getgroup = function(btnlist){
     	return "<div class='btn-group' role='group'>"+btnlist + "</div>"
     }
+    
     //分页显示方法
     pageChange = function(pageNo,pageCount,type){
     	$("#"+type+"pageChange").append("当前页码["+pageNo+"/"+pageCount+"]<div class='btn-toolbar' role='toolbar'><div>");//添加分页显示及按钮组父容器
@@ -126,6 +127,7 @@
 		}
     	$("#"+type+"pageChange").children().append(btnstr);
     }
+    
 	uploadTable = function(){
 		createWindow("upload","上传文件");
 		$("#upload").empty();

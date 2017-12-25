@@ -6,7 +6,11 @@ import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -62,6 +66,33 @@ public class JavaBeanUtil {
         }
         return t;
     }
+    
+    
+    /*public static <T>List<T> populateList(Class<T> clazz, Map<String, String[]> map) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+    	List<T> list = new ArrayList<T>();
+    	Set<String> keys = map.keySet();
+    	String[] values = null;
+    	int i= 0 ;
+    	int length =0 ; 
+    	T obj = clazz.newInstance();
+    	Field[] fields = clazz.getDeclaredFields();
+    	do {
+    		for (Field field : fields) {
+    			String methodName = getSetter(field.getName());
+    			Method method = clazz.getDeclaredMethod(methodName, field.getType());
+    			length =  map.get(field.getName()).length;
+    			String val = map.get(field.getName())[i];
+    			if(val !=null && "".equals(val)) {
+    				method.invoke(obj, val);
+    			}else {
+    				continue;
+    			}
+    		}
+    		list.add(obj);
+    		i++;
+    	}while(i<length);
+    	return list;
+    }*/
 
     public static String getSetter(String fieldName) {
         return "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);

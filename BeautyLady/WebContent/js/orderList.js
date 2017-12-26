@@ -1,4 +1,4 @@
-function orderDetail(orderNo){
+function orderDetails(orderNo){
 	createWindow("orderDetail","订单详情");
 	$("#orderDetail").empty();
 	$("#orderDetail").append("<table class='table table-hover table-bordered table-sm'><thead id='orderDetailgoodList'></thead><tbody id='orderDetailclassList'></tbody></table><span id='orderDetailpageChange'><span>");
@@ -36,7 +36,7 @@ function getOrderList(pageNo){
 			if(t.status==4){
 				status="已收货";
 			}
-			$("#orderListclassList").append("<tr><td>"+t.orderNo+"</td><td>"+t.userName+"</td><td>"+t.createDate+"</td><td>"+t.costPrice+"</td><td>"+status+"</td><td>"+t.address+"</td><td>"+t.name+"</td><td>"+t.phone+"</td><td><a href='javascript:void(0)' onclick='orderDetail(\""+t.orderNo+"\")'>查看详情</a></td></tr>");
+			$("#orderListclassList").append("<tr><td>"+t.orderNo+"</td><td>"+t.userName+"</td><td>"+t.createDate+"</td><td>"+t.costPrice+"</td><td>"+status+"</td><td>"+t.address+"</td><td>"+t.name+"</td><td>"+t.phone+"</td><td><a href='javascript:void(0)' onclick='orderDetails(\""+t.orderNo+"\")'>查看详情</a></td></tr>");
 		});
 		pageChange2(data.pageNo,data.pageCount,"orderList");
 	}

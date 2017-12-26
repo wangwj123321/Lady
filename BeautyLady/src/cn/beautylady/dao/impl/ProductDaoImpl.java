@@ -49,7 +49,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao{
 			sql+=", tagPrice "+order;
 		}
 		sql+=" LIMIT ?,?";
-		System.out.println(sql);
 		Object[] objs= {(page.getPageNo()-1)*page.getPageSize(),page.getPageSize()};
 		return getArrayList(sql, Product.class, objs);
 	}

@@ -51,7 +51,7 @@
 								<td>颜色/尺码</td>
 								<td>单价</td>
 								<td>数量</td>
-								<td>小计</td>
+								<td style="width:20%;">小计</td>
 							</tr>
 							<c:forEach var="detail" items="${list }" varStatus="status">
 								<tr>

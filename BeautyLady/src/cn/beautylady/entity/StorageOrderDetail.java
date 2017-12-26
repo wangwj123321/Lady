@@ -15,9 +15,19 @@ public class StorageOrderDetail {
 	private String sizeNo;
 	private Integer number;
 	private Double totalMoney;
+	private Integer status;
 	
 	public StorageOrderDetail() {
 	}
+	
+	public StorageOrderDetail(String orderNo, String productNo, String colorNo, String sizeNo, Integer number) {
+		this.orderNo = orderNo;
+		this.productNo = productNo;
+		this.colorNo = colorNo;
+		this.sizeNo = sizeNo;
+		this.number = number;
+	}
+
 	public StorageOrderDetail(String order, String productNo, String colorNo, String sizeNo, Integer number,
 			Double totalMoney) {
 		this.orderNo=order;
@@ -27,6 +37,15 @@ public class StorageOrderDetail {
 		this.number=number;
 		this.totalMoney=totalMoney;
 	}
+	
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public Integer getId() {
 		return id;
 	}

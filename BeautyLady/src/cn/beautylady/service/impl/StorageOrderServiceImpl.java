@@ -10,6 +10,7 @@ import java.util.List;
 import cn.beautylady.dao.StorageOrderDao;
 import cn.beautylady.dao.impl.StorageOrderDaoImpl;
 import cn.beautylady.entity.ProductExt;
+import cn.beautylady.entity.Storage;
 import cn.beautylady.entity.StorageOrder;
 import cn.beautylady.entity.StorageOrderDetail;
 import cn.beautylady.service.StorageOrderService;
@@ -78,6 +79,61 @@ public class StorageOrderServiceImpl implements StorageOrderService {
 		}
 		return result;
 	}
+	
+	
+	@Override
+	public int addStorageOrder(StorageOrder order,List list) {
+		Connection conn = JdbcUtil.getConnection();
+		
+		int result = 0;
+		try {
+			conn.setAutoCommit(false);
+			result = dao.addStorageOrder(conn, order, list);
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean accept(String orderNo) throws SQLException {
+		Connection conn = JdbcUtil.getConnection();
+		boolean result = dao.accept(conn, orderNo);
+		return result;
+	}
+
+	@Override
+	public List<Storage> showStorage() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.showStorage();
+	}
+
+	@Override
+	public List<StorageOrderDetail> showDetail(String orderNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.showDetail(orderNo);
+	}
+
+	
+	
+	
 	
 	
 

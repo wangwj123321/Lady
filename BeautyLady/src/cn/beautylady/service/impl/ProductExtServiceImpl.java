@@ -2,6 +2,7 @@ package cn.beautylady.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.beautylady.dao.ProductExtDao;
 import cn.beautylady.dao.impl.ProductExtDaoImpl;
@@ -14,6 +15,10 @@ public class ProductExtServiceImpl implements ProductExtService{
 	public ProductExt getProductExt(String productNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		
 		return dao.getProductExt(productNo);
+	}
+	@Override
+	public List<ProductExt> findAllProductExt(Class clazz) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+		return dao.findAllProductExt(clazz);
 	}
 
 }

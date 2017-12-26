@@ -2,11 +2,14 @@ package cn.beautylady.service;
 
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 import cn.beautylady.entity.ProductExt;
+import cn.beautylady.entity.Storage;
 import cn.beautylady.entity.StorageOrder;
+import cn.beautylady.entity.StorageOrderDetail;
 
 
 public interface StorageOrderService {
@@ -40,5 +43,50 @@ public interface StorageOrderService {
 	 * @return
 	 */
 	public int delStorageOrder(String orderNo);
+	
+	/**
+	 * 添加订单和订单明细
+	 * @param conn
+	 * @param order
+	 * @param list
+	 * @return
+	 */
+	public int addStorageOrder(StorageOrder order,List list);
+	
+	/**
+	 * 验收订单
+	 * @param orderNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public boolean accept(String orderNo) throws SQLException;
+	
+	/**
+	 * 查看库存
+	 * @return
+	 * @throws SQLException 
+	 * @throws InvocationTargetException 
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchMethodException 
+	 * @throws NoSuchFieldException 
+	 */
+	public List<Storage> showStorage() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	
+	/**
+	 * 显示商品明细
+	 * @param orderNo
+	 * @return
+	 * @throws SQLException 
+	 * @throws InvocationTargetException 
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException 
+	 * @throws NoSuchMethodException 
+	 * @throws NoSuchFieldException 
+	 */
+	public List<StorageOrderDetail> showDetail(String orderNo) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	
 
 }

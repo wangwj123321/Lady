@@ -74,7 +74,7 @@
                             </li>
                             <li class="nav-item"><a class="nav-link" href="#">用户评论</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">商品回收站</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">库存管理</a></li>
+                            <li class="nav-item"><a class="nav-link" href="javaScript:void(0)" onclick='showStorage()'>库存管理</a></li>
                         </ul>
                     </div>
                 </div>

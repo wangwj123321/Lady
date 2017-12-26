@@ -52,7 +52,7 @@
     			var diff = "";//不同商品的数据信息
     			//相同类型的表格数据
     			var comm = "<td>"+arr[i].status+"</td><td>"+arr[i].createdBy+"</td><td>"+arr[i].createDate+"</td>" +
-				"<td>"+arr[i].modifyBy+"</td><td>"+arr[i].modifyDate+"</td>"
+				"<td>"+isNull(arr[i].modifyBy)+"</td><td>"+isNull(arr[i].modifyDate)+"</td>"
 				+"<td><a href='javaScript:void(0)' onclick=propertyModify("+arr[i].id+",'"+data.type+"')>修改</a>&nbsp;&nbsp;&nbsp;" +
 						"<a href='"+ctx+"/stop.jsp?id="+arr[i].id+"&type="+data.type+"'>停用</a></td></tr>";
     			//根据商品信息的不同插入不同的表头及数据
@@ -95,6 +95,7 @@
     getgroup = function(btnlist){
     	return "<div class='btn-group' role='group'>"+btnlist + "</div>"
     }
+    
     //分页显示方法
     pageChange = function(pageNo,pageCount,type){
     	$("#"+type+"pageChange").append("当前页码["+pageNo+"/"+pageCount+"]<div class='btn-toolbar' role='toolbar'><div>");//添加分页显示及按钮组父容器
@@ -126,6 +127,7 @@
 		}
     	$("#"+type+"pageChange").children().append(btnstr);
     }
+    
 	uploadTable = function(){
 		createWindow("upload","上传文件");
 		$("#upload").empty();

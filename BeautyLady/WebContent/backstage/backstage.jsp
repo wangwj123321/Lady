@@ -45,6 +45,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/orderList.js"></script>
 <!--用户管理的js文件  -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/userManager.js"></script>
+<link rel="stylesheet" href='${pageContext.request.contextPath }/css/storageOrder.css'>
 <!--类别添加  -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/category.js"></script>
 <body>

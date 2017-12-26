@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
+import cn.beautylady.entity.Page;
 import cn.beautylady.entity.Product;
 import cn.beautylady.entity.ProductExt;
 import cn.beautylady.service.ProductExtService;
@@ -23,6 +24,7 @@ import cn.beautylady.service.StorageOrderService;
 import cn.beautylady.service.impl.ProductExtServiceImpl;
 import cn.beautylady.service.impl.ProductServiceImpl;
 import cn.beautylady.service.impl.StorageOrderServiceImpl;
+import cn.beautylady.util.ClassNameUtil;
 
 /**
  * Servlet implementation class FindProductExt
@@ -33,20 +35,30 @@ public class FindProductExtServlet extends HttpServlet {
        
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String productNos = request.getParameter("productNos");
-		String[] nos = productNos.split(",");
-		StorageOrderService order = new StorageOrderServiceImpl();
-		try {
-			List<ProductExt> exts =order.getProductExtByNos(nos);
-			System.out.println(exts);
-			String jsonExts = JSON.toJSONStringWithDateFormat(exts, "yyyy-MM-dd");
-			PrintWriter out = response.getWriter();
-			out.println(jsonExts);
-			out.flush();
-			out.close();
-		} catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InstantiationException
-				| InvocationTargetException | SQLException e) {
-			e.printStackTrace();
+		String opr = request.getParameter("opr");
+		if(opr == null ) {
+			opr="findAllProExt";
+		}
+		ProductExtService extService = new ProductExtServiceImpl();
+		ProductService proService = new ProductServiceImpl();
+		if("findAllProExt".equals(opr)) {
+			String produectExt = request.getParameter("type");
+			try {
+				String className = ClassNameUtil.getClassName(produectExt);
+				Class clazz = Class.forName(className);
+				Page<ProductExt> page = proService.getPageObj(Integer.parseInt(request.getParameter("pageNo")),Integer.parseInt( request.getParameter("pageSize")), clazz);
+				PrintWriter out = response.getWriter();
+				if(page != null && page.getList().size()>0) {
+					String jsonData = JSON.toJSONStringWithDateFormat(page, "yyyy-MM-dd HH:mm:ss");
+					out.println(jsonData);
+				}else {
+					out.println(false);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 

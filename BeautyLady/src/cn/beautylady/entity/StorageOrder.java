@@ -1,6 +1,7 @@
 package cn.beautylady.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 入库单
@@ -21,6 +22,7 @@ public class StorageOrder {
 	private String createdBy;
 	private String modifyBy;
 	private Date modifyDate;
+	private List<StorageOrderDetail> list;
 	
 	
 	
@@ -33,6 +35,26 @@ public class StorageOrder {
 		this.totalMoney=totalMoney;
 		this.desc=desc;
 		
+	}
+	
+	public StorageOrder(String orderNo, Integer number, String userName, List<StorageOrderDetail> list) {
+		this.orderNo = orderNo;
+		this.number = number;
+		this.userName = userName;
+		this.list = list;
+	}
+	
+	public StorageOrder(String orderNo, Integer number, String userName,Double totalMoney) {
+		this.orderNo = orderNo;
+		this.number = number;
+		this.createdBy = userName;
+		this.totalMoney = totalMoney;
+	}
+	public List<StorageOrderDetail> getList() {
+		return list;
+	}
+	public void setList(List<StorageOrderDetail> list) {
+		this.list = list;
 	}
 	public Integer getId() {
 		return id;

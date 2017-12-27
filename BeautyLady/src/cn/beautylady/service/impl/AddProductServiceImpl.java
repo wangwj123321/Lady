@@ -67,5 +67,10 @@ public class AddProductServiceImpl implements AddProductService{
 			IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		return dao.findNewProduct(newProduct);
 	}
+	@Override
+	public void storeProduct() throws SQLException {
+		dao.storeProduct();
+		
+	}
 
 }

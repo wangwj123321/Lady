@@ -77,7 +77,6 @@ $(function(){
 			$("#newProduct>form").submit(function(){
 				var formData = new FormData($(this)[0]);
 				formData.append("userName",userName);
-				var addProduct = "addProduct";
 				$.get(ctx+"/servlet/AddProductServlet",formData,function(data){
 					alert(data);
 				},"JSON")

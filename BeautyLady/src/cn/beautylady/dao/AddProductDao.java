@@ -38,4 +38,9 @@ public interface AddProductDao {
 	 * @throws NoSuchFieldException 
 	 */
 	NewProduct findNewProduct(NewProduct newProduct) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	/**
+	 * 存储不同颜色商品信息
+	 * @throws SQLException 
+	 */
+	void storeProduct() throws SQLException;
 }

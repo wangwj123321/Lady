@@ -29,4 +29,10 @@ public interface AddProductService {
 	 * @return 执行结果
 	 */
 	NewProduct findNewProduct(NewProduct newProduct) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException;
+	
+	/**
+	 * 存储不同颜色商品信息
+	 * @throws SQLException 
+	 */
+	void storeProduct() throws SQLException;
 }

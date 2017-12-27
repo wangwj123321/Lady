@@ -19,7 +19,7 @@ public class AddProductDaoImpl extends BaseDao implements AddProductDao {
 	public int addNewProduct(Connection conn,NewProduct newProduct) {
 		int count = -1;
 		Product_Color product_color = new Product_Color(newProduct.getProductNo(), newProduct.getColorNo1());
-		Product_Size product_Size = new Product_Size(newProduct.getProductNo(), newProduct.getSeriesNo());
+		Product_Size product_Size = new Product_Size(newProduct.getProductNo(), newProduct.getSizeNo());
 		Product product = new Product(newProduct.getProductNo(), newProduct.getProductName(), newProduct.getTagPrice(),
 				newProduct.getCostPrice(), newProduct.getCategoryNo(), newProduct.getSubclassesNo(), newProduct.getBandNo()
 				, newProduct.getThemeNo(), newProduct.getSeriesNo(), newProduct.getYear(), newProduct.getQuarter(),
@@ -40,7 +40,7 @@ public class AddProductDaoImpl extends BaseDao implements AddProductDao {
 	@Override
 	public int addDiffColorProduct(Connection conn, NewProduct newProduct) {
 		Product_Color product_color = new Product_Color(newProduct.getProductNo(), newProduct.getColorNo1());
-		Product_Size product_Size = new Product_Size(newProduct.getProductNo(), newProduct.getSeriesNo());
+		Product_Size product_Size = new Product_Size(newProduct.getProductNo(), newProduct.getSizeNo());
 		int count = 0;
 		try {
 			count += insert(conn,product_color);
@@ -58,6 +58,12 @@ public class AddProductDaoImpl extends BaseDao implements AddProductDao {
 	public NewProduct findNewProduct(NewProduct newProduct) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 		String sql = "SELECT * FROM `product` WHERE `productNo` = ?";
 		return selectOne(newProduct.getClass(), sql, newProduct.getProductNo());
+	}
+
+	@Override
+	public void storeProduct() throws SQLException {
+		String sql = "CALL product_color_size()";
+		callableStatement(sql);
 	}
 
 }

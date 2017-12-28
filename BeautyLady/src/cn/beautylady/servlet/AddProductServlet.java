@@ -58,14 +58,6 @@ public class AddProductServlet extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);//创建上传文件解析器
 		upload.setFileSizeMax(1024*1024*100);
 		upload.setSizeMax(1024*1024*1024); 
-		upload.setProgressListener(new ProgressListener() {//监听文件上传进度
-			
-			@Override
-			public void update(long arg0, long arg1, int arg2) {
-				System.out.println("文件大小为："+arg1+"，当前已处理："+arg0);
-				
-			}
-		});
 		upload.setHeaderEncoding("UTF-8");//解决上传文件名中文乱码
 		//判断是否为表单提交
 		if(!ServletFileUpload.isMultipartContent(request)){
@@ -73,9 +65,13 @@ public class AddProductServlet extends HttpServlet {
 		}
 	    try {
 	        List<FileItem> items = upload.parseRequest(request);
+	        if(items == null){
+	        	out.print("表单内容有误");
+	        	return;
+	        }
 	        List<Pic> picList = new ArrayList<>();
 	    	NewProduct newProduct = new NewProduct();
-	    	newProduct.setCreatedBy(items.get(0).getString("UTF-8"));
+	    	newProduct.setCreatedBy(items.get(0).getString("utf-8"));
 	    	newProduct.setProductNo(items.get(1).getString("UTF-8"));
 	    	newProduct.setProductName(items.get(2).getString("UTF-8"));
 	    	newProduct.setCostPrice(Double.parseDouble(items.get(3).getString("UTF-8")));
@@ -155,16 +151,19 @@ public class AddProductServlet extends HttpServlet {
 	    		count = service.addDiffColorProduct(newProduct);
 	    	}
 	    	service.storeProduct();//更新商品存储过程
-	    	if(count == 3){
-	    		out.print("新增成功");
+	    	out.print("文件上传成功");
+	    	if(count >= 3){
+	    		out.print("新增成功，3s后返回后台首页");
 	    	}else{
-	    		out.print("新增失败");
+	    		out.print("新增失败3s后返回后台首页");
 	    	}
+	    	Thread.currentThread().sleep(3000);//程序暂停3s
+	    	response.sendRedirect("../backstage/backstage.jsp");
 	    }catch(Exception e){
-	    	System.out.println("文件上传失败");
+	    	out.print("文件上传失败");
 	    	e.printStackTrace();
 	    }finally{
-	    	System.out.println("文件上传成功");
+	    	out.close();
 	    }
 	    
 	}

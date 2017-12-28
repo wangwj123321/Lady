@@ -2,7 +2,7 @@ $(function(){
 	//获取上传字段单属性字段id：表单label的id type:表单的类型  propertyName:添加属性的名称,name:表单name属性 hint:提示内容
 	getItem = function(propertyName,id,type,name,hint){
 		return "<label class='col-sm-1 control-label' for='"+id+"' sytle='line-height:1.5'>"+propertyName+":</label>" +
-				"<div class='col-sm-3'><input class='form-control' id='"+id+"' type='"+type+"' name='"+name+"' placeholder='"+hint+"'/></div>"
+				"<div class='col-sm-3'><input class='form-control' id='"+id+"' type='"+type+"' name='"+name+"' placeholder='"+hint+"' autocomplete='off'/></div>"
 	}
 	//获取formgroup拼接字段 itemsList:拼接字段属性的字符串数组
 	getFormGroup = function(itemsList){
@@ -20,7 +20,7 @@ $(function(){
 		var formGroupList3 = "";//商品图片
 		var fieldsetList = "";
 		formGroupList1 += getFormGroup(getItem("创建者","userName","text","userName","???") + getItem("商品编号","proNumber","text","proNumber","1JY4032020010") +getItem("商品名称","proName","text","proName","长外套"));
-		formGroupList1 += getFormGroup(getItem("商品价格","proPrice","text","proPrice","99.00") +getItem("商品成本","proTagPrice","text","proTagPrice","99.00"));
+		formGroupList1 += getFormGroup(getItem("商品成本","proPrice","text","proPrice","99.00") +getItem("商品价格","proTagPrice","text","proTagPrice","99.00"));
 		formGroupList1 += getFormGroup(getItem("商品年份","proYear","text","proYear","2017") +getItem("商品季节","proSeason","text","proSeason","1"));
 		formGroupList2 += getFormGroup(getItem("大类编号","categoryNo1","text","categoryNo","BY") +getItem("大类名称","categoryName1","text","categoryName","长外套"));
 		formGroupList2 += getFormGroup(getItem("小类编号","subClassesNo1","text","subClassesNo","12") +getItem("小类名称","subClassesName1","text","subClassesName","活动礼品"));
@@ -36,17 +36,79 @@ $(function(){
 		formGroupList3 += getFormGroup(getItem("放大镜1","magnifypic1","file","magnifypic1","") + getItem("放大镜2","magnifypic2","file","magnifypic2",""));
 		formGroupList3 += getFormGroup(getItem("颜色图1","colorpic1","file","colorpic1","") + getItem("颜色图2","colorpic2","file","colorpic2",""));
 		fieldsetList += getFieldSet("基本信息",formGroupList1) + getFieldSet("商品属性",formGroupList2) + getFieldSet("图片",formGroupList3);
-		var formStr = "<form enctype='multipart/form-data' action='"+ctx+"/servlet/AddProductServlet' method='post' class='form-horizontal' role='form' style='font-size:13px'>"+fieldsetList+"<input type='submit' value='提交'/></form>";
+		var formStr = "<form enctype='multipart/form-data' action='"+ctx+"/servlet/AddProductServlet' method='post' class='form-horizontal' role='form' style='font-size:13px'>"+fieldsetList+"<input type='submit' name='sbtForm' value='提交'/></form>";
 		$("#newProduct").append(formStr);
 		$("input[name='userName'").val(userName).parent().addClass("d-none").prev().addClass("d-none");
-		//遍历所有No属性
+		//添加年份可能值
+		$("input[name='proYear'").attr("list","year").append("<datalist id='year'><option value='2016'><option value='2017'><option value='2018'><option value='2019'><option value='2020'><option value='2021'></datalist>");
+		//添加季节可能值
+		$("input[name='proSeason'").attr("list","season").append("<datalist id='season'><option value='1'><option value='2'><option value='3'><option value='4'></datalist>");
+		//表单验证
+		var $input = $("#newProduct>form input:lt(7),#newProduct>form input:odd,#newProduct>form input:gt(22)");//所有不为空的表单
+		var retEmpty = /^\S$/;//非空字符
+		var retNum = /^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/;//验证价格
+		var retYear = /^(2[0-9]{3})$/;//匹配年份
+		var retSeason = /^[1-4]$/;//匹配年份
+		$input.each(function(){
+			$(this).blur(function(){
+				if($(this).val() == ""){
+					$(this).val("").attr("placeholder","该项不能为空");
+				}
+				if($(this).attr("name") == "proPrice"){
+					if(!retNum.test($(this).val())){
+						$(this).val("").attr("placeholder","价格必须为是数值");
+					}
+				}
+				if($(this).attr("name") == "proYear"){
+					if(!retYear.test($(this).val())){
+						$(this).val("").attr("placeholder","年份必须是以2开头的4位整数");
+					}
+				}
+				if($(this).attr("name") == "proSeason"){
+					if(!retSeason.test($(this).val())){
+						$(this).val("").attr("placeholder","季节必须是1~4的整数");
+					}
+				}
+				checkForm();
+			});
+		});
+		checkForm = function(){
+			var flag = true;
+			$input.each(function(){
+				if($(this).val() == ""){
+					flag = false;
+				}
+				if($(this).attr("name") == "proPrice"){
+					if(!retNum.test($(this).val())){
+						flag = false;
+					}
+				}
+				if($(this).attr("name") == "proYear"){
+					if(!retYear.test($(this).val())){
+						flag = false;
+					}
+				}
+				if($(this).attr("name") == "proSeason"){
+					if(!retSeason.test($(this).val())){
+						flag = false;
+					}
+				}
+			});
+			if(!flag){
+				$("input[name='sbtForm']").attr("disabled",'disabled');;
+			}else{
+				$("input[name='sbtForm']").removeAttr("disabled");
+			}
+		};
+		checkForm();
+		//遍历所有文本框name属性值里带有No标签
 		var $idlist = $("input[id*='No']");
 		$idlist.each(function(){
 			/*双击击单个输入框*/
 			$(this).dblclick( function() {
 				var id = $(this).attr("id");
 				if(!($("#"+id+"form").length >0)){
-					createform(id);
+					createform(id);//创建form结构
 					var getNumber = "getNumber";
 					$.get(ctx+"/servlet/ProductServlet","opr="+getNumber+"&className="+id.substr(0,id.length-3),function(data){
 						if(data == null){return;}
@@ -76,7 +138,6 @@ $(function(){
 			}); 
 			$("#newProduct>form").submit(function(){
 				var formData = new FormData($(this)[0]);
-				formData.append("userName",userName);
 				$.get(ctx+"/servlet/AddProductServlet",formData,function(data){
 					alert(data);
 				},"JSON")

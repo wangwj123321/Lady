@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -882,5 +883,17 @@ public class BaseDao {
 			JNDIJdbcUtil.closeAll(conn, st,null);
 		}
 		return counts;
+	}
+	/**
+	 * 执行存储过程
+	 * @param sql
+	 * @throws SQLException
+	 */
+	public void callableStatement(String sql) throws SQLException{
+		Connection conn = JNDIJdbcUtil.getConnection();
+		CallableStatement cstm = conn.prepareCall(sql);//实例化对象
+		cstm.execute();//执行存储过程
+		cstm.close();
+		conn.close();
 	}
 }

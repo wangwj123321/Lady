@@ -154,12 +154,12 @@ public class AddProductServlet extends HttpServlet {
 	    	}else{
 	    		count = service.addDiffColorProduct(newProduct);
 	    	}
+	    	service.storeProduct();//更新商品存储过程
 	    	if(count == 3){
 	    		out.print("新增成功");
 	    	}else{
 	    		out.print("新增失败");
 	    	}
-	    	response.sendRedirect("../backstage/backstage.jsp");
 	    }catch(Exception e){
 	    	System.out.println("文件上传失败");
 	    	e.printStackTrace();

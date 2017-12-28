@@ -67,4 +67,8 @@
 }
 .img_bottom{
 	position:relative;
+	height: 70%;
+}
+.out{
+	height: 80%;
 }
